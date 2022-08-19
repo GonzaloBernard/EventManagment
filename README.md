@@ -23,3 +23,4 @@ localhost make sure that value of SANCTUM_STATEFUL_DOMAINS variable in .env file
 same as your hostname in browser. Example: SANCTUM_STATEFUL_DOMAINS=myproject.test
 
 
+
