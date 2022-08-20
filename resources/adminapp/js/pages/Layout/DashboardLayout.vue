@@ -62,7 +62,7 @@ export default {
         {
           title: 'Calendario de Eventos',
           icon: 'table_view',
-          path: { name: 'eventos.index' },
+          path: { name: 'eventos.calendario' },
           gate: 'user_management_access',
         },
         /* {

@@ -18,9 +18,9 @@ const routes = [
         meta: { title: 'global.dashboard' }
       },
       {
-        path: 'eventos',
-        name: 'eventos.index',
-        component: () => import('@cruds/Eventos/Index.vue'),
+        path: 'eventos_calendario',
+        name: 'eventos.calendario',
+        component: () => import('@cruds/Eventos/Calendario.vue'),
         meta: { title: 'Eventos' }
       },
       {
