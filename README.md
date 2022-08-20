@@ -2,25 +2,21 @@
 
 **Deploy**
 
-- cp .env.example .env file to copy example file to .env
+- cp .env.example .env
 
 Then edit your .env file with DB credentials and other settings.
 
-- composer install command
+- composer install
 
-- php artisan migrate --seed command
+- php artisan migrate --seed
 
-- php artisan key:generate command
+- php artisan key:generate
 
 - npm install
 
-- npm run dev
+- npm run watch
 
-If you have file/photo fields, run *php artisan storage:link command*.
-
-Laravel Sanctum for API Auth: If you are using custom hostname for project other than 
-localhost make sure that value of SANCTUM_STATEFUL_DOMAINS variable in .env file is the 
-same as your hostname in browser. Example: SANCTUM_STATEFUL_DOMAINS=myproject.test
+# http://eventos-produccion.herokuapp.com/login
 
 
 
