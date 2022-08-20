@@ -18,6 +18,12 @@ const routes = [
         meta: { title: 'global.dashboard' }
       },
       {
+        path: 'eventos',
+        name: 'eventos.index',
+        component: () => import('@cruds/Eventos/Index.vue'),
+        meta: { title: 'Eventos' }
+      },
+      {
         path: 'user-management',
         name: 'user_management',
         component: View,

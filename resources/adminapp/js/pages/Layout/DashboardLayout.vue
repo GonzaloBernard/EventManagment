@@ -29,30 +29,30 @@ export default {
     return {
       sidebarLinks: [
         {
-          title: 'global.dashboard',
+          title: 'Inicio',
           icon: 'dashboard',
           path: { name: 'dashboard' }
         },
         {
-          title: 'cruds.userManagement.title',
+          title: 'Gestión de Usuarios',
           icon: 'person',
           path: { name: 'user_management' },
           gate: 'user_management_access',
           children: [
             {
-              title: 'cruds.permission.title',
+              title: 'Permisos',
               icon: 'perm_data_setting',
               path: { name: 'permissions.index' },
               gate: 'permission_access'
             },
             {
-              title: 'cruds.role.title',
+              title: 'Roles',
               icon: 'group',
               path: { name: 'roles.index' },
               gate: 'role_access'
             },
             {
-              title: 'cruds.user.title',
+              title: 'Usuarios',
               icon: 'person',
               path: { name: 'users.index' },
               gate: 'user_access'
@@ -60,6 +60,12 @@ export default {
           ]
         },
         {
+          title: 'Calendario de Eventos',
+          icon: 'table_view',
+          path: { name: 'eventos.index' },
+          gate: 'user_management_access',
+        },
+        /* {
           title: 'cruds.productManagement.title',
           icon: 'table_view',
           path: { name: 'product_management' },
@@ -142,7 +148,7 @@ export default {
               gate: 'expense_report_access'
             }
           ]
-        }
+        } */
       ]
     }
   }
