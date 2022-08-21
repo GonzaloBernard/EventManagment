@@ -66,12 +66,6 @@ export default {
           gate: 'user_management_access',
         },
         {
-          title: 'Crear Evento',
-          icon: 'table_view',
-          path: { name: 'eventos.create' },
-          gate: 'user_management_access',
-        },
-        {
           title: 'Tabla de Evento',
           icon: 'table_view',
           path: { name: 'eventos.index' },
