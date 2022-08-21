@@ -8,24 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class EgresoCategoria extends Model
 {
     //use HasAdvancedFilter;
     use SoftDeletes;
     use HasFactory;
 
-    public $table = 'roles';
-
-    protected $orderable = [
-        'id',
-        'title',
-    ];
-
-    protected $filterable = [
-        'id',
-        'title',
-        'permissions.title',
-    ];
+    public $table = 'egreso_categoria';
 
     protected $dates = [
         'created_at',
@@ -34,16 +23,11 @@ class Role extends Model
     ];
 
     protected $fillable = [
-        'title',
+        'descripcion',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
-
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class);
-    }
 
     protected function serializeDate(DateTimeInterface $date)
     {

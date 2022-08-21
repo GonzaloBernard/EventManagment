@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use \DateTimeInterface;
-use App\Support\HasAdvancedFilter;
+//use App\Support\HasAdvancedFilter;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -14,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasAdvancedFilter;
+    //use HasAdvancedFilter;
     use SoftDeletes;
     use Notifiable;
     use HasFactory;

@@ -3,29 +3,18 @@
 namespace App\Models;
 
 use \DateTimeInterface;
-//use App\Support\HasAdvancedFilter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Ingreso extends Model
 {
     //use HasAdvancedFilter;
     use SoftDeletes;
     use HasFactory;
 
-    public $table = 'roles';
-
-    protected $orderable = [
-        'id',
-        'title',
-    ];
-
-    protected $filterable = [
-        'id',
-        'title',
-        'permissions.title',
-    ];
+    public $table = 'ingreso';
 
     protected $dates = [
         'created_at',
@@ -34,15 +23,24 @@ class Role extends Model
     ];
 
     protected $fillable = [
-        'title',
+        'descripcion',
+        'monto',
+        'fecha',
+        'medio_de_pago_id',
+        'evento_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function permissions()
+    public function medioDePago()
     {
-        return $this->belongsToMany(Permission::class);
+        return $this->belongsTo(MedioDePago::class);
+    }
+
+    public function evento()
+    {
+        return $this->belongsTo(Evento::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)

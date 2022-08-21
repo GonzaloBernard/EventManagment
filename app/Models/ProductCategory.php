@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use \DateTimeInterface;
-use App\Support\HasAdvancedFilter;
+//use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +13,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductCategory extends Model implements HasMedia
 {
-    use HasAdvancedFilter;
+    //use HasAdvancedFilter;
     use SoftDeletes;
     use InteractsWithMedia;
     use HasFactory;

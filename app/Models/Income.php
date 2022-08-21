@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use \DateTimeInterface;
-use App\Support\HasAdvancedFilter;
+//use App\Support\HasAdvancedFilter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Income extends Model
 {
-    use HasAdvancedFilter;
+    //use HasAdvancedFilter;
     use SoftDeletes;
     use HasFactory;
 

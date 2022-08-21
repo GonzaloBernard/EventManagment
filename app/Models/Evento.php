@@ -35,6 +35,14 @@ class Evento extends Model
         return $this->belongsTo(Lugar::class);
     }
 
+    public function ingresos()
+    {
+        return $this->hasMany(Ingreso::class);
+    }
+    public function egresos()
+    {
+        return $this->hasMany(Egreso::class);
+    }
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

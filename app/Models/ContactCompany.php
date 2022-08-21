@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use \DateTimeInterface;
-use App\Support\HasAdvancedFilter;
+//use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ContactCompany extends Model
 {
-    use HasAdvancedFilter;
+    //use HasAdvancedFilter;
     use SoftDeletes;
     use HasFactory;
 

@@ -18,7 +18,7 @@ class EventoApiController extends Controller
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EventoResource(Evento::with(['lugar'])->get());
+        return new EventoResource(Evento::with(['lugar', 'ingresos', 'ingresos.medioDePago','egresos', 'egresos.egreso_categoria'])->get());
     }
 
     public function store(StoreEventoRequest $request)
