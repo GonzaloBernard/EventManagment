@@ -65,6 +65,18 @@ export default {
           path: { name: 'eventos.calendario' },
           gate: 'user_management_access',
         },
+        {
+          title: 'Crear Evento',
+          icon: 'table_view',
+          path: { name: 'eventos.create' },
+          gate: 'user_management_access',
+        },
+        {
+          title: 'Tabla de Evento',
+          icon: 'table_view',
+          path: { name: 'eventos.index' },
+          gate: 'user_management_access',
+        },
         /* {
           title: 'cruds.productManagement.title',
           icon: 'table_view',

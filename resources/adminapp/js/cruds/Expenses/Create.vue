@@ -17,7 +17,7 @@
               <back-button></back-button>
             </div>
             <div class="card-body">
-              <bootstrap-alert />
+              <!-- <bootstrap-alert /> -->
               <div class="row">
                 <div class="col-md-12">
                   <div
@@ -38,8 +38,8 @@
                       :options="lists.expense_category"
                       :reduce="entry => entry.id"
                       @input="updateExpenseCategory"
-                      @search.focus="focusField('expense_category')"
-                      @search.blur="clearFocus"
+                      @[`search.focus`]="focusField('expense_category')"
+                      @[`search.blur`]="clearFocus"
                     />
                   </div>
                   <div

@@ -18,7 +18,7 @@ class IncomeApiController extends Controller
     {
         abort_if(Gate::denies('income_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new IncomeResource(Income::with(['incomeCategory'])->advancedFilter());
+        return new IncomeResource(Income::with(['incomeCategory'])->get());
     }
 
     public function store(StoreIncomeRequest $request)

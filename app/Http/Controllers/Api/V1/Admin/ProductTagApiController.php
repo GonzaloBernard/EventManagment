@@ -17,7 +17,7 @@ class ProductTagApiController extends Controller
     {
         abort_if(Gate::denies('product_tag_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ProductTagResource(ProductTag::advancedFilter());
+        return new ProductTagResource(ProductTag::get());
     }
 
     public function store(StoreProductTagRequest $request)

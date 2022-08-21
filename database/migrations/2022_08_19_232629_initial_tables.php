@@ -52,9 +52,9 @@ class InitialTables extends Migration
 
         Schema::create('evento', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('descripcion');
-            $table->string('cliente');
-            $table->timestamp('fecha');
+            $table->string('descripcion')->nullable();
+            $table->string('cliente')->nullable();
+            $table->timestamp('fecha')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

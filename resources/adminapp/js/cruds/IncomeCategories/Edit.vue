@@ -17,7 +17,7 @@
               <back-button></back-button>
             </div>
             <div class="card-body">
-              <bootstrap-alert />
+              <!-- <bootstrap-alert /> -->
               <div class="row">
                 <div class="col-md-12">
                   <div

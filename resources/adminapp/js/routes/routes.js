@@ -24,6 +24,18 @@ const routes = [
         meta: { title: 'Eventos' }
       },
       {
+        path: 'eventos/create',
+        name: 'eventos.create',
+        component: () => import('@cruds/Eventos/Create.vue'),
+        meta: { title: 'Eventos' }
+      },
+      {
+        path: 'eventos/index',
+        name: 'eventos.index',
+        component: () => import('@cruds/Eventos/Index.vue'),
+        meta: { title: 'Eventos' }
+      },
+      {
         path: 'user-management',
         name: 'user_management',
         component: View,

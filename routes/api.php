@@ -48,4 +48,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Expense Report
     Route::apiResource('expense-reports', 'ExpenseReportApiController', ['only' => ['index']]);
+
+    // Expense
+    Route::resource('eventos', 'EventoApiController');
 });

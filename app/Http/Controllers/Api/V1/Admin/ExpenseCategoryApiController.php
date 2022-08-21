@@ -17,7 +17,7 @@ class ExpenseCategoryApiController extends Controller
     {
         abort_if(Gate::denies('expense_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ExpenseCategoryResource(ExpenseCategory::advancedFilter());
+        return new ExpenseCategoryResource(ExpenseCategory::get());
     }
 
     public function store(StoreExpenseCategoryRequest $request)

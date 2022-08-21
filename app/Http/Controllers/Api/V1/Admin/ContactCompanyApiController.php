@@ -17,7 +17,7 @@ class ContactCompanyApiController extends Controller
     {
         abort_if(Gate::denies('contact_company_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ContactCompanyResource(ContactCompany::advancedFilter());
+        return new ContactCompanyResource(ContactCompany::get());
     }
 
     public function store(StoreContactCompanyRequest $request)

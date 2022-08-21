@@ -17,7 +17,7 @@
               <back-button></back-button>
             </div>
             <div class="card-body">
-              <bootstrap-alert />
+              <!-- <bootstrap-alert /> -->
               <div class="row">
                 <div class="col-md-12">
                   <div
@@ -98,8 +98,8 @@
                       :closeOnSelect="false"
                       multiple
                       @input="updateRoles"
-                      @search.focus="focusField('roles')"
-                      @search.blur="clearFocus"
+                      @[`search.focus`]="focusField('roles')"
+                      @[`search.blur`]="clearFocus"
                     />
                   </div>
                 </div>

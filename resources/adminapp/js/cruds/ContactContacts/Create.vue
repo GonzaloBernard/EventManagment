@@ -17,7 +17,7 @@
               <back-button></back-button>
             </div>
             <div class="card-body">
-              <bootstrap-alert />
+              <!-- <bootstrap-alert /> -->
               <div class="row">
                 <div class="col-md-12">
                   <div
@@ -38,8 +38,8 @@
                       :options="lists.company"
                       :reduce="entry => entry.id"
                       @input="updateCompany"
-                      @search.focus="focusField('company')"
-                      @search.blur="clearFocus"
+                      @[`search.focus`]="focusField('company')"
+                      @[`search.blur`]="clearFocus"
                     />
                   </div>
                   <div

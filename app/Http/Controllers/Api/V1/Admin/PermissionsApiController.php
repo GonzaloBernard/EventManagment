@@ -17,7 +17,7 @@ class PermissionsApiController extends Controller
     {
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PermissionResource(Permission::advancedFilter());
+        return new PermissionResource(Permission::get());
     }
 
     public function store(StorePermissionRequest $request)

@@ -17,7 +17,7 @@
               <back-button></back-button>
             </div>
             <div class="card-body">
-              <bootstrap-alert />
+              <!-- <bootstrap-alert /> -->
               <div class="row">
                 <div class="col-md-12">
                   <div
@@ -99,8 +99,8 @@
                       :closeOnSelect="false"
                       multiple
                       @input="updateCategory"
-                      @search.focus="focusField('category')"
-                      @search.blur="clearFocus"
+                      @[`search.focus`]="focusField('category')"
+                      @[`search.blur`]="clearFocus"
                     />
                   </div>
                   <div
@@ -122,8 +122,8 @@
                       :closeOnSelect="false"
                       multiple
                       @input="updateTag"
-                      @search.focus="focusField('tag')"
-                      @search.blur="clearFocus"
+                      @[`search.focus`]="focusField('tag')"
+                      @[`search.blur`]="clearFocus"
                     />
                   </div>
                   <div class="form-group">
