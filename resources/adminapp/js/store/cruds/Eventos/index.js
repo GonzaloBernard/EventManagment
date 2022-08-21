@@ -21,6 +21,7 @@ const getters = {
 
 const actions = {
   fetchIndexData({ commit/* , state */ }) {
+    console.log("Hola")
     commit('setLoading', true)
     axios
       .get(route/* , { params: state.query } */)

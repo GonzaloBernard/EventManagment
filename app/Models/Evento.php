@@ -30,6 +30,11 @@ class Evento extends Model
         'deleted_at',
     ];
 
+    public function lugar()
+    {
+        return $this->belongsTo(Lugar::class);
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

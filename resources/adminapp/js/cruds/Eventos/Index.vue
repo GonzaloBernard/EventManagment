@@ -34,5 +34,27 @@
     </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
+  components: {
+  },
+  data() {
+    return {
+    }
+  },
+  beforeDestroy() {
+    this.resetState()
+  },
+  created(){
+    console.log("asd")
+    this.fetchIndexData()
+  },
+  computed: {
+    ...mapGetters('EventosIndex', ['data', 'total', 'loading'])
+  },
+  methods: {
+    ...mapActions('EventosIndex', ['fetchIndexData', 'resetState'])
+  }
 }
+</script>
