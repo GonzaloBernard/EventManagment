@@ -47,7 +47,7 @@ export default {
     this.resetState()
   },
   created(){
-    console.log("asd")
+    //console.log("asd")
     this.fetchIndexData()
   },
   computed: {

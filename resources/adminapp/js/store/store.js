@@ -11,6 +11,10 @@ import UsersIndex from './cruds/Users'
 import UsersSingle from './cruds/Users/single'
 import EventosIndex from './cruds/Eventos'
 import EventoSingle from './cruds/Eventos/single'
+import IngresosIndex from './cruds/Ingresos'
+import IngresosSingle from './cruds/Ingresos/single'
+import EgresosIndex from './cruds/Egresos'
+import EgresosSingle from './cruds/Egresos/single'
 
 Vue.use(Vuex)
 
@@ -28,7 +32,11 @@ export default new Vuex.Store({
     UsersSingle,
     // ENTIDADES DEL MODELO
     EventosIndex,
-    EventoSingle
+    EventoSingle,
+    IngresosIndex,
+    IngresosSingle,
+    EgresosIndex,
+    EgresosSingle
   },
   strict: debug
 })

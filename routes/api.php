@@ -17,38 +17,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Users
     Route::resource('users', 'UsersApiController');
 
-    // Product Category
-    Route::post('product-categories/media', 'ProductCategoryApiController@storeMedia')->name('product-categories.storeMedia');
-    Route::resource('product-categories', 'ProductCategoryApiController');
-
-    // Product Tag
-    Route::resource('product-tags', 'ProductTagApiController');
-
-    // Product
-    Route::post('products/media', 'ProductApiController@storeMedia')->name('products.storeMedia');
-    Route::resource('products', 'ProductApiController');
-
-    // Contact Company
-    Route::resource('contact-companies', 'ContactCompanyApiController');
-
-    // Contact Contacts
-    Route::resource('contact-contacts', 'ContactContactsApiController');
-
-    // Expense Category
-    Route::resource('expense-categories', 'ExpenseCategoryApiController');
-
-    // Income Category
-    Route::resource('income-categories', 'IncomeCategoryApiController');
-
-    // Expense
-    Route::resource('expenses', 'ExpenseApiController');
-
-    // Income
-    Route::resource('incomes', 'IncomeApiController');
-
-    // Expense Report
-    Route::apiResource('expense-reports', 'ExpenseReportApiController', ['only' => ['index']]);
-
-    // Expense
+    // Eventos
     Route::resource('eventos', 'EventoApiController');
+
+    // Ingreso
+    Route::resource('ingresos', 'IngresoApiController');
+
+    // Egreso
+    Route::resource('egresos', 'EgresoApiController');
 });

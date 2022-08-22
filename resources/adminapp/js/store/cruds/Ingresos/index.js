@@ -11,7 +11,7 @@ function initialState() {
   }
 }
 
-const route = 'eventos'
+const route = 'ingresos'
 
 const getters = {
   data: state => state.data,
@@ -21,13 +21,13 @@ const getters = {
 
 const actions = {
   fetchIndexData({ commit/* , state */ }) {
-    console.log("Hola")
+    //console.log("asd")
     commit('setLoading', true)
     axios
       .get(route/* , { params: state.query } */)
       .then(response => {
         commit('setData', response.data.data)
-        commit('setTotal', response.data.total)
+        //commit('setTotal', response.data.total)
       })
       .catch(error => {
         message = error.response.data.message || error.message
