@@ -10,7 +10,7 @@ function initialState() {
       deleted_at: ''
     },
     lists: {
-      lugar: []
+      egreso_categoria: []
     },
     loading: false
   }

@@ -2,15 +2,12 @@ function initialState() {
   return {
     entry: {
       id: null,
-      descripcion: '',
-      cliente: '',
-      fecha: '',
       created_at: '',
       updated_at: '',
       deleted_at: ''
     },
     lists: {
-      lugar: []
+      medio_de_pago: []
     },
     loading: false
   }
@@ -90,40 +87,7 @@ const actions = {
         })
     })
   },
-/*   setCompany({ commit }, value) {
-    commit('setCompany', value)
-  },
-  setContactFirstName({ commit }, value) {
-    commit('setContactFirstName', value)
-  },
-  setContactLastName({ commit }, value) {
-    commit('setContactLastName', value)
-  },
-  setContactPhone1({ commit }, value) {
-    commit('setContactPhone1', value)
-  },
-  setContactPhone2({ commit }, value) {
-    commit('setContactPhone2', value)
-  },
-  setContactEmail({ commit }, value) {
-    commit('setContactEmail', value)
-  },
-  setContactSkype({ commit }, value) {
-    commit('setContactSkype', value)
-  },
-  setContactAddress({ commit }, value) {
-    commit('setContactAddress', value)
-  }, */
 
-  setDescripcion({ commit }, value) {
-    commit('setDescripcion', value)
-  },
-  setCliente({ commit }, value) {
-    commit('setCliente', value)
-  },
-  setFecha({ commit }, value) {
-    commit('setFecha', value)
-  },
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
   },
@@ -157,39 +121,6 @@ const actions = {
 const mutations = {
   setEntry(state, entry) {
     state.entry = entry
-  },
-/*   setCompany(state, value) {
-    state.entry.company_id = value
-  },
-  setContactFirstName(state, value) {
-    state.entry.contact_first_name = value
-  },
-  setContactLastName(state, value) {
-    state.entry.contact_last_name = value
-  },
-  setContactPhone1(state, value) {
-    state.entry.contact_phone_1 = value
-  },
-  setContactPhone2(state, value) {
-    state.entry.contact_phone_2 = value
-  },
-  setContactEmail(state, value) {
-    state.entry.contact_email = value
-  },
-  setContactSkype(state, value) {
-    state.entry.contact_skype = value
-  },
-  setContactAddress(state, value) {
-    state.entry.contact_address = value
-  }, */
-  setDescripcion(state, value) {
-    state.entry.descripcion = value
-  },
-  setCliente(state, value) {
-    state.entry.cliente = value
-  },
-  setFecha(state, value) {
-    state.entry.fecha = value
   },
   setCreatedAt(state, value) {
     state.entry.created_at = value
