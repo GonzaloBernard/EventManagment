@@ -16,7 +16,7 @@ function initialState() {
   }
 }
 
-const route = ''
+const route = 'egresos'
 
 const getters = {
   entry: state => state.entry,

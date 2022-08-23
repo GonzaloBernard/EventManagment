@@ -54,6 +54,7 @@ export default {
     ...mapGetters('IngresoSingle', ['entry', 'loading', 'lists'])
   },
   mounted() {
+    console.log("asdsss")
     this.fetchCreateData()
   },
   beforeDestroy() {

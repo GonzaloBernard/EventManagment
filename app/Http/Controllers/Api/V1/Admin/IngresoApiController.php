@@ -7,6 +7,7 @@ use App\Http\Requests\StoreIngresoRequest;
 use App\Http\Requests\UpdateIngresoRequest;
 use App\Http\Resources\Admin\IngresoResource;
 use App\Models\Ingreso;
+use App\Models\MedioDePago;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
