@@ -13,7 +13,7 @@ function initialState() {
   }
 }
 
-const route = 'eventos'
+const route = 'ingresos'
 
 const getters = {
   entry: state => state.entry,
@@ -99,6 +99,7 @@ const actions = {
   },
   fetchCreateData({ commit }) {
     axios.get(`${route}/create`).then(response => {
+        console.log(response.data.meta)
       commit('setLists', response.data.meta)
     })
   },

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEgresoRequest;
 use App\Http\Requests\UpdateEgresoRequest;
 use App\Http\Resources\Admin\EgresoResource;
 use App\Models\Egreso;
+use App\Models\EgresoCategoria;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -35,7 +36,7 @@ class EgresoApiController extends Controller
 
         return response([
             'meta' => [
-
+                'egreso_categoria' => EgresoCategoria::get(['id', 'descripcion']),
             ],
         ]);
     }
