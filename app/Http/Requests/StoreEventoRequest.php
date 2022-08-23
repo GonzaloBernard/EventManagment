@@ -17,6 +17,10 @@ class StoreEventoRequest extends FormRequest
     public function rules()
     {
         return [
+            'nombre' => [
+                'string',
+                'nullable',
+            ],
             'descripcion' => [
                 'string',
                 'nullable',
@@ -31,6 +35,14 @@ class StoreEventoRequest extends FormRequest
             ],
             'fecha' => [
                 'date_format:' . config('project.date_format'),
+                'nullable',
+            ],
+            'lugar_id' => [
+                'integer',
+                'nullable',
+            ],
+            'duracion' => [
+                'string',
                 'nullable',
             ],
         ];
