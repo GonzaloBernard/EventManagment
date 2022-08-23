@@ -4,9 +4,8 @@
       <v-sheet height="64">
         <v-toolbar flat>
           <v-btn
-            :small="$vuetify.breakpoint.mobile"
             color="primary"
-            dark
+            outlined
             class="mr-4"
             @click.stop="dialog = true"
             >Nuevo</v-btn
@@ -24,6 +23,15 @@
             <h2>{{ $refs.calendar.title.toUpperCase() }}</h2>
           </v-toolbar-title>
           <v-spacer></v-spacer>
+          <v-row justify="center">
+            <v-icon large> mdi-white-balance-sunny </v-icon>
+            <v-switch
+              class="mt-5 ml-2"
+              v-model="$vuetify.theme.dark"
+              persistent-hint
+            ></v-switch>
+            <v-icon large> mdi-weather-night </v-icon>
+          </v-row>
           <v-menu bottom right>
             <template v-slot:activator="{ on, attrs }">
               <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
@@ -49,20 +57,28 @@
         </v-toolbar>
       </v-sheet>
       <v-sheet height="600">
+        <v-progress-linear
+          v-if="loading"
+          indeterminate
+          color="primary"
+        ></v-progress-linear>
         <v-calendar
           ref="calendar"
           v-model="focus"
           color="primary"
-          :events="events"
+          :events="eventos"
           :event-color="getEventColor"
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"
-          @change="updateRange"
         ></v-calendar>
 
-        <CreateModal :dialog="dialog" @dialogClose="dialog = false"/>
+        <CreateModal
+          :dialog="dialog"
+          @dialogClose="dialog = false"
+          @eventAdded="fetchIndexData"
+        />
 
         <v-menu
           v-model="selectedOpen"
@@ -99,7 +115,7 @@
   </v-row>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 import CreateModal from "./CreateModal.vue";
 export default {
   components: {
@@ -109,44 +125,36 @@ export default {
     focus: "",
     type: "month",
     typeToLabel: {
-      month: "Month",
-      week: "Week",
-      day: "Day",
-      "4day": "4 Days",
+      month: "Mes",
+      week: "Semana",
+      day: "Dia",
+      "4Dias": "4 Días",
     },
     selectedEvent: {},
     dialog: false,
     selectedElement: null,
     selectedOpen: false,
-    events: [],
-    colors: [
-      "blue",
-      "indigo",
-      "deep-purple",
-      "cyan",
-      "green",
-      "orange",
-      "grey darken-1",
-    ],
-    names: [
-      "Meeting",
-      "Holiday",
-      "PTO",
-      "Travel",
-      "Event",
-      "Birthday",
-      "Conference",
-      "Party",
-    ],
   }),
-  created () {
+  created() {
     this.fetchIndexData();
   },
   mounted() {
     this.$refs.calendar.checkChange();
   },
   computed: {
-    ...mapGetters("EventosIndex", ["data"])
+    ...mapGetters("EventosIndex", ["data", "loading"]),
+
+    eventos() {
+      return this.data.map((evento) => {
+        return {
+          start: evento.fecha,
+          end: evento.fecha,
+          color: evento.color,
+          name: evento.nombre,
+          details: evento.descripcion,
+        };
+      });
+    },
   },
   methods: {
     ...mapActions("EventosIndex", ["fetchIndexData"]),
@@ -184,17 +192,6 @@ export default {
 
       nativeEvent.stopPropagation();
     },
-    updateRange() {
-      this.events = this.data.map(evento => {
-        return {
-          start: evento.fecha,
-          end: evento.fecha,
-          color: evento.color,
-          name: evento.nombre,
-          detail: evento.descripcion
-        }
-      });
-    }
   },
 };
 </script>

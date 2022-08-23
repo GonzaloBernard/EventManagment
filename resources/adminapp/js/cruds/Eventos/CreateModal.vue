@@ -68,6 +68,8 @@ export default {
     },
     addEvent() {
       this.storeData()
+      this.$emit("eventAdded")
+      this.$emit("dialogClose")
     }
   },
 };
