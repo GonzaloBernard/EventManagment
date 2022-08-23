@@ -26,6 +26,8 @@ class Evento extends Model
         'descripcion',
         'cliente',
         'fecha',
+        'duracion',
+        'lugar_id',
         'color',
         'created_at',
         'updated_at',

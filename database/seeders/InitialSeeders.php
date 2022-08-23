@@ -50,7 +50,8 @@ class InitialSeeders extends Seeder
                 'nombre' => 'Cumpleaños',
                 'descripcion' => 'Esto es una descripcion 1',
                 'cliente' => 'Gonzalo',
-                'fecha' => '2022-08-20',
+                'fecha' => '2022-05-20',
+                'duracion' => 60,
                 'lugar_id' => 1,
                 'color' => '#33B8FF'
             ],
@@ -59,7 +60,8 @@ class InitialSeeders extends Seeder
                 'nombre' => 'Cumpleaños',
                 'descripcion' => 'Esto es una descripcion 2',
                 'cliente' => 'Gonzalo',
-                'fecha' => '2022-08-20',
+                'fecha' => '2022-07-20',
+                'duracion' => 90,
                 'lugar_id' => 1,
                 'color' => '#33B8FF'
             ],
@@ -68,7 +70,8 @@ class InitialSeeders extends Seeder
                 'nombre' => 'Cumpleaños',
                 'descripcion' => 'Esto es una descripcion 3',
                 'cliente' => 'Gonzalo',
-                'fecha' => '2022-08-20',
+                'fecha' => '2022-07-25',
+                'duracion' => 120,
                 'lugar_id' => 1,
                 'color' => '#33B8FF'
             ],
@@ -77,7 +80,8 @@ class InitialSeeders extends Seeder
                 'nombre' => 'Cumpleaños',
                 'descripcion' => 'Esto es una descripcion 4',
                 'cliente' => 'Gonzalo',
-                'fecha' => '2022-08-20',
+                'fecha' => '2022-07-18',
+                'duracion' => 120,
                 'lugar_id' => 1,
                 'color' => '#33B8FF'
             ],
@@ -86,7 +90,8 @@ class InitialSeeders extends Seeder
                 'nombre' => 'Cumpleaños',
                 'descripcion' => 'Esto es una descripcion 5',
                 'cliente' => 'Gonzalo',
-                'fecha' => '2022-08-20',
+                'fecha' => '2022-07-15',
+                'duracion' => 120,
                 'lugar_id' => 1,
                 'color' => '#33B8FF'
             ],
@@ -95,7 +100,8 @@ class InitialSeeders extends Seeder
                 'nombre' => 'Cumpleaños',
                 'descripcion' => 'Esto es una descripcion 6',
                 'cliente' => 'Gonzalo',
-                'fecha' => '2022-08-20',
+                'fecha' => '2022-07-26',
+                'duracion' => 90,
                 'lugar_id' => 1,
                 'color' => '#33B8FF'
             ],

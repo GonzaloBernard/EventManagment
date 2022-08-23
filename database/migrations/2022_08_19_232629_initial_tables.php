@@ -57,6 +57,7 @@ class InitialTables extends Migration
             $table->string('cliente')->nullable();
             $table->string('color')->nullable();
             $table->timestamp('fecha')->nullable();
+            $table->string('duracion')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

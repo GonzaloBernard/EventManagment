@@ -33,6 +33,14 @@ class StoreEventoRequest extends FormRequest
                 'date_format:' . config('project.date_format'),
                 'nullable',
             ],
+            'lugar_id' => [
+                'integer',
+                'nullable',
+            ],
+            'duracion' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }
