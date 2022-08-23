@@ -51,10 +51,10 @@ export default {
     this.fetchIndexData()
   },
   computed: {
-    ...mapGetters('EgresosIndex', ['data', 'total', 'loading'])
+    ...mapGetters('EgresoIndex', ['data', 'total', 'loading'])
   },
   methods: {
-    ...mapActions('EgresosIndex', ['fetchIndexData', 'resetState'])
+    ...mapActions('EgresoIndex', ['fetchIndexData', 'resetState'])
   }
 }
 </script>

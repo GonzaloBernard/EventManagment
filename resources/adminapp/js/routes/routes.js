@@ -42,9 +42,21 @@ const routes = [
         meta: { title: 'Ingresos' }
       },
       {
+        path: 'ingresos/create',
+        name: 'ingresos.create',
+        component: () => import('@cruds/Ingresos/Create.vue'),
+        meta: { title: 'Ingresos' }
+      },
+      {
         path: 'egresos/index',
         name: 'egresos.index',
         component: () => import('@cruds/Egresos/Index.vue'),
+        meta: { title: 'Egreos' }
+      },
+      {
+        path: 'egresos/create',
+        name: 'egresos.create',
+        component: () => import('@cruds/Egresos/Create.vue'),
         meta: { title: 'Egreos' }
       },
       {

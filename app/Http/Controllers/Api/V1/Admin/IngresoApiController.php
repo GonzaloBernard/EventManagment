@@ -35,7 +35,7 @@ class IngresoApiController extends Controller
 
         return response([
             'meta' => [
-
+                'medio_de_pagos' => MedioDePago::get(['id', 'descripcion']),
             ],
         ]);
     }
