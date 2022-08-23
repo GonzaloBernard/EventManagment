@@ -25,6 +25,11 @@ import GlobalComponents from './globalComponents'
 import GlobalDirectives from './globalDirectives'
 import GlobalMixins from './mixins/global'
 import { mapGetters, mapActions } from 'vuex'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import '@mdi/font/css/materialdesignicons.css'
+
+Vue.use(Vuetify)
 
 Vue.use(GlobalComponents)
 Vue.use(GlobalDirectives)
@@ -42,6 +47,7 @@ const app = new Vue({
   router,
   store,
   i18n,
+  vuetify: new Vuetify(),
   created() {
     this.fetchLanguages()
   },
