@@ -5,6 +5,8 @@ function initialState() {
       descripcion: '',
       cliente: '',
       fecha: '',
+      nombre: '',
+      color: '',
       created_at: '',
       updated_at: '',
       deleted_at: ''
@@ -118,6 +120,12 @@ const actions = {
   setDescripcion({ commit }, value) {
     commit('setDescripcion', value)
   },
+  setNombre({ commit }, value) {
+    commit('setNombre', value)
+  },
+  setColor({ commit }, value) {
+    commit('setColor', value)
+  },
   setCliente({ commit }, value) {
     commit('setCliente', value)
   },
@@ -182,6 +190,12 @@ const mutations = {
   setContactAddress(state, value) {
     state.entry.contact_address = value
   }, */
+  setNombre(state, value) {
+    state.entry.nombre = value
+  },
+  setColor(state, value) {
+    state.entry.color = value
+  },
   setDescripcion(state, value) {
     state.entry.descripcion = value
   },

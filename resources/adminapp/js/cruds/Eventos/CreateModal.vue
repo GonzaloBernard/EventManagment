@@ -1,5 +1,9 @@
 <template>
-  <v-dialog :value="dialog" max-width="600" @click:outside="$emit('dialogClose')">
+  <v-dialog
+    :value="dialog"
+    max-width="600"
+    @click:outside="$emit('dialogClose')"
+  >
     <v-card class="p-2">
       <v-container>
         <v-form @submit.prevent="addEvent">
@@ -13,43 +17,26 @@
               locale="es-es"
               elevation="5"
               full-width
-              v-model="picker"
+              @input="updateAtributo($event, 'Fecha')"
             ></v-date-picker>
           </v-row>
-          <v-radio-group v-model="isChecked">
-            <v-radio
-              label="Con hora de Inicio y Fin"
-              color="indigo"
-              :value="false"
-            ></v-radio>
-            <v-radio
-              label="Evento de Todo el día"
-              color="red"
-              :value="true"
-            ></v-radio>
-          </v-radio-group>
           <v-text-field
-            v-model="name"
+            @input="updateAtributo($event, 'Nombre')"
             type="text"
             label="Nombre del Evento"
           ></v-text-field>
           <v-textarea
             rows="2"
-            v-model="details"
+            @input="updateAtributo($event,'Descripcion')"
             type="text"
             label="Detalles"
           ></v-textarea>
           <v-text-field
-            v-model="color"
+            @input="updateAtributo($event,'Color')"
             type="color"
             label="color"
           ></v-text-field>
-          <v-btn
-            type="submit"
-            color="primay"
-            class="mr-4"
-            >Crear Evento</v-btn
-          >
+          <v-btn @click.prevent="addEvent()"  color="primay" class="mr-4">Crear Evento</v-btn>
           <v-btn
             type="submit"
             color="error"
@@ -64,6 +51,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   props: {
     dialog: {
@@ -71,19 +59,16 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      picker: null,
-      isChecked: null,
-      name: null,
-      details: null,
-      color: null,
-    };
-  },
   methods: {
-    addEvent() {
-      console.log("hola");
+    ...mapActions("EventoSingle", ["storeData", "setDescripcion", "setNombre", "setColor", "setFecha"]),
+
+    // HAY QUE PASARLE COMO PARAMETRO EL NOMBRE DEL ATRIBUTO -> EJEMPLO: nombre = Nombre, = setNombre
+    updateAtributo(e, nombre) {
+      this[`set${nombre}`](e)
     },
+    addEvent() {
+      this.storeData()
+    }
   },
 };
 </script>

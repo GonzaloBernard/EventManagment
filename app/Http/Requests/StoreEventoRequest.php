@@ -25,6 +25,10 @@ class StoreEventoRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'color' => [
+                'string',
+                'nullable',
+            ],
             'fecha' => [
                 'date_format:' . config('project.date_format'),
                 'nullable',
