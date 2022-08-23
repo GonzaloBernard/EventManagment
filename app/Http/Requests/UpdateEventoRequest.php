@@ -17,6 +17,10 @@ class UpdateEventoRequest extends FormRequest
     public function rules()
     {
         return [
+            'nombre' => [
+                'string',
+                'nullable',
+            ],
             'descripcion' => [
                 'string',
                 'nullable',

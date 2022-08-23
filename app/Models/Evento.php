@@ -22,6 +22,7 @@ class Evento extends Model
     ];
 
     protected $fillable = [
+        'nombre',
         'descripcion',
         'cliente',
         'fecha',
