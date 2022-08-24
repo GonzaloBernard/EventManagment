@@ -11,6 +11,8 @@ use App\Models\Lugar;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Spatie\GoogleCalendar\Event;
+use Carbon\Carbon;
 
 class EventoApiController extends Controller
 {
@@ -23,7 +25,23 @@ class EventoApiController extends Controller
 
     public function store(StoreEventoRequest $request)
     {
+        // Create google calendar event
+        $event = Event::create([
+            'name' => $request->nombre,
+            'startDateTime' => Carbon::createFromFormat('Y-m-d'/*  H:i:s' */, $request->fecha),
+            'endDateTime' => Carbon::createFromFormat('Y-m-d'/*  H:i:s' */, $request->fecha)->addHour(),
+        ]);
+
         $evento = Evento::create($request->validated());
+        $evento->google_calendar_id =  $event->id;
+        $evento->fecha = $event->startDateTime;
+        $evento->duracion = $event->endDateTime->diffInSeconds($event->startDateTime) / 60;
+        $evento->update();
+
+         return $evento;
+         return response([
+             'data' => new EventoResource($events),
+         ]);
 
         return (new EventoResource($evento))
             ->response()

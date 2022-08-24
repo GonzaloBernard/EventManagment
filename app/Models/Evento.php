@@ -28,6 +28,7 @@ class Evento extends Model
         'fecha',
         'duracion',
         'lugar_id',
+        'google_calendar_id',
         'color',
         'created_at',
         'updated_at',

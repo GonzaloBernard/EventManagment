@@ -25,4 +25,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Egreso
     Route::resource('egresos', 'EgresoApiController');
+
+    // Google calendar Events
+    Route::get('googleEvents', 'EventoApiController@getGoogleEvents')->name('getGoogleEvents');
 });
