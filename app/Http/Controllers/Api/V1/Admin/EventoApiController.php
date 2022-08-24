@@ -38,11 +38,6 @@ class EventoApiController extends Controller
         $evento->duracion = $event->endDateTime->diffInSeconds($event->startDateTime) / 60;
         $evento->update();
 
-         return $evento;
-         return response([
-             'data' => new EventoResource($events),
-         ]);
-
         return (new EventoResource($evento))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
