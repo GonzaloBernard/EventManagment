@@ -47,12 +47,6 @@
                                             :items="data"
                                             :search="search"
                                         >
-                                        <template v-slot:[`item.lugar.descripcion`]="{ item }">
-                                        <v-chip>
-                                            {{item.lugar.descripcion }}
-                                        </v-chip>
-                                        </template>
-
                                         <template v-slot:[`item.acciones`]="{ item }">
                                         <v-btn @click="editEvent(item.id)">
                                             Editar
