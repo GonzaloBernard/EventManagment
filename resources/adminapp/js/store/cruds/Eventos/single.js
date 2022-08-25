@@ -33,7 +33,7 @@ const actions = {
     /* dispatch('Alert/resetState', null, { root: true }) */
 
     return new Promise((resolve, reject) => {
-        const parametros = {
+        let parametros = {
             id: state.entry.id,
             descripcion: state.entry.descripcion,
             cliente: state.entry.cliente,
@@ -74,14 +74,15 @@ const actions = {
     commit('setLoading', true)
     /* dispatch('Alert/resetState', null, { root: true }) */
     return new Promise((resolve, reject) => {
-        const parametros = {
+        let parametros = {
             id: state.entry.id,
             descripcion: state.entry.descripcion,
             cliente: state.entry.cliente,
-            fecha: `${state.entry.fecha} ${state.entry.hora}:00`,
+            fecha: `${state.entry.fecha.substring(0,10)} ${state.entry.hora}:00`,
             nombre: state.entry.nombre,
             color: state.entry.color
         }
+        console.log(parametros)
       let params = objectToFormData(parametros, {
         indices: true,
         booleansAsIntegers: true
@@ -188,6 +189,7 @@ const actions = {
 const mutations = {
   setEntry(state, entry) {
     state.entry = entry
+    state.entry.hora = entry.fecha.substring(11,16)
   },
 /*   setCompany(state, value) {
     state.entry.company_id = value

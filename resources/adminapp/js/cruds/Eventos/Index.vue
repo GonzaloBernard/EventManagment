@@ -54,6 +54,9 @@
                                         </template>
 
                                         <template v-slot:[`item.acciones`]="{ item }">
+                                        <v-btn @click="editEvent(item.id)">
+                                            Editar
+                                        </v-btn>
                                         <v-btn @click="destroyDataAction(item.id)">
                                             Borrar
                                         </v-btn>
@@ -107,6 +110,7 @@ export default {
   },
   methods: {
     ...mapActions('EventosIndex', ['fetchIndexData', 'resetState', 'destroyData']),
+    ...mapActions("EventoSingle", ["fetchEditData", "resetState"]),
     destroyDataAction(id) {
         this.$swal({
             title: 'Are you sure?',
@@ -128,7 +132,12 @@ export default {
         this.scenario = 'create'
         this.dialog = true
     },
-
+    editEvent(id) {
+      this.fetchEditData(id).then(() => {
+        this.scenario = 'edit',
+        this.dialog = true
+      })
+    }
   }
 }
 </script>

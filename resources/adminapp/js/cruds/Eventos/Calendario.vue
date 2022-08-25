@@ -106,11 +106,17 @@
               <span v-html="selectedEvent.details"></span>
             </v-card-text>
             <v-card-actions>
-              <v-btn text color="secondary" @click="selectedOpen = false">
-                Cancel
+                <v-btn @click="agregarIngreso(selectedEvent)">
+                  Registrar Ingreso
+              </v-btn>
+              <v-btn @click="agregarEgreso(selectedEvent)">
+                  Asociar Gasto
               </v-btn>
               <v-btn @click="destroyDataAction(selectedEvent.id)">
                   Borrar
+              </v-btn>
+              <v-btn text color="secondary" @click="selectedOpen = false">
+                  Cancelar
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -182,6 +188,12 @@ export default {
             if (result.value) {
                 this.destroyData(id)
             }})
+    },
+    agregarIngreso(){
+        alert('En desarrollo');
+    },
+    agregarEgreso(){
+        alert('En desarrollo');
     },
     viewDay({ date }) {
       this.focus = date;
