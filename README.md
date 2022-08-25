@@ -18,5 +18,7 @@ Then edit your .env file with DB credentials and other settings.
 
 # http://eventos-produccion.herokuapp.com/login
 
+# Heroku
+# Google calendar
 
 
