@@ -110,4 +110,8 @@ export default {
     display: none;
   }
 }
+
+.v-application ul {
+  padding-left: 0px !important;
+}
 </style>

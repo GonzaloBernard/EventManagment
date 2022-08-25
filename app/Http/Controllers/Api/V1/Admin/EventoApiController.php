@@ -28,8 +28,8 @@ class EventoApiController extends Controller
         // Create google calendar event
         $event = Event::create([
             'name' => $request->nombre,
-            'startDateTime' => Carbon::createFromFormat('Y-m-d'/*  H:i:s' */, $request->fecha),
-            'endDateTime' => Carbon::createFromFormat('Y-m-d'/*  H:i:s' */, $request->fecha)->addHour(),
+            'startDateTime' => Carbon::createFromFormat('Y-m-d H:i:s', $request->fecha),
+            'endDateTime' => Carbon::createFromFormat('Y-m-d H:i:s', $request->fecha)->addHour(),
         ]);
 
         $evento = Evento::create($request->validated());

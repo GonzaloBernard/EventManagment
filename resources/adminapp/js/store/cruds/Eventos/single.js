@@ -5,6 +5,7 @@ function initialState() {
       descripcion: '',
       cliente: '',
       fecha: '',
+      hora: '',
       nombre: '',
       color: '',
       created_at: '',
@@ -30,7 +31,7 @@ const actions = {
   storeData({ commit, state, dispatch }) {
     commit('setLoading', true)
     /* dispatch('Alert/resetState', null, { root: true }) */
-
+    state.entry.fecha = `${state.entry.fecha} ${state.entry.hora}:00`
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
         indices: true,
@@ -62,7 +63,7 @@ const actions = {
   updateData({ commit, state, dispatch }) {
     commit('setLoading', true)
     /* dispatch('Alert/resetState', null, { root: true }) */
-
+    state.entry.fecha = `${state.entry.fecha} ${state.entry.hora}:00`
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
         indices: true,
@@ -132,6 +133,9 @@ const actions = {
   setFecha({ commit }, value) {
     commit('setFecha', value)
   },
+  setHora({ commit }, value) {
+    commit('setHora', value)
+  },
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
   },
@@ -194,6 +198,9 @@ const mutations = {
   }, */
   setNombre(state, value) {
     state.entry.nombre = value
+  },
+  setHora(state, value) {
+    state.entry.hora = value
   },
   setColor(state, value) {
     state.entry.color = value

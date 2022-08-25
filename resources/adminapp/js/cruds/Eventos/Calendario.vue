@@ -7,7 +7,7 @@
             color="primary"
             outlined
             class="mr-4"
-            @click.stop="(dialog = true), (scenario = 'create')"
+            @click.stop="createEvent"
             >Nuevo</v-btn
           >
           <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">
@@ -74,7 +74,7 @@
           @click:date="viewDay"
         ></v-calendar>
 
-        <CreateModal
+        <CreateEditModal
           :dialog="dialog"
           :scenario="scenario"
           :id="selectedEvent.id"
@@ -118,10 +118,10 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import CreateModal from "./CreateModal.vue";
+import CreateEditModal from "./CreateEditModal.vue";
 export default {
   components: {
-    CreateModal,
+    CreateEditModal,
   },
   data: () => ({
     focus: "",
@@ -163,7 +163,7 @@ export default {
   },
   methods: {
     ...mapActions("EventosIndex", ["fetchIndexData"]),
-    ...mapActions("EventoSingle", ["fetchEditData"]),
+    ...mapActions("EventoSingle", ["fetchEditData", "resetState"]),
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -198,9 +198,15 @@ export default {
 
       nativeEvent.stopPropagation();
     },
+    createEvent () {
+      this.resetState()
+      this.scenario = 'create'
+      this.dialog = true
+    },
     editEvent() {
       this.fetchEditData(this.selectedEvent.id).then(() => {
         this.scenario = 'edit',
+        this.selectedOpen = false,
         this.dialog = true
       })
     }
