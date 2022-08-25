@@ -22,3 +22,4 @@ Then edit your .env file with DB credentials and other settings.
 # Google calendar
 
 
+
