@@ -28,8 +28,8 @@ class EventoApiController extends Controller
         // Create google calendar event
         $event = Event::create([
             'name' => $request->nombre,
-            'startDateTime' => Carbon::createFromFormat('Y-m-d'/*  H:i:s' */, $request->fecha),
-            'endDateTime' => Carbon::createFromFormat('Y-m-d'/*  H:i:s' */, $request->fecha)->addHour(),
+            'startDateTime' => Carbon::createFromFormat('Y-m-d H:i:s', $request->fecha),
+            'endDateTime' => Carbon::createFromFormat('Y-m-d H:i:s' , $request->fecha)->addHour(),
         ]);
 
         $evento = Evento::create($request->validated());
@@ -73,6 +73,8 @@ class EventoApiController extends Controller
     public function edit(Evento $evento)
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        //EDITAR EL EVENTO EN GOOGLE CALENDAR
 
         return response([
             'data' => new EventoResource($evento->load(['lugar'])),
