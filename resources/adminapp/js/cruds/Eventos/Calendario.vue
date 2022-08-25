@@ -109,6 +109,9 @@
               <v-btn text color="secondary" @click="selectedOpen = false">
                 Cancel
               </v-btn>
+              <v-btn @click="destroyDataAction(selectedEvent.id)">
+                  Borrar
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-menu>
@@ -162,8 +165,24 @@ export default {
     },
   },
   methods: {
-    ...mapActions("EventosIndex", ["fetchIndexData"]),
+    ...mapActions("EventosIndex", ["fetchIndexData", "destroyData"]),
     ...mapActions("EventoSingle", ["fetchEditData", "resetState"]),
+    destroyDataAction(id) {
+    this.$swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        confirmButtonColor: '#dd4b39',
+        focusCancel: true,
+        reverseButtons: true
+        }).then(
+            result => {
+            if (result.value) {
+                this.destroyData(id)
+            }})
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
