@@ -31,12 +31,12 @@ const actions = {
   storeData({ commit, state, dispatch }) {
     commit('setLoading', true)
     /* dispatch('Alert/resetState', null, { root: true }) */
-    state.entry.fecha = `${state.entry.fecha} ${state.entry.hora}:00`
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
         indices: true,
         booleansAsIntegers: true
       })
+      params["fecha"] = `${state.entry.fecha} ${state.entry.hora}:00`
       axios
         .post(route, params)
         .then(response => {
@@ -63,12 +63,13 @@ const actions = {
   updateData({ commit, state, dispatch }) {
     commit('setLoading', true)
     /* dispatch('Alert/resetState', null, { root: true }) */
-    state.entry.fecha = `${state.entry.fecha} ${state.entry.hora}:00`
     return new Promise((resolve, reject) => {
+      state.entry.fecha = `${state.entry.fecha} ${state.entry.hora}:00`
       let params = objectToFormData(state.entry, {
         indices: true,
         booleansAsIntegers: true
       })
+      params["fecha"] = `${state.entry.fecha} ${state.entry.hora}:00`
       params.set('_method', 'PUT')
       axios
         .post(`${route}/${state.entry.id}`, params)
