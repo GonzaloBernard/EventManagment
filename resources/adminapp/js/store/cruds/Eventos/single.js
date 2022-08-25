@@ -147,9 +147,11 @@ const actions = {
     })
   },
   fetchEditData({ commit, dispatch }, id) {
+    commit('setLoading',true)
     axios.get(`${route}/${id}/edit`).then(response => {
       commit('setEntry', response.data.data)
       commit('setLists', response.data.meta)
+      commit('setLoading',false)
     })
   },
   fetchShowData({ commit, dispatch }, id) {

@@ -7,7 +7,7 @@
             color="primary"
             outlined
             class="mr-4"
-            @click.stop="dialog = true"
+            @click.stop="(dialog = true), (scenario = 'create')"
             >Nuevo</v-btn
           >
           <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">
@@ -76,6 +76,8 @@
 
         <CreateModal
           :dialog="dialog"
+          :scenario="scenario"
+          :id="selectedEvent.id"
           @dialogClose="dialog = false"
           @eventAdded="fetchIndexData"
         />
@@ -88,7 +90,7 @@
         >
           <v-card color="grey lighten-4" min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
-              <v-btn icon>
+              <v-btn icon @click="editEvent(selectedEvent)">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
@@ -131,9 +133,11 @@ export default {
       "4Dias": "4 Días",
     },
     selectedEvent: {},
+    scenario: '',
     dialog: false,
     selectedElement: null,
     selectedOpen: false,
+    id: null
   }),
   created() {
     this.fetchIndexData();
@@ -152,12 +156,14 @@ export default {
           color: evento.color,
           name: evento.nombre,
           details: evento.descripcion,
+          id: evento.id
         };
       });
     },
   },
   methods: {
     ...mapActions("EventosIndex", ["fetchIndexData"]),
+    ...mapActions("EventoSingle", ["fetchEditData"]),
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -192,6 +198,12 @@ export default {
 
       nativeEvent.stopPropagation();
     },
+    editEvent() {
+      this.fetchEditData(this.selectedEvent.id).then(() => {
+        this.scenario = 'edit',
+        this.dialog = true
+      })
+    }
   },
 };
 </script>

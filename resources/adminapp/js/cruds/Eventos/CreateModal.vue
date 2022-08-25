@@ -18,30 +18,34 @@
               elevation="5"
               full-width
               @input="updateAtributo($event, 'Fecha')"
+              :value="entry.fecha"
             ></v-date-picker>
           </v-row>
           <v-text-field
             @input="updateAtributo($event, 'Nombre')"
             type="text"
             label="Nombre del Evento"
+            :value="entry.nombre"
           ></v-text-field>
           <v-textarea
             rows="2"
             @input="updateAtributo($event,'Descripcion')"
             type="text"
             label="Detalles"
+            :value="entry.descripcion"
           ></v-textarea>
           <v-text-field
             @input="updateAtributo($event,'Color')"
             type="color"
             label="color"
+            :value="entry.color"
           ></v-text-field>
-          <v-btn @click.prevent="addEvent()"  color="primay" class="mr-4">Crear Evento</v-btn>
+          <v-btn @click.prevent="scenario === 'create' ? addEvent : updateEvent"  color="primay" class="mr-4">Crear Evento</v-btn>
           <v-btn
             type="submit"
             color="error"
             class="mr-4"
-            @click="$emit('dialogClose')"
+            @click.prevent="$emit('dialogClose')"
             >Cerrar</v-btn
           >
         </v-form>
@@ -58,9 +62,24 @@ export default {
       required: true,
       default: false,
     },
+    scenario: {
+      required: false,
+      default: ''
+    },
+    id: {
+      required: false,
+      default: null
+    }
+  },
+  watch: {
+    entry: {
+      handler(newVal){ 
+        console.log(newVal)
+      }
+    }
   },
   methods: {
-    ...mapActions("EventoSingle", ["storeData", "setDescripcion", "setNombre", "setColor", "setFecha"]),
+    ...mapActions("EventoSingle", ["loading", "entry", "storeData", "setDescripcion", "setNombre", "setColor", "setFecha"]),
 
     // HAY QUE PASARLE COMO PARAMETRO EL NOMBRE DEL ATRIBUTO -> EJEMPLO: nombre = Nombre, = setNombre
     updateAtributo(e, nombre) {
@@ -68,6 +87,11 @@ export default {
     },
     addEvent() {
       this.storeData()
+      this.$emit("eventAdded")
+      this.$emit("dialogClose")
+    },
+    updateEvent() {
+      this.updateData()
       this.$emit("eventAdded")
       this.$emit("dialogClose")
     }
