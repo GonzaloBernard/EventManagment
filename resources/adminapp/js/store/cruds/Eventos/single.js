@@ -31,12 +31,22 @@ const actions = {
   storeData({ commit, state, dispatch }) {
     commit('setLoading', true)
     /* dispatch('Alert/resetState', null, { root: true }) */
+
     return new Promise((resolve, reject) => {
-      let params = objectToFormData(state.entry, {
+        const parametros = {
+            id: state.entry.id,
+            descripcion: state.entry.descripcion,
+            cliente: state.entry.cliente,
+            fecha: `${state.entry.fecha} ${state.entry.hora}:00`,
+            nombre: state.entry.nombre,
+            color: state.entry.color
+        }
+
+      let params = objectToFormData(parametros, {
         indices: true,
         booleansAsIntegers: true
       })
-      params["fecha"] = `${state.entry.fecha} ${state.entry.hora}:00`
+
       axios
         .post(route, params)
         .then(response => {
@@ -64,12 +74,18 @@ const actions = {
     commit('setLoading', true)
     /* dispatch('Alert/resetState', null, { root: true }) */
     return new Promise((resolve, reject) => {
-      state.entry.fecha = `${state.entry.fecha} ${state.entry.hora}:00`
-      let params = objectToFormData(state.entry, {
+        const parametros = {
+            id: state.entry.id,
+            descripcion: state.entry.descripcion,
+            cliente: state.entry.cliente,
+            fecha: `${state.entry.fecha} ${state.entry.hora}:00`,
+            nombre: state.entry.nombre,
+            color: state.entry.color
+        }
+      let params = objectToFormData(parametros, {
         indices: true,
         booleansAsIntegers: true
       })
-      params["fecha"] = `${state.entry.fecha} ${state.entry.hora}:00`
       params.set('_method', 'PUT')
       axios
         .post(`${route}/${state.entry.id}`, params)
