@@ -74,6 +74,8 @@ class EventoApiController extends Controller
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        //EDITAR EL EVENTO EN GOOGLE CALENDAR
+
         return response([
             'data' => new EventoResource($evento->load(['lugar'])),
             'meta' => [

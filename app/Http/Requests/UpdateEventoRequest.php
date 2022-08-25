@@ -30,7 +30,19 @@ class UpdateEventoRequest extends FormRequest
                 'nullable',
             ],
             'fecha' => [
-                'date_format:' . config('project.date_format'),
+                'date_format:Y-m-d H:i:s',
+                'nullable',
+            ],
+            'color' => [
+                'string',
+                'nullable',
+            ],
+            'lugar_id' => [
+                'integer',
+                'nullable',
+            ],
+            'duracion' => [
+                'string',
                 'nullable',
             ],
         ];
