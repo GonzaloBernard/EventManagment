@@ -8,6 +8,7 @@ function initialState() {
       hora: '',
       nombre: '',
       color: '',
+      lugar_id: '',
       created_at: '',
       updated_at: '',
       deleted_at: ''
@@ -39,7 +40,8 @@ const actions = {
             cliente: state.entry.cliente,
             fecha: `${state.entry.fecha} ${state.entry.hora}:00`,
             nombre: state.entry.nombre,
-            color: state.entry.color
+            color: state.entry.color,
+            lugar_id: state.entry.lugar_id
         }
 
       let params = objectToFormData(parametros, {
@@ -80,7 +82,8 @@ const actions = {
             cliente: state.entry.cliente,
             fecha: `${state.entry.fecha.substring(0,10)} ${state.entry.hora}:00`,
             nombre: state.entry.nombre,
-            color: state.entry.color
+            color: state.entry.color,
+            lugar_id: state.entry.lugar_id
         }
         console.log(parametros)
       let params = objectToFormData(parametros, {
@@ -150,6 +153,9 @@ const actions = {
   },
   setFecha({ commit }, value) {
     commit('setFecha', value)
+  },
+  setLugar({ commit }, value) {
+    commit('setLugar', value)
   },
   setHora({ commit }, value) {
     commit('setHora', value)
@@ -232,6 +238,9 @@ const mutations = {
   },
   setFecha(state, value) {
     state.entry.fecha = value
+  },
+  setLugar(state, value) {
+    state.entry.lugar_id = value
   },
   setCreatedAt(state, value) {
     state.entry.created_at = value

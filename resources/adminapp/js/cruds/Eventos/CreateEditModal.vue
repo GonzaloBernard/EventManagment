@@ -64,6 +64,16 @@
                 label="color"
                 :value="entry.color"
               ></v-text-field>
+              <v-text-field
+                @input="updateAtributo($event, 'Lugar')"
+                type="text"
+                label="Escribir 1 para pelotero"
+                :value="entry.lugar_id"
+              ></v-text-field>
+              <v-text-field
+                type="text"
+                label="Cliente"
+              ></v-text-field>
             </v-col>
           </v-row>
           <v-row justify="center" class="mt-8">
@@ -125,6 +135,7 @@ export default {
       "setColor",
       "setHora",
       "setFecha",
+      "setLugar",
       "updateData",
     ]),
 
