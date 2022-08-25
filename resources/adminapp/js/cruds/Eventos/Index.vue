@@ -47,9 +47,9 @@
                                             :items="data"
                                             :search="search"
                                         >
-                                        <template v-slot:[`item.lugar`]="{ item }">
+                                        <template v-slot:[`item.lugar.descripcion`]="{ item }">
                                         <v-chip>
-                                            {{item.lugar?.descripcion }}
+                                            {{item.lugar.descripcion }}
                                         </v-chip>
                                         </template>
 
@@ -90,7 +90,7 @@ export default {
           { text: 'Color', value: 'color' },
           { text: 'Fecha', value: 'fecha' },
           { text: 'Duración', value: 'duracion' },
-          { text: 'Lugar', value: 'lugar' },
+          { text: 'Lugar', value: 'lugar.descripcion' },
           { text: 'Acciones', value: 'acciones' },
         ],
         dialog: false,
