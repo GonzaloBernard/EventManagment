@@ -49,7 +49,7 @@ export default {
     },
     backgroundImage: {
       type: String,
-      default: '/md/img/sidebar-1.jpg'
+      default: 'https://images.pexels.com/photos/273153/pexels-photo-273153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     },
     imgLogo: {
       type: String,

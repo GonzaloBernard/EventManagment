@@ -26,7 +26,13 @@
       <!-- Collapsable -->
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="navbar-nav">
-          <top-navbar-languages />
+          <v-icon large> mdi-white-balance-sunny </v-icon>
+          <v-switch
+            class="mt-5 ml-2"
+            v-model="$vuetify.theme.dark"
+            persistent-hint
+          ></v-switch>
+          <v-icon large> mdi-weather-night </v-icon>
         </ul>
       </div>
     </div>
@@ -37,8 +43,8 @@
 export default {
   methods: {
     toggleSidebar() {
-      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar)
-    }
-  }
-}
+      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    },
+  },
+};
 </script>
