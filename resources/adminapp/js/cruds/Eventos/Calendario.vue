@@ -63,6 +63,7 @@
           color="primary"
         ></v-progress-linear>
         <v-calendar
+          locale="es-es"
           ref="calendar"
           v-model="focus"
           color="primary"
