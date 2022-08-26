@@ -21,7 +21,7 @@ a {
   color: #202124;
 }
 a:hover {
-  color: #9c27b0;
+  color: #214F9E;
   text-decoration: underline;
 }
 </style>

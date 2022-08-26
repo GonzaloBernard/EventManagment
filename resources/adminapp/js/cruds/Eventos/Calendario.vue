@@ -172,7 +172,7 @@ export default {
   },
   methods: {
     ...mapActions("EventosIndex", ["fetchIndexData", "destroyData"]),
-    ...mapActions("EventoSingle", ["fetchEditData", "resetState"]),
+    ...mapActions("EventoSingle", ["fetchEditData", "resetState", "fetchCreateData"]),
     destroyDataAction(id) {
     this.$swal({
         title: 'Are you sure?',
@@ -231,8 +231,10 @@ export default {
     },
     createEvent () {
       this.resetState()
-      this.scenario = 'create'
-      this.dialog = true
+      this.fetchCreateData().then(()=>{
+        this.scenario = 'create'
+        this.dialog = true
+      })
     },
     editEvent() {
       this.fetchEditData(this.selectedEvent.id).then(() => {

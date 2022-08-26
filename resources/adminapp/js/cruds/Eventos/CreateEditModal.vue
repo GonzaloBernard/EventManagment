@@ -64,22 +64,33 @@
                 label="color"
                 :value="entry.color"
               ></v-text-field>
-              <v-text-field
-                @input="updateAtributo($event, 'Lugar')"
-                type="text"
-                label="Escribir 1 para pelotero"
+              <v-select
+                name="lugar"
+                class="my-2"
+                label="descripcion"
+                placeholder="Seleccione Lugar"
+                :key="'id'"
                 :value="entry.lugar_id"
-              ></v-text-field>
-              <v-text-field
-                type="text"
-                label="Cliente"
-              ></v-text-field>
+                :options="lists.lugar"
+                :closeOnSelect="true"
+                :reduce="(lugar) => lugar.id"
+                @input="updateAtributo($event, 'Lugar')"
+                @[`search.focus`]="focusField('lugar')"
+              />
+              <v-select
+                @input="updateAtributo($event, 'Duracion')"
+                v-model="entry.duracion"
+                placeholder="Duración del evento (en minutos)"
+                class="my-4"
+                :options="['30', '60', '90', '120', '180', '240']"
+              />
+              <v-text-field type="text" label="Cliente"></v-text-field>
             </v-col>
           </v-row>
           <v-row justify="center" class="mt-8">
-            <v-btn @click.prevent="buttonHandler" color="primay" class="mr-4"
-              >{{scenario === 'create' ? 'Crear Evento' : 'Actualizar Evento'}}</v-btn
-            >
+            <v-btn @click.prevent="buttonHandler" color="primay" class="mr-4">{{
+              scenario === "create" ? "Crear Evento" : "Actualizar Evento"
+            }}</v-btn>
             <v-btn
               type="submit"
               color="error"
@@ -117,7 +128,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("EventoSingle", ["entry"]),
+    ...mapGetters("EventoSingle", ["entry", "lists"]),
   },
   watch: {
     scenario: {
@@ -137,6 +148,7 @@ export default {
       "setFecha",
       "setLugar",
       "updateData",
+      "setDuracion"
     ]),
 
     // HAY QUE PASARLE COMO PARAMETRO EL NOMBRE DEL ATRIBUTO -> EJEMPLO: nombre = Nombre, = setNombre
@@ -150,15 +162,34 @@ export default {
         this.updateEvent();
       }
     },
+    validator() {
+      if (
+        this.entry.fecha.length < 1 ||
+        !this.entry.hora ||
+        !this.entry.nombre ||
+        !this.entry.descripcion ||
+        !this.entry.lugar_id
+      )
+        return false;
+      else return true;
+    },
     addEvent() {
-      this.storeData();
-      this.$emit("eventAdded");
-      this.$emit("dialogClose");
+      if (this.validator()) {
+        this.storeData();
+        this.$emit("eventAdded");
+        this.$emit("dialogClose");
+      } else {
+        this.$swal("error", "Faltan datos");
+      }
     },
     updateEvent() {
-      this.updateData();
-      this.$emit("eventAdded");
-      this.$emit("dialogClose");
+      if (this.validator()) {
+        this.updateData();
+        this.$emit("eventAdded");
+        this.$emit("dialogClose");
+      } else {
+        this.$swal("error", "Faltan datos");
+      }
     },
   },
 };

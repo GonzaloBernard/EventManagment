@@ -29,6 +29,10 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 
+import Vue from 'vue';
+import VueSweetalert2 from 'vue-sweetalert2';
+
+Vue.use(VueSweetalert2);
 Vue.use(Vuetify)
 
 Vue.use(GlobalComponents)

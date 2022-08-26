@@ -61,7 +61,7 @@ export default {
         },
         {
           title: 'Calendario de Eventos',
-          icon: 'table_view',
+          icon: 'perm_contact_calendar',
           path: { name: 'eventos.calendario' },
           gate: 'user_management_access',
         },
@@ -73,13 +73,13 @@ export default {
         },
         {
           title: 'Tabla de Ingresos',
-          icon: 'table_view',
+          icon: 'attach_money',
           path: { name: 'ingresos.index' },
           gate: 'user_management_access',
         },
         {
           title: 'Tabla de Egresos',
-          icon: 'table_view',
+          icon: 'money_off',
           path: { name: 'egresos.index' },
           gate: 'user_management_access',
         },

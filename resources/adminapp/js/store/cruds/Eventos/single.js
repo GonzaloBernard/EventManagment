@@ -2,13 +2,14 @@ function initialState() {
   return {
     entry: {
       id: null,
-      descripcion: '',
-      cliente: '',
+      descripcion: null,
+      cliente: null,
       fecha: '',
-      hora: '',
-      nombre: '',
-      color: '',
-      lugar_id: '',
+      hora: null,
+      duracion: null,
+      nombre: null,
+      color: null,
+      lugar_id: null,
       created_at: '',
       updated_at: '',
       deleted_at: ''
@@ -145,6 +146,9 @@ const actions = {
   setNombre({ commit }, value) {
     commit('setNombre', value)
   },
+  setDuracion({ commit }, value) {
+    commit('setDuracion', value)
+  },
   setColor({ commit }, value) {
     commit('setColor', value)
   },
@@ -223,6 +227,9 @@ const mutations = {
   }, */
   setNombre(state, value) {
     state.entry.nombre = value
+  },
+  setDuracion(state, value) {
+    state.entry.duracion = value
   },
   setHora(state, value) {
     state.entry.hora = value
