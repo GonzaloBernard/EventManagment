@@ -79,12 +79,12 @@
               />
               <v-select
                 @input="updateAtributo($event, 'Duracion')"
-                v-model="entry.duracion"
+                :value="entry.duracion"
                 placeholder="Duración del evento (en minutos)"
                 class="my-4"
                 :options="['30', '60', '90', '120', '180', '240']"
               />
-              <v-text-field type="text" label="Cliente"></v-text-field>
+              <v-text-field :value="entry.cliente" @input="updateAtributo($event, 'Cliente')" type="text" label="Cliente"></v-text-field>
             </v-col>
           </v-row>
           <v-row justify="center" class="mt-8">
@@ -147,6 +147,7 @@ export default {
       "setHora",
       "setFecha",
       "setLugar",
+      "setCliente",
       "updateData",
       "setDuracion"
     ]),

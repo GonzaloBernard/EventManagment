@@ -29,7 +29,7 @@ class EventoApiController extends Controller
         $event = Event::create([
             'name' => $request->nombre,
             'startDateTime' => Carbon::createFromFormat('Y-m-d H:i:s', $request->fecha),
-            'endDateTime' => Carbon::createFromFormat('Y-m-d H:i:s', $request->fecha)->addHour(),
+            'endDateTime' => Carbon::createFromFormat('Y-m-d H:i:s', $request->fecha)->addMinutes($request->duracion),
         ]);
 
         $evento = Evento::create($request->validated());

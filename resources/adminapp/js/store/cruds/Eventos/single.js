@@ -3,7 +3,7 @@ function initialState() {
     entry: {
       id: null,
       descripcion: null,
-      cliente: null,
+      cliente: '',
       fecha: '',
       hora: null,
       duracion: null,
@@ -42,9 +42,10 @@ const actions = {
             fecha: `${state.entry.fecha} ${state.entry.hora}:00`,
             nombre: state.entry.nombre,
             color: state.entry.color,
-            lugar_id: state.entry.lugar_id
+            lugar_id: state.entry.lugar_id,
+            duracion: state.entry.duracion
         }
-
+    console.log(parametros)
       let params = objectToFormData(parametros, {
         indices: true,
         booleansAsIntegers: true
