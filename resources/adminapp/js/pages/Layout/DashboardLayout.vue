@@ -34,30 +34,10 @@ export default {
           path: { name: 'dashboard' }
         },
         {
-          title: 'Gestión de Usuarios',
+          title: 'Usuarios',
           icon: 'person',
-          path: { name: 'user_management' },
+          path: { name: 'users.index' },
           gate: 'user_management_access',
-          children: [
-            {
-              title: 'Permisos',
-              icon: 'perm_data_setting',
-              path: { name: 'permissions.index' },
-              gate: 'permission_access'
-            },
-            {
-              title: 'Roles',
-              icon: 'group',
-              path: { name: 'roles.index' },
-              gate: 'role_access'
-            },
-            {
-              title: 'Usuarios',
-              icon: 'person',
-              path: { name: 'users.index' },
-              gate: 'user_access'
-            }
-          ]
         },
         {
           title: 'Calendario de Eventos',
