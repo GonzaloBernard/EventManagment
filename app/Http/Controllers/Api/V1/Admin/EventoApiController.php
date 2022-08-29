@@ -65,6 +65,13 @@ class EventoApiController extends Controller
     {
         $evento->update($request->validated());
 
+        //EDITAR EL EVENTO EN GOOGLE CALENDAR
+        $event = Event::find($evento->google_calendar_id);
+        $event->update([
+            'name' => $evento->nombre,
+            'startDateTime' => Carbon::createFromFormat('Y-m-d H:i:s', $evento->fecha),
+            'endDateTime' => Carbon::createFromFormat('Y-m-d H:i:s', $evento->fecha)->addMinutes($request->duracion)
+        ]);
         return (new EventoResource($evento))
             ->response()
             ->setStatusCode(Response::HTTP_ACCEPTED);
@@ -73,8 +80,6 @@ class EventoApiController extends Controller
     public function edit(Evento $evento)
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        //EDITAR EL EVENTO EN GOOGLE CALENDAR
 
         return response([
             'data' => new EventoResource($evento->load(['lugar'])),
@@ -89,6 +94,9 @@ class EventoApiController extends Controller
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $evento->delete();
+
+        $event = Event::find($evento->google_calendar_id);
+        $event->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
