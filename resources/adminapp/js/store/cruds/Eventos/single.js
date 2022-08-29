@@ -82,7 +82,7 @@ const actions = {
             id: state.entry.id,
             descripcion: state.entry.descripcion,
             cliente: state.entry.cliente,
-            fecha: `${state.entry.fecha} ${state.entry.hora}:00`,
+            fecha: `${state.entry.fecha.substring(0,11)} ${state.entry.hora}:00`,
             nombre: state.entry.nombre,
             color: state.entry.color ? state.entry.color : '#2B66CC',
             lugar_id: state.entry.lugar_id,
