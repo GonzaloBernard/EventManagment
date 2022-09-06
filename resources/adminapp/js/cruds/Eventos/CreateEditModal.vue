@@ -214,7 +214,6 @@ export default {
         this.entry.fecha.length < 1 ||
         !this.entry.hora ||
         !this.entry.nombre ||
-        !this.entry.descripcion ||
         !this.entry.lugar_id
       )
         return false;
