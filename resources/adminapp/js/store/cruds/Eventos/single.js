@@ -90,7 +90,9 @@ const actions = {
             nombre: state.entry.nombre,
             color: state.entry.color ? state.entry.color : '#2B66CC',
             lugar_id: state.entry.lugar_id,
-            duracion: state.entry.duracion
+            duracion: state.entry.duracion,
+            precio: state.entry.precio,
+            agasajado: state.entry.agasajado,
         }
         console.log(parametros)
       let params = objectToFormData(parametros, {
