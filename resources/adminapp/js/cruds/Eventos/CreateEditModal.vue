@@ -190,6 +190,8 @@ export default {
       "setColor",
       "setHora",
       "setFecha",
+      "setAgasajado",
+      "setPrecio",
       "setLugar",
       "setCliente",
       "updateData",

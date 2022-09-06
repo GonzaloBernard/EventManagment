@@ -7,8 +7,8 @@ function initialState() {
       fecha: '',
       hora: null,
       duracion: null,
-      precio: 10000.54,
-      agasajado: "Juan",
+      precio: null,
+      agasajado: '',
       nombre: null,
       color: null,
       lugar_id: 1,
@@ -161,6 +161,12 @@ const actions = {
   setCliente({ commit }, value) {
     commit('setCliente', value)
   },
+  setAgasajado({ commit }, value) {
+    commit('setAgasajado', value)
+  },
+  setPrecio({ commit }, value) {
+    commit('setPrecio', value)
+  },
   setFecha({ commit }, value) {
     commit('setFecha', value)
   },
@@ -231,6 +237,12 @@ const mutations = {
   setContactAddress(state, value) {
     state.entry.contact_address = value
   }, */
+  setAgasajado(state, value) {
+    state.entry.agasajado = value
+  },
+  setPrecio(state, value) {
+    state.entry.precio = value
+  },
   setNombre(state, value) {
     state.entry.nombre = value
   },
