@@ -45,6 +45,13 @@
               </v-row>
             </v-col>
             <v-col class="ml-4" cols="4" align-self="center">
+              <v-select
+                @input="updateAtributo($event, 'Nombre')"
+                :value="entry.nombre"
+                placeholder="Nombres Predeterminados"
+                class="my-4"
+                :options="['Infanti x 20' ,'Teens x 20' ,'Salón Fiesta 1' ,'Salón Fiesta 2' ,'Especial']"
+              />
               <v-text-field
                 @input="updateAtributo($event, 'Nombre')"
                 type="text"
@@ -58,12 +65,30 @@
                 label="Detalles"
                 :value="entry.descripcion"
               ></v-textarea>
-              <v-text-field
-                @input="updateAtributo($event, 'Color')"
-                type="color"
-                label="color"
-                :value="entry.color"
+              <v-text-field 
+                @input="updateAtributo($event, 'Cliente')"
+                type="text" 
+                label="Cliente"
+                :value="entry.cliente"
               ></v-text-field>
+
+            <!-- FALTA AGREGARLO A VUEX- POST -->
+              <v-text-field 
+                prefix="$"
+                @input="updateAtributo($event, 'Precio')"
+                type="number"
+                label="Precio"
+                :value="entry.precio"
+              ></v-text-field>
+            <!-- FALTA AGREGARLO A VUEX- POST -->
+              <v-text-field 
+                prefix="$"
+                @input="updateAtributo($event, 'Entrega')"
+                type="number"
+                label="Entrega"
+                :value="entry.entrega"
+              ></v-text-field>
+
               <v-select
                 name="lugar"
                 class="my-2"
@@ -82,18 +107,40 @@
                 :value="entry.duracion"
                 placeholder="Duración del evento (en minutos)"
                 class="my-4"
-                :options="['30', '60', '90', '120', '180', '240']"
+                :options="['30', '60', '90', '120', '150', '180', '210', '240']"
               />
-              <v-text-field :value="entry.cliente" @input="updateAtributo($event, 'Cliente')" type="text" label="Cliente"></v-text-field>
+              <v-row>
+                <v-col align="center">
+                  <v-btn class="" @click="setColor('#b62525')" rounded x-small color="#b62525"></v-btn>
+                  <v-btn class="" @click="setColor('#27b054')" rounded x-small color="#27b054"></v-btn>
+                </v-col>
+                <v-col align="center">
+                  <v-btn class="" @click="setColor('#b2a61f')" rounded x-small color="#b2a61f"></v-btn>
+                  <v-btn class="" @click="setColor('#27a7b0')" rounded x-small color="#27a7b0"></v-btn>
+                  
+                </v-col>
+                <v-col align="center">
+                  <v-btn class="" @click="setColor('#aa5f22')" rounded x-small color="#aa5f22"></v-btn>
+                  <v-btn class="" @click="setColor('#244ba8')" rounded x-small color="#244ba8"></v-btn>
+                  
+                </v-col>
+                <v-col class="col-4" align="center">
+                <v-text-field
+                    @input="updateAtributo($event, 'Color')"
+                    type="color"
+                    :value="entry.color"
+                ></v-text-field>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
           <v-row justify="center" class="mt-8">
-            <v-btn @click.prevent="buttonHandler" color="primay" class="mr-4">{{
+            <v-btn @click.prevent="buttonHandler" color="secondary" class="mr-4">{{
               scenario === "create" ? "Crear Evento" : "Actualizar Evento"
             }}</v-btn>
             <v-btn
               type="submit"
-              color="error"
+              color="primay"
               class="mr-4"
               @click.prevent="$emit('dialogClose')"
               >Cerrar</v-btn

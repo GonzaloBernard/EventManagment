@@ -9,7 +9,7 @@ function initialState() {
       duracion: null,
       nombre: null,
       color: null,
-      lugar_id: null,
+      lugar_id: 1,
       created_at: '',
       updated_at: '',
       deleted_at: ''
