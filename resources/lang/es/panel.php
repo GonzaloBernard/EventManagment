@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'PruebaVue',
+    'site_title' => 'Gestión Eventos',
 ];

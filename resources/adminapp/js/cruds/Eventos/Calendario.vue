@@ -23,15 +23,6 @@
             <h2>{{ $refs.calendar.title.toUpperCase() }}</h2>
           </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-row justify="center">
-            <v-icon large> mdi-white-balance-sunny </v-icon>
-            <v-switch
-              class="mt-5 ml-2"
-              v-model="$vuetify.theme.dark"
-              persistent-hint
-            ></v-switch>
-            <v-icon large> mdi-weather-night </v-icon>
-          </v-row>
           <v-menu bottom right>
             <template v-slot:activator="{ on, attrs }">
               <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
