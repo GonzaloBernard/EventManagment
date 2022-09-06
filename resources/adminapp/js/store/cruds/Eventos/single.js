@@ -7,9 +7,11 @@ function initialState() {
       fecha: '',
       hora: null,
       duracion: null,
+      precio: null,
+      agasajado: '',
       nombre: null,
       color: null,
-      lugar_id: null,
+      lugar_id: 1,
       created_at: '',
       updated_at: '',
       deleted_at: ''
@@ -43,7 +45,9 @@ const actions = {
             nombre: state.entry.nombre,
             color: state.entry.color ? state.entry.color : '#2B66CC',
             lugar_id: state.entry.lugar_id,
-            duracion: state.entry.duracion
+            duracion: state.entry.duracion,
+            precio: state.entry.precio,
+            agasajado: state.entry.agasajado,
         }
     console.log(parametros)
       let params = objectToFormData(parametros, {
@@ -157,6 +161,12 @@ const actions = {
   setCliente({ commit }, value) {
     commit('setCliente', value)
   },
+  setAgasajado({ commit }, value) {
+    commit('setAgasajado', value)
+  },
+  setPrecio({ commit }, value) {
+    commit('setPrecio', value)
+  },
   setFecha({ commit }, value) {
     commit('setFecha', value)
   },
@@ -227,6 +237,12 @@ const mutations = {
   setContactAddress(state, value) {
     state.entry.contact_address = value
   }, */
+  setAgasajado(state, value) {
+    state.entry.agasajado = value
+  },
+  setPrecio(state, value) {
+    state.entry.precio = value
+  },
   setNombre(state, value) {
     state.entry.nombre = value
   },
