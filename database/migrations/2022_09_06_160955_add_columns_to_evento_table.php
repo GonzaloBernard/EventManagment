@@ -14,19 +14,8 @@ class AddColumnsToEventoTable extends Migration
     public function up()
     {
         Schema::table('evento', function (Blueprint $table) {
-            //
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('evento', function (Blueprint $table) {
-            //
+            $table->float('precio')->nullable();
+            $table->string('agasajado')->nullable();
         });
     }
 }
