@@ -87,15 +87,21 @@
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn icon>
+              <!-- <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
               <v-btn icon>
                 <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
+              </v-btn> -->
             </v-toolbar>
             <v-card-text>
-              <span v-html="selectedEvent.details"></span>
+              <h4>Detalle: {{selectedEvent.descripcion}} </h4>
+              <h4>Lugar: {{selectedEvent.lugar?.descripcion}} </h4>
+              <h4>Hora de Inicio: {{selectedEvent.fecha?.split(" ")[1].substring(0,5)}}</h4>
+              <h4>Duración: {{selectedEvent.duracion}} min</h4>
+              <h4>Mamá / Papá: {{selectedEvent.cliente}} </h4>
+              <h4>Cumple de: {{selectedEvent.agasajado}} </h4>
+              <h4>Precio $ {{selectedEvent.precio}} </h4>
             </v-card-text>
             <v-card-actions>
                 <v-btn @click="agregarIngreso(selectedEvent)">
@@ -152,6 +158,7 @@ export default {
     eventos() {
       return this.data.map((evento) => {
         return {
+          ...evento,
           start: evento.fecha,
           end: evento.fecha,
           color: evento.color,
