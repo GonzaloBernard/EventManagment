@@ -45,6 +45,14 @@ class UpdateEventoRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'precio' => [
+                'numeric',
+                'nullable',
+            ],
+            'agasajado' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }
