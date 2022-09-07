@@ -110,6 +110,9 @@
               <v-btn @click="agregarEgreso(selectedEvent)">
                   Asociar Gasto
               </v-btn>
+              <v-btn @click="editEvent(selectedEvent)">
+                  Editar
+              </v-btn>
               <v-btn @click="destroyDataAction(selectedEvent.id)">
                   Borrar
               </v-btn>

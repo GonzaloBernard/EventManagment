@@ -49,38 +49,40 @@
                       :search="search"
                     >
                       <template v-slot:[`item.acciones`]="{ item }">
-                        <v-tooltip bottom color="primary">
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                              @click="editEvent(item.id)"
-                              class="mx-2"
-                              fab
-                              dark
-                              small
-                              v-bind="attrs"
-                              v-on="on"
-                              color="primary"
-                              ><v-icon dark>mdi-pencil</v-icon></v-btn
-                            >
-                          </template>
-                          <span>Editar Evento</span>
-                        </v-tooltip>
-                        <v-tooltip top color="error">
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                              @click="destroyDataAction(item.id)"
-                              class="mx-2"
-                              fab
-                              dark
-                              small
-                              v-bind="attrs"
-                              v-on="on"
-                              color="red darken-3"
-                              ><v-icon dark>mdi-delete-forever</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Borrar Evento</span>
-                        </v-tooltip>
+                        <div class="d-flex justify-content-center">
+                          <v-tooltip bottom color="primary">
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                @click="editEvent(item.id)"
+                                class="mx-1"
+                                fab
+                                dark
+                                x-small
+                                v-bind="attrs"
+                                v-on="on"
+                                color="primary"
+                                ><v-icon dark>mdi-pencil</v-icon></v-btn
+                              >
+                            </template>
+                            <span>Editar Evento</span>
+                          </v-tooltip>
+                          <v-tooltip top color="error">
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                @click="destroyDataAction(item.id)"
+                                class="mx-1"
+                                fab
+                                dark
+                                x-small
+                                v-bind="attrs"
+                                v-on="on"
+                                color="red darken-3"
+                                ><v-icon dark>mdi-delete-forever</v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Borrar Evento</span>
+                          </v-tooltip>
+                        </div>
                       </template>
                     </v-data-table>
                   </v-card>
@@ -105,13 +107,13 @@ export default {
       search: "",
       headers: [
         { text: "Nombre", value: "nombre" },
-        { text: "Descripcion", value: "descripcion" },
-        { text: "Cliente", value: "cliente" },
-        { text: "Color", value: "color" },
-        { text: "Fecha", value: "fecha" },
-        { text: "Duración", value: "duracion" },
         { text: "Lugar", value: "lugar.descripcion" },
-        { text: "Acciones", value: "acciones" },
+        { text: "Mamá / Papá", value: "cliente" },
+        { text: "Cumple de", value: "agasajado" },
+        { text: "Precio $", value: "precio" },
+        { text: "Fecha y hora", value: "fecha" },
+        { text: "Duración", value: "duracion" },
+        { text: "Acciones", value: "acciones" , align: "center"},
       ],
       dialog: false,
       scenario: "",
@@ -134,7 +136,7 @@ export default {
       "resetState",
       "destroyData",
     ]),
-    ...mapActions("EventoSingle", ["fetchEditData", "resetState"]),
+    ...mapActions("EventoSingle", ["fetchEditData", "fetchCreateData", "resetState"]),
     destroyDataAction(id) {
       this.$swal({
         title: "Are you sure?",
@@ -152,9 +154,11 @@ export default {
       });
     },
     createEvent() {
-      //this.resetState()
-      this.scenario = "create";
-      this.dialog = true;
+      this.resetState()
+      this.fetchCreateData().then(()=>{
+        this.scenario = 'create'
+        this.dialog = true
+      })
     },
     editEvent(id) {
       this.fetchEditData(id).then(() => {
