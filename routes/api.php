@@ -26,6 +26,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Egreso
     Route::resource('egresos', 'EgresoApiController');
 
+    // EgresoCategoria
+    Route::resource('egresoCategoria', 'EgresoCategoriaApiController');
+
+    // MedioDePago
+    Route::resource('medioDePago', 'MedioDePagoApiController');
+
     // Google calendar Events
     Route::get('googleEvents', 'EventoApiController@getGoogleEvents')->name('getGoogleEvents');
 });
