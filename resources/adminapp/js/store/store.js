@@ -15,6 +15,10 @@ import IngresoIndex from './cruds/Ingresos'
 import IngresoSingle from './cruds/Ingresos/single'
 import EgresoIndex from './cruds/Egresos'
 import EgresoSingle from './cruds/Egresos/single'
+import EgresoCategoriaIndex from './cruds/EgresoCategoria'
+import EgresoCategoriaSingle from './cruds/EgresoCategoria/single'
+import MedioDePagoIndex from './cruds/MedioDePago'
+import MedioDePagoSingle from './cruds/MedioDePago/single'
 
 Vue.use(Vuex)
 
@@ -36,7 +40,11 @@ export default new Vuex.Store({
     IngresoIndex,
     IngresoSingle,
     EgresoIndex,
-    EgresoSingle
+    EgresoSingle,
+    EgresoCategoriaIndex,
+    EgresoCategoriaSingle,
+    MedioDePagoIndex,
+    MedioDePagoSingle,
   },
   strict: debug
 })
