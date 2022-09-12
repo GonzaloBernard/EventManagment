@@ -17,6 +17,22 @@ class StoreEgresoRequest extends FormRequest
     public function rules()
     {
         return [
+            'monto' => [
+                'numeric',
+                'required',
+            ],
+            'fecha' => [
+                'date_format:Y-m-d H:i:s',
+                'nullable',
+            ],
+            'egreso_categoria_id' => [
+                'integer',
+                'required'
+            ],
+            'evento_id' => [
+                'integer',
+                'required'
+            ],
         ];
     }
 }

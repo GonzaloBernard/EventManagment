@@ -17,7 +17,10 @@ class UpdateEgresoCategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'descripcion' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

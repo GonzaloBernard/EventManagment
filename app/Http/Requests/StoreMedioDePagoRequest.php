@@ -17,6 +17,10 @@ class StoreMedioDePagoRequest extends FormRequest
     public function rules()
     {
         return [
+            'descripcion' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

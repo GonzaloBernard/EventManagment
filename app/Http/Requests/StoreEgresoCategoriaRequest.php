@@ -17,6 +17,10 @@ class StoreEgresoCategoriaRequest extends FormRequest
     public function rules()
     {
         return [
+            'descripcion' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }
