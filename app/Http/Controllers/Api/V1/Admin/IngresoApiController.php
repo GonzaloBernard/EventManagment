@@ -18,7 +18,7 @@ class IngresoApiController extends Controller
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new IngresoResource(Ingreso::all());
+        return new IngresoResource(Ingreso::with(['medioDePago' ,'evento'])->get());
     }
 
     public function store(StoreIngresoRequest $request)

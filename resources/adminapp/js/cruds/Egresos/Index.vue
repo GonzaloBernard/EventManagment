@@ -24,6 +24,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h1>Tabla de Egresos</h1>
+                                <v-data-table
+                                    :headers="headers"
+                                    :items="data"
+                                    :search="search"
+                                    >
+                                </v-data-table>
                             </div>
                         </div>
                     </div>
@@ -41,7 +47,15 @@ export default {
   },
   data() {
     return {
-    }
+        search: "",
+        headers: [
+            { text: "fecha", value: "fecha" },
+            { text: "monto", value: "monto" },
+            { text: "categoria", value: "egreso_categoria.descripcion" },
+            { text: "evento", value: "evento_id" },
+            { text: "Acciones", value: "acciones" , align: "center"},
+        ],
+        }
   },
   beforeDestroy() {
     this.resetState()

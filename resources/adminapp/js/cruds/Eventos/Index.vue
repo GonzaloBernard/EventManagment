@@ -106,6 +106,7 @@ export default {
     return {
       search: "",
       headers: [
+        { text: "#", value: "id" },
         { text: "Nombre", value: "nombre" },
         { text: "Lugar", value: "lugar.descripcion" },
         { text: "Mamá / Papá", value: "cliente" },
