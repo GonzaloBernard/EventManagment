@@ -34,7 +34,7 @@ const getters = {
 const actions = {
   storeData({ commit, state, dispatch }) {
     commit('setLoading', true)
-    /* dispatch('Alert/resetState', null, { root: true }) */
+
 
     return new Promise((resolve, reject) => {
         let parametros = {
@@ -80,7 +80,7 @@ const actions = {
   },
   updateData({ commit, state, dispatch }) {
     commit('setLoading', true)
-    /* dispatch('Alert/resetState', null, { root: true }) */
+
     return new Promise((resolve, reject) => {
         let parametros = {
             id: state.entry.id,

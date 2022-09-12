@@ -27,7 +27,6 @@ const getters = {
 const actions = {
   storeData({ commit, state, dispatch }) {
     commit('setLoading', true)
-    /* dispatch('Alert/resetState', null, { root: true }) */
 
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
@@ -42,11 +41,6 @@ const actions = {
         .catch(error => {
           let message = error.response.data.message || error.message
           let errors = error.response.data.errors
-/*           dispatch(
-            'Alert/setAlert',
-            { message: message, errors: errors, color: 'danger' },
-            { root: true }
-          ) */
           console.log(message)
           console.log(errors)
           reject(error)
@@ -58,7 +52,6 @@ const actions = {
   },
   updateData({ commit, state, dispatch }) {
     commit('setLoading', true)
-    /* dispatch('Alert/resetState', null, { root: true }) */
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
         indices: true,
@@ -73,12 +66,6 @@ const actions = {
         .catch(error => {
           let message = error.response.data.message || error.message
           let errors = error.response.data.errors
-
-          /* dispatch(
-            'Alert/setAlert',
-            { message: message, errors: errors, color: 'danger' },
-            { root: true }
-          ) */
           console.log(message)
           console.log(errors)
           reject(error)
@@ -126,6 +113,9 @@ const mutations = {
   setEntry(state, entry) {
     state.entry = entry
   },
+  // ATRIBUTOS
+
+  // ATRIBUTOS
   setCreatedAt(state, value) {
     state.entry.created_at = value
   },

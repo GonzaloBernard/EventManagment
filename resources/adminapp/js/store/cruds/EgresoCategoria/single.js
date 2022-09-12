@@ -4,23 +4,19 @@ function initialState() {
       id: null,
         // ATRIBUTOS
         descripcion: '',
-        monto: '',
-        fecha: '',
-        egreso_categoria_id: null,
-        evento_id: null,
         // ATRIBUTOS
       created_at: '',
       updated_at: '',
       deleted_at: ''
     },
     lists: {
-      egreso_categoria: []
+      lugar: []
     },
     loading: false
   }
 }
 
-const route = 'egresos'
+const route = 'egresoCategoria'
 
 const getters = {
   entry: state => state.entry,
@@ -46,11 +42,6 @@ const actions = {
         .catch(error => {
           let message = error.response.data.message || error.message
           let errors = error.response.data.errors
-/*           dispatch(
-            'Alert/setAlert',
-            { message: message, errors: errors, color: 'danger' },
-            { root: true }
-          ) */
           console.log(message)
           console.log(errors)
           reject(error)
@@ -77,12 +68,6 @@ const actions = {
         .catch(error => {
           let message = error.response.data.message || error.message
           let errors = error.response.data.errors
-
-          /* dispatch(
-            'Alert/setAlert',
-            { message: message, errors: errors, color: 'danger' },
-            { root: true }
-          ) */
           console.log(message)
           console.log(errors)
           reject(error)
@@ -94,7 +79,9 @@ const actions = {
   },
 
   // ATRIBUTOS
-
+  setDescripcion({ commit }, value) {
+    commit('setDescripcion', value)
+  },
   // ATRIBUTOS
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
@@ -130,9 +117,11 @@ const mutations = {
   setEntry(state, entry) {
     state.entry = entry
   },
-    // ATRIBUTOS
-
-    // ATRIBUTOS
+  //////////////
+  setDescripcion(state, value) {
+    state.entry.descripcion = value
+  },
+  //////////////
   setCreatedAt(state, value) {
     state.entry.created_at = value
   },

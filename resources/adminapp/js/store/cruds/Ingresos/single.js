@@ -2,6 +2,13 @@ function initialState() {
   return {
     entry: {
       id: null,
+        ///////////
+        descripcion: '',
+        monto: '',
+        fecha: '',
+        medio_de_pago_id: null,
+        evento_id: null,
+        ///////////
       created_at: '',
       updated_at: '',
       deleted_at: ''
@@ -24,7 +31,7 @@ const getters = {
 const actions = {
   storeData({ commit, state, dispatch }) {
     commit('setLoading', true)
-    /* dispatch('Alert/resetState', null, { root: true }) */
+
 
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
@@ -40,11 +47,6 @@ const actions = {
           let message = error.response.data.message || error.message
           let errors = error.response.data.errors
 
-/*           dispatch(
-            'Alert/setAlert',
-            { message: message, errors: errors, color: 'danger' },
-            { root: true }
-          ) */
           console.log(message)
           console.log(errors)
           reject(error)
@@ -56,7 +58,7 @@ const actions = {
   },
   updateData({ commit, state, dispatch }) {
     commit('setLoading', true)
-    /* dispatch('Alert/resetState', null, { root: true }) */
+
 
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
@@ -72,12 +74,6 @@ const actions = {
         .catch(error => {
           let message = error.response.data.message || error.message
           let errors = error.response.data.errors
-
-          /* dispatch(
-            'Alert/setAlert',
-            { message: message, errors: errors, color: 'danger' },
-            { root: true }
-          ) */
           console.log(message)
           console.log(errors)
           reject(error)
@@ -87,6 +83,10 @@ const actions = {
         })
     })
   },
+
+  // ATRIBUTOS
+
+  // ATRIBUTOS
 
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
@@ -123,6 +123,11 @@ const mutations = {
   setEntry(state, entry) {
     state.entry = entry
   },
+
+    // ATRIBUTOS
+
+    // ATRIBUTOS
+
   setCreatedAt(state, value) {
     state.entry.created_at = value
   },

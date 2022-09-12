@@ -10,7 +10,7 @@ function initialState() {
   }
 }
 
-const route = ''
+const route = 'egresoCategoria'
 
 const getters = {
   data: state => state.data,
@@ -20,6 +20,7 @@ const getters = {
 
 const actions = {
   fetchIndexData({ commit/* , state */ }) {
+    //console.log("asd")
     commit('setLoading', true)
     axios
       .get(route/* , { params: state.query } */)

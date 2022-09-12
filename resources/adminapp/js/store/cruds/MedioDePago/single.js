@@ -4,23 +4,19 @@ function initialState() {
       id: null,
         // ATRIBUTOS
         descripcion: '',
-        monto: '',
-        fecha: '',
-        egreso_categoria_id: null,
-        evento_id: null,
         // ATRIBUTOS
       created_at: '',
       updated_at: '',
       deleted_at: ''
     },
     lists: {
-      egreso_categoria: []
+      lugar: []
     },
     loading: false
   }
 }
 
-const route = 'egresos'
+const route = 'medioDePago'
 
 const getters = {
   entry: state => state.entry,
@@ -94,7 +90,9 @@ const actions = {
   },
 
   // ATRIBUTOS
-
+  setDescripcion({ commit }, value) {
+    commit('setDescripcion', value)
+  },
   // ATRIBUTOS
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
@@ -130,9 +128,11 @@ const mutations = {
   setEntry(state, entry) {
     state.entry = entry
   },
-    // ATRIBUTOS
-
-    // ATRIBUTOS
+  //////////////
+  setDescripcion(state, value) {
+    state.entry.descripcion = value
+  },
+  //////////////
   setCreatedAt(state, value) {
     state.entry.created_at = value
   },
