@@ -3,11 +3,11 @@ function initialState() {
     entry: {
       id: null,
         ///////////
-        descripcion: '',
+        //descripcion: '',
         monto: '',
         fecha: '',
         medio_de_pago_id: null,
-        evento_id: null,
+        evento_id: 1,
         ///////////
       created_at: '',
       updated_at: '',
@@ -25,13 +25,13 @@ const route = 'ingresos'
 const getters = {
   entry: state => state.entry,
   lists: state => state.lists,
+  listsIngresos: state => state.lists,
   loading: state => state.loading
 }
 
 const actions = {
   storeData({ commit, state, dispatch }) {
     commit('setLoading', true)
-
 
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
@@ -58,8 +58,6 @@ const actions = {
   },
   updateData({ commit, state, dispatch }) {
     commit('setLoading', true)
-
-
     return new Promise((resolve, reject) => {
       let params = objectToFormData(state.entry, {
         indices: true,
@@ -85,7 +83,18 @@ const actions = {
   },
 
   // ATRIBUTOS
-
+  setMedioDePago({commit}, value) {
+    commit('setMedioDePago', value)
+  },
+  setDescripcion({commit}, value) {
+    commit('setDescripcion', value)
+  },
+  setMonto({commit}, value) {
+    commit('setMonto', value)
+  },
+  setFecha({commit}, value) {
+    commit('setFecha', value)
+  },
   // ATRIBUTOS
 
   setCreatedAt({ commit }, value) {
@@ -125,7 +134,18 @@ const mutations = {
   },
 
     // ATRIBUTOS
-
+  setMedioDePago(state, value) {
+    state.entry.medio_de_pago_id = value
+  },
+  setDescripcion(state, value) {
+    state.entry.descripcion = value
+  },
+  setMonto(state, value) {
+    state.entry.monto = value
+  },
+  setFecha(state, value) {
+    state.entry.fecha = value
+  },
     // ATRIBUTOS
 
   setCreatedAt(state, value) {

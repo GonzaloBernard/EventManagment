@@ -27,7 +27,7 @@
     <div class="lockscreen-wrapper">
         <div class="lockscreen-logo">
             <a href="{{ route('admin.dashboard') }}">
-                {{ trans('panel.site_title') }}
+            Gestión de Eventos
             </a>
         </div>
 

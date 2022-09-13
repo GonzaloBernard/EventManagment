@@ -14,7 +14,9 @@ function initialState() {
       lugar_id: 1,
       created_at: '',
       updated_at: '',
-      deleted_at: ''
+      deleted_at: '',
+      ingresos: [],
+      egresos: []
     },
     lists: {
       lugar: []
@@ -48,6 +50,8 @@ const actions = {
             duracion: state.entry.duracion,
             precio: state.entry.precio,
             agasajado: state.entry.agasajado,
+            ingresos: state.entry.ingresos,
+            egresos: state.entry.egresos
         }
     console.log(parametros)
       let params = objectToFormData(parametros, {
@@ -147,7 +151,12 @@ const actions = {
   setContactAddress({ commit }, value) {
     commit('setContactAddress', value)
   }, */
-
+  setIngreso({ commit }, value) {
+    commit('setIngreso', value)
+  },
+  setEgreso({ commit }, value) {
+    commit('setEgreso', value)
+  },
   setDescripcion({ commit }, value) {
     commit('setDescripcion', value)
   },
@@ -239,6 +248,12 @@ const mutations = {
   setContactAddress(state, value) {
     state.entry.contact_address = value
   }, */
+  setEgreso(state, value) {
+    state.entry.egresos.push(value)
+  },
+  setIngreso(state, value) {
+    state.entry.ingresos.push(value)
+  },
   setAgasajado(state, value) {
     state.entry.agasajado = value
   },

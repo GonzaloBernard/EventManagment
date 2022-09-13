@@ -1,91 +1,155 @@
 <template>
-  <div class="container-fluid">
-    <form @submit.prevent="submitForm">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header card-header-primary card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">add</i>
-              </div>
-              <h4 class="card-title">
-                {{ $t('global.create') }}
-                <strong>Crear Ingreso</strong>
-              </h4>
-            </div>
-            <div class="card-body">
-              <back-button></back-button>
-            </div>
-            <div class="card-body">
-              <!-- <bootstrap-alert /> -->
-              <div class="row">
-                <div class="col-md-12">
-                    <!-- ACA VAN TODOS LOS INPUTS -->
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <vue-button-spinner
-                class="btn-primary"
-                :status="status"
-                :isLoading="loading"
-                :disabled="loading"
-              >
-                {{ $t('global.save') }}
-              </vue-button-spinner>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+  <v-container>
+    <v-row justify="center">
+      <!--       <v-col cols="3" align-self="center">
+        <v-text-field
+          :value="entry.descripcion"
+          outlined
+          @input="setDescripcion($event)"
+          label="Monto"
+        />
+      </v-col> -->
+      <v-col cols="3" align-self="center">
+        <v-menu
+          ref="menu"
+          v-model="menu"
+          :close-on-content-click="false"
+          :return-value.sync="date"
+          transition="scale-transition"
+          offset-y
+          min-width="auto"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              outlined
+              v-model="date"
+              label="Seleccione Fecha"
+              prepend-icon="mdi-calendar"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="date" locale="es-es" no-title scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="menu = false"> Cancelar </v-btn>
+            <v-btn text color="primary" @click="saveDate(date)">
+              Guardar Fecha
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+      </v-col>
+      <v-col cols="2" align-self="center">
+        <v-text-field
+          :value="entry.monto"
+          outlined
+          prepend-inner-icon="mdi-currency-usd"
+          @input="setMonto($event)"
+          label="Monto"
+        />
+      </v-col>
+      <!-- <bootstrap-alert /> -->
+      <v-col cols="3" align-self="center" class="mb-8">
+        <v-select
+          @input="setMedioDePago($event)"
+          :value="entry.medio_de_pago_id"
+          :reduce="(medio_de_pago) => medio_de_pago.id"
+          label="descripcion"
+          placeholder="Medio de pago"
+          :options="lists.medio_de_pagos"
+        />
+      </v-col>
+      <v-col cols="2" align-self="center" class="mb-8">
+        <v-btn
+          @click="handleSubmit"
+          color="green lighten-3"
+          class="ma-2 white--text"
+        >
+          Guardar Ingreso
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-divider></v-divider>
+  </v-container>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      status: '',
-      activeField: ''
-    }
+      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
+      menu: false,
+      status: "",
+      activeField: "",
+    };
+  },
+  props: {
+    scenario: {
+      type: String,
+      required: true,
+      default: "",
+    },
   },
   computed: {
-    ...mapGetters('IngresoSingle', ['entry', 'loading', 'lists'])
+    ...mapGetters("IngresoSingle", ["entry", "loading", "lists"]),
   },
   mounted() {
-    console.log("asdsss")
-    this.fetchCreateData()
+    this.fetchCreateData();
+    this.saveDate(this.date);
   },
   beforeDestroy() {
-    this.resetState()
+    this.resetState();
   },
   methods: {
-    ...mapActions('IngresoSingle', [
-      'storeData',
-      'resetState',
-      'fetchCreateData'
+    ...mapActions("IngresoSingle", [
+      "storeData",
+      "resetState",
+      "fetchCreateData",
+      "setMedioDePago",
+      "setDescripcion",
+      "setMonto",
+      "setFecha",
     ]),
-
+    ...mapActions("EventoSingle", ["setIngreso"]),
+    handleSubmit() {
+      if (this.scenario === "Multiple") {
+        this.setIngreso({
+          evento_id: this.entry.evento_id,
+          fecha: this.entry.fecha,
+          medio_de_pago_id: this.entry.medio_de_pago_id,
+          monto: this.entry.monto
+        });
+      } else {
+        this.submitForm();
+      }
+    },
+    saveDate(date) {
+      this.$refs.menu.save(date);
+      let dateFormat = date + " 00:00:00";
+      this.setFecha(dateFormat);
+    },
     submitForm() {
       this.storeData()
         .then(() => {
-          this.$router.push({ name: 'ingresos.index' })
-          this.$eventHub.$emit('create-success')
+          this.$router.push({ name: "ingresos.index" });
+          this.$eventHub.$emit("create-success");
         })
-        .catch(error => {
-          this.status = 'failed'
+        .catch((error) => {
+          this.status = "failed";
           _.delay(() => {
-            this.status = ''
-          }, 3000)
-        })
+            this.status = "";
+          }, 3000);
+        });
     },
     focusField(name) {
-      this.activeField = name
+      this.activeField = name;
     },
     clearFocus() {
-      this.activeField = ''
-    }
-  }
-}
+      this.activeField = "";
+    },
+  },
+};
 </script>
