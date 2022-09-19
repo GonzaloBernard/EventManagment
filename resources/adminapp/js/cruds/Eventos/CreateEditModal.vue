@@ -363,6 +363,6 @@ export default {
 
 <style>
 .v-dialog {
-  overflow: hidden;
+  overflow: auto;
 }
 </style>
