@@ -363,8 +363,10 @@ export default {
     addEvent() {
       if (this.validator()) {
         this.storeData();
-        this.$emit("eventAdded");
-        this.$emit("dialogClose");
+
+        // TESTING
+        /* this.$emit("eventAdded");
+        this.$emit("dialogClose"); */
       } else {
         this.$swal("error", "Faltan datos");
       }

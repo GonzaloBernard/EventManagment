@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateEventoRequest;
 use App\Http\Resources\Admin\EventoResource;
 use App\Models\Evento;
 use App\Models\Lugar;
+use App\Models\Ingreso;
+use App\Models\Egreso;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -37,6 +39,27 @@ class EventoApiController extends Controller
         $evento->fecha = $event->startDateTime;
         $evento->duracion = $event->endDateTime->diffInSeconds($event->startDateTime) / 60;
         $evento->update();
+
+        if($request->ingresos){
+        foreach ($request->ingresos as $ingreso) {
+
+            Ingreso::create([
+                'evento_id' => $evento->id,
+                'monto' => $ingreso['monto'],
+                'fecha' => $ingreso['fecha'],
+                'medio_de_pago_id' => $ingreso['medio_de_pago_id'],
+            ]);
+        }}
+
+        if($request->egresos){
+        foreach ($request->egresos as $egreso) {
+            Egreso::create([
+                'evento_id' => $evento['id'],
+                'monto' => $egreso['monto'],
+                'fecha' => $egreso['fecha'],
+                'egreso_categoria_id' => $egreso['egreso_categoria_id'],
+            ]);
+        }}
 
         return (new EventoResource($evento))
             ->response()
