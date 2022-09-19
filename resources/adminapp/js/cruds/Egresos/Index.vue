@@ -29,6 +29,14 @@
                                     :items="data"
                                     :search="search"
                                     >
+                                <template v-slot:[`item.monto`]="{ item }">
+                                    <v-chip color="red darken-3" dark>
+                                        {{`$ ${item.monto}`}}
+                                    </v-chip>
+                                </template>
+                                <template v-slot:[`item.fecha`]="{ item }">
+                                    {{item.fecha.substring(0,10)}}
+                                </template>
                                 </v-data-table>
                             </div>
                         </div>
@@ -49,10 +57,10 @@ export default {
     return {
         search: "",
         headers: [
-            { text: "fecha", value: "fecha" },
-            { text: "monto", value: "monto" },
-            { text: "categoria", value: "egreso_categoria.descripcion" },
-            { text: "evento", value: "evento_id" },
+            { text: "Fecha", value: "fecha" },
+            { text: "Monto", value: "monto" },
+            { text: "Categoria", value: "egreso_categoria.descripcion" },
+            { text: "Evento", value: "evento.cliente" },
             { text: "Acciones", value: "acciones" , align: "center"},
         ],
         }

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
+    "v-click-outside": "^3.2.0",
     "vuetify": "^2.6.0"
   },
   "devDependencies": {

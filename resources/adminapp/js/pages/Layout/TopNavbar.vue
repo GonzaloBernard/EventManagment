@@ -28,6 +28,7 @@
         <ul class="navbar-nav">
           <v-icon large> mdi-white-balance-sunny </v-icon>
           <v-switch
+            @change="setDarkMode"
             class="mt-5 ml-2"
             v-model="$vuetify.theme.dark"
             persistent-hint
@@ -45,6 +46,9 @@ export default {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
+    setDarkMode (e) {
+      localStorage.setItem("darkMode", e)
+    }
   },
 };
 </script>

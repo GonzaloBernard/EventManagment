@@ -122,6 +122,7 @@ export default {
           medio_de_pago_id: this.entry.medio_de_pago_id,
           monto: this.entry.monto
         });
+        this.setMonto(0)
       } else {
         this.submitForm();
       }

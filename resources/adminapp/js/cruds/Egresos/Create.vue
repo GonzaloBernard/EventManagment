@@ -126,6 +126,7 @@ export default {
           egreso_categoria_id: this.entry.egreso_categoria_id,
           monto: this.entry.monto
         });
+        this.setMonto(0)
       } else {
         this.submitForm()
       }

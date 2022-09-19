@@ -51,7 +51,9 @@ const app = new Vue({
   router,
   store,
   i18n,
-  vuetify: new Vuetify(),
+  vuetify: new Vuetify({
+    theme: { dark: localStorage.getItem("darkMode") }
+  }),
   created() {
     this.fetchLanguages()
   },
