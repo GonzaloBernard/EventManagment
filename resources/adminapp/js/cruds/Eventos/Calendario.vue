@@ -80,7 +80,7 @@
           :activator="selectedElement"
           offset-x
         >
-          <v-card color="grey lighten-4" min-width="350px" flat>
+          <v-card min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-btn icon @click="editEvent(selectedEvent)">
                 <v-icon>mdi-pencil</v-icon>
@@ -94,7 +94,7 @@
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn> -->
             </v-toolbar>
-            <v-card-text>
+            <v-card-text :color="$vuetify.theme.dark ? 'blue-grey darken-4' : 'blue-grey lighten-4'">
               <h4>Detalle: {{selectedEvent.descripcion}} </h4>
               <h4>Lugar: {{selectedEvent.lugar?.descripcion}} </h4>
               <h4>Hora de Inicio: {{selectedEvent.fecha?.split(" ")[1].substring(0,5)}}</h4>

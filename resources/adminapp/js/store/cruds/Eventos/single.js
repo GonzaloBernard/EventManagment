@@ -151,6 +151,12 @@ const actions = {
   setContactAddress({ commit }, value) {
     commit('setContactAddress', value)
   }, */
+  removeEgreso({ commit }, value) {
+    commit('removeEgreso', value)
+  },
+  removeIngreso({ commit }, value) {
+    commit('removeIngreso', value)
+  },
   setIngreso({ commit }, value) {
     commit('setIngreso', value)
   },
@@ -248,6 +254,12 @@ const mutations = {
   setContactAddress(state, value) {
     state.entry.contact_address = value
   }, */
+  removeIngreso(state, value) {
+    state.entry.ingresos.splice(value, 1)
+  },
+  removeEgreso(state, value) {
+    state.entry.egresos.splice(value, 1)
+  },
   setEgreso(state, value) {
     state.entry.egresos.push(value)
   },

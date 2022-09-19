@@ -82,15 +82,15 @@ export default {
         .substr(0, 10),
       menu: false,
       status: "",
-      activeField: ""
+      activeField: "",
     };
   },
   props: {
     scenario: {
       type: String,
       required: true,
-      default: ''
-    }
+      default: "",
+    },
   },
   computed: {
     ...mapGetters("EgresoSingle", ["entry", "loading", "lists"]),
@@ -110,7 +110,7 @@ export default {
       "setCategoria",
       "setDescripcion",
       "setMonto",
-      "setFecha"
+      "setFecha",
     ]),
     ...mapActions("EventoSingle", ["setEgreso"]),
     saveDate(date) {
@@ -118,17 +118,22 @@ export default {
       let dateFormat = date + " 00:00:00";
       this.setFecha(dateFormat);
     },
-    handleSubmit () {
-      if (this.scenario === 'Multiple') {
-        this.setEgreso({
-          evento_id: this.entry.evento_id,
-          fecha: this.entry.fecha,
-          egreso_categoria_id: this.entry.egreso_categoria_id,
-          monto: this.entry.monto
-        });
-        this.setMonto(0)
+    handleSubmit() {
+      if (this.scenario === "Multiple") {
+        if (
+          this.entry.fecha &&
+          this.entry.egreso_categoria_id &&
+          this.entry.monto
+        ) {
+          this.setEgreso({
+            fecha: this.entry.fecha,
+            egreso_categoria_id: this.entry.egreso_categoria_id,
+            monto: this.entry.monto,
+          });
+          this.setMonto(0);
+        }
       } else {
-        this.submitForm()
+        this.submitForm();
       }
     },
     submitForm() {

@@ -116,13 +116,18 @@ export default {
     ...mapActions("EventoSingle", ["setIngreso"]),
     handleSubmit() {
       if (this.scenario === "Multiple") {
-        this.setIngreso({
-          evento_id: this.entry.evento_id,
-          fecha: this.entry.fecha,
-          medio_de_pago_id: this.entry.medio_de_pago_id,
-          monto: this.entry.monto
-        });
-        this.setMonto(0)
+        if (
+          this.entry.fecha &&
+          this.entry.medio_de_pago_id &&
+          this.entry.monto
+        ) {
+          this.setIngreso({
+            fecha: this.entry.fecha,
+            medio_de_pago_id: this.entry.medio_de_pago_id,
+            monto: this.entry.monto,
+          });
+          this.setMonto(0);
+        }
       } else {
         this.submitForm();
       }
