@@ -78,17 +78,17 @@
         >
           <v-card min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
-              <v-btn icon @click="editEvent(selectedEvent)">
+              <!-- <v-btn icon @click="editEvent(selectedEvent)">
                 <v-icon>mdi-pencil</v-icon>
-              </v-btn>
+              </v-btn> -->
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <!-- <v-btn icon>
+<!--               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
               </v-btn> -->
+              <v-btn icon @click="selectedOpen = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
             </v-toolbar>
             <v-card-text
               :color="
@@ -109,15 +109,17 @@
               <h4>Precio $ {{ selectedEvent.precio }}</h4>
             </v-card-text>
             <v-card-actions>
+              <v-btn @click="saldoFinal(selectedEvent.id)">
+                <v-icon dark>mdi-plus</v-icon> Saldo Final
+              </v-btn>
               <v-btn @click="agregarIngresoEgreso(selectedEvent.id)">
-                Registrar Ingreso / Egreso
+                <v-icon dark>mdi-plus</v-icon> Registrar Ingreso / Egreso
               </v-btn>
-              <v-btn @click="editEvent(selectedEvent)"> Editar </v-btn>
+              <v-btn @click="editEvent(selectedEvent)">
+                <v-icon dark>mdi-pencil</v-icon> Editar 
+              </v-btn>
               <v-btn @click="destroyDataAction(selectedEvent.id)">
-                Borrar
-              </v-btn>
-              <v-btn text color="secondary" @click="selectedOpen = false">
-                Cancelar
+                <v-icon dark>mdi-delete-forever</v-icon> Borrar
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -203,6 +205,16 @@ export default {
     ]),
     ...mapActions("IngresoSingle", ["fetchCreateData", "setEventId"]),
     ...mapActions("EgresoSingle", ["fetchCreateData", "setEventId"]),
+    saldoFinal(id) {
+      alert("En Desarrollo")
+      this.$store.dispatch("IngresoSingle/fetchCreateData");
+      this.$store.dispatch("EgresoSingle/fetchCreateData");
+      this.$store.dispatch("IngresoSingle/setEventId", id);
+      this.$store.dispatch("EgresoSingle/setEventId", id);
+      this.fetchShowData(id).then(() => {
+        this.modalIngresoEgreso = true;
+      })
+    },
     agregarIngresoEgreso(id) {
       this.$store.dispatch("IngresoSingle/fetchCreateData");
       this.$store.dispatch("EgresoSingle/fetchCreateData");

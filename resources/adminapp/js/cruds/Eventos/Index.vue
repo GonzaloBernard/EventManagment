@@ -53,6 +53,22 @@
                           <v-tooltip top color="success">
                             <template v-slot:activator="{ on, attrs }">
                               <v-btn
+                                @click="saldoFinal(item.id)"
+                                class="mx-1"
+                                fab
+                                dark
+                                x-small
+                                v-bind="attrs"
+                                v-on="on"
+                                color="green darken-3"
+                                ><v-icon dark>mdi-plus</v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Saldo Final</span>
+                          </v-tooltip>
+                          <v-tooltip top color="success">
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
                                 @click="agregarIngresoEgreso(item.id)"
                                 class="mx-1"
                                 fab
@@ -161,6 +177,16 @@ export default {
       "resetState",
       "destroyData",
     ]),
+    saldoFinal(id) {
+      alert("En Desarrollo")
+      this.$store.dispatch("IngresoSingle/fetchCreateData");
+      this.$store.dispatch("EgresoSingle/fetchCreateData");
+      this.$store.dispatch("IngresoSingle/setEventId", id);
+      this.$store.dispatch("EgresoSingle/setEventId", id);
+      this.fetchShowData(id).then(() => {
+        this.modalIngresoEgreso = true;
+      })
+    },
     agregarIngresoEgreso(id) {
       this.$store.dispatch("IngresoSingle/fetchCreateData");
       this.$store.dispatch("EgresoSingle/fetchCreateData");
@@ -169,6 +195,7 @@ export default {
       this.modalIngresoEgreso = true;
     },
     ...mapActions("EventoSingle", [
+      "fetchShowData",
       "fetchEditData",
       "fetchCreateData",
       "resetState",
