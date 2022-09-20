@@ -115,7 +115,7 @@ export default {
     ]),
     ...mapActions("EventoSingle", ["setIngreso"]),
     handleSubmit() {
-      if (this.scenario === "Multiple") {
+      if (this.scenario === "multiple") {
         if (
           this.entry.fecha &&
           this.entry.medio_de_pago_id &&

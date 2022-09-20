@@ -124,7 +124,7 @@
         </v-menu>
         <v-dialog v-model="modalIngresoEgreso" max-width="900">
           <v-card class="pa-8">
-            <ingresos-egresos :scenario="'single'" />
+            <ingresos-egresos :scenario="'multiple'" />
           </v-card>
         </v-dialog>
       </v-sheet>
@@ -183,6 +183,7 @@ export default {
   methods: {
     ...mapActions("EventosIndex", ["fetchIndexData", "destroyData"]),
     ...mapActions("EventoSingle", [
+      "fetchShowData",
       "fetchEditData",
       "resetState",
       "fetchCreateData",
@@ -229,22 +230,24 @@ export default {
       this.$refs.calendar.next();
     },
     showEvent({ nativeEvent, event }) {
-      const open = () => {
-        this.selectedEvent = event;
-        this.selectedElement = nativeEvent.target;
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => (this.selectedOpen = true))
-        );
-      };
+      this.fetchShowData(event.id).then(() => {
+        const open = () => {
+          this.selectedEvent = event;
+          this.selectedElement = nativeEvent.target;
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => (this.selectedOpen = true))
+          );
+        };
 
-      if (this.selectedOpen) {
-        this.selectedOpen = false;
-        requestAnimationFrame(() => requestAnimationFrame(() => open()));
-      } else {
-        open();
-      }
+        if (this.selectedOpen) {
+          this.selectedOpen = false;
+          requestAnimationFrame(() => requestAnimationFrame(() => open()));
+        } else {
+          open();
+        }
 
-      nativeEvent.stopPropagation();
+        nativeEvent.stopPropagation();
+      });
     },
     createEvent() {
       this.resetState();

@@ -104,7 +104,7 @@
                   </v-card>
                   <v-dialog v-model="modalIngresoEgreso" max-width="900">
                     <v-card class="pa-8">
-                      <ingresos-egresos :scenario="'single'" />
+                      <ingresos-egresos :scenario="'multiple'" />
                     </v-card>
                   </v-dialog>
                 </template>
