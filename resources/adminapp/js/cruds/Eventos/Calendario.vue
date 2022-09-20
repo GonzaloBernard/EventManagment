@@ -3,11 +3,7 @@
     <v-col>
       <v-sheet height="64">
         <v-toolbar flat>
-          <v-btn
-            color="primary"
-            outlined
-            class="mr-4"
-            @click.stop="createEvent"
+          <v-btn color="primary" outlined class="mr-4" @click.stop="createEvent"
             >Nuevo</v-btn
           >
           <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">
@@ -94,34 +90,43 @@
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn> -->
             </v-toolbar>
-            <v-card-text :color="$vuetify.theme.dark ? 'blue-grey darken-4' : 'blue-grey lighten-4'">
-              <h4>Detalle: {{selectedEvent.descripcion}} </h4>
-              <h4>Lugar: {{selectedEvent.lugar?.descripcion}} </h4>
-              <h4>Hora de Inicio: {{selectedEvent.fecha?.split(" ")[1].substring(0,5)}}</h4>
-              <h4>Duración: {{selectedEvent.duracion}} min</h4>
-              <h4>Mamá / Papá: {{selectedEvent.cliente}} </h4>
-              <h4>Cumple de: {{selectedEvent.agasajado}} </h4>
-              <h4>Precio $ {{selectedEvent.precio}} </h4>
+            <v-card-text
+              :color="
+                $vuetify.theme.dark
+                  ? 'blue-grey darken-4'
+                  : 'blue-grey lighten-4'
+              "
+            >
+              <h4>Detalle: {{ selectedEvent.descripcion }}</h4>
+              <h4>Lugar: {{ selectedEvent.lugar?.descripcion }}</h4>
+              <h4>
+                Hora de Inicio:
+                {{ selectedEvent.fecha?.split(" ")[1].substring(0, 5) }}
+              </h4>
+              <h4>Duración: {{ selectedEvent.duracion }} min</h4>
+              <h4>Mamá / Papá: {{ selectedEvent.cliente }}</h4>
+              <h4>Cumple de: {{ selectedEvent.agasajado }}</h4>
+              <h4>Precio $ {{ selectedEvent.precio }}</h4>
             </v-card-text>
             <v-card-actions>
-                <v-btn @click="agregarIngreso(selectedEvent)">
-                  Registrar Ingreso
+              <v-btn @click="agregarIngresoEgreso(selectedEvent.id)">
+                Registrar Ingreso / Egreso
               </v-btn>
-              <v-btn @click="agregarEgreso(selectedEvent)">
-                  Asociar Gasto
-              </v-btn>
-              <v-btn @click="editEvent(selectedEvent)">
-                  Editar
-              </v-btn>
+              <v-btn @click="editEvent(selectedEvent)"> Editar </v-btn>
               <v-btn @click="destroyDataAction(selectedEvent.id)">
-                  Borrar
+                Borrar
               </v-btn>
               <v-btn text color="secondary" @click="selectedOpen = false">
-                  Cancelar
+                Cancelar
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-menu>
+        <v-dialog v-model="modalIngresoEgreso" max-width="900">
+          <v-card class="pa-8">
+            <ingresos-egresos :scenario="'single'" />
+          </v-card>
+        </v-dialog>
       </v-sheet>
     </v-col>
   </v-row>
@@ -129,9 +134,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import CreateEditModal from "./CreateEditModal.vue";
+import IngresosEgresos from "./IngresosEgresos.vue";
 export default {
   components: {
     CreateEditModal,
+    IngresosEgresos,
   },
   data: () => ({
     focus: "",
@@ -143,11 +150,12 @@ export default {
       "4Dias": "4 Días",
     },
     selectedEvent: {},
-    scenario: '',
+    scenario: "",
     dialog: false,
     selectedElement: null,
     selectedOpen: false,
-    id: null
+    modalIngresoEgreso: false,
+    id: null,
   }),
   created() {
     this.fetchIndexData();
@@ -167,35 +175,42 @@ export default {
           color: evento.color,
           name: evento.nombre,
           details: evento.descripcion,
-          id: evento.id
+          id: evento.id,
         };
       });
     },
   },
   methods: {
     ...mapActions("EventosIndex", ["fetchIndexData", "destroyData"]),
-    ...mapActions("EventoSingle", ["fetchEditData", "resetState", "fetchCreateData"]),
+    ...mapActions("EventoSingle", [
+      "fetchEditData",
+      "resetState",
+      "fetchCreateData",
+    ]),
+    ...mapActions("IngresoSingle", ["fetchCreateData", "setEventId"]),
+    ...mapActions("EgresoSingle", ["fetchCreateData", "setEventId"]),
+    agregarIngresoEgreso(id) {
+      this.$store.dispatch("IngresoSingle/fetchCreateData");
+      this.$store.dispatch("EgresoSingle/fetchCreateData");
+      this.$store.dispatch("IngresoSingle/setEventId", id);
+      this.$store.dispatch("EgresoSingle/setEventId", id);
+      this.modalIngresoEgreso = true;
+    },
     destroyDataAction(id) {
-    this.$swal({
-        title: 'Are you sure?',
+      this.$swal({
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        type: 'warning',
+        type: "warning",
         showCancelButton: true,
-        confirmButtonText: 'Delete',
-        confirmButtonColor: '#dd4b39',
+        confirmButtonText: "Delete",
+        confirmButtonColor: "#dd4b39",
         focusCancel: true,
-        reverseButtons: true
-        }).then(
-            result => {
-            if (result.value) {
-                this.destroyData(id)
-            }})
-    },
-    agregarIngreso(){
-        alert('En desarrollo');
-    },
-    agregarEgreso(){
-        alert('En desarrollo');
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.value) {
+          this.destroyData(id);
+        }
+      });
     },
     viewDay({ date }) {
       this.focus = date;
@@ -231,20 +246,20 @@ export default {
 
       nativeEvent.stopPropagation();
     },
-    createEvent () {
-      this.resetState()
-      this.fetchCreateData().then(()=>{
-        this.scenario = 'create'
-        this.dialog = true
-      })
+    createEvent() {
+      this.resetState();
+      this.fetchCreateData().then(() => {
+        this.scenario = "create";
+        this.dialog = true;
+      });
     },
     editEvent() {
       this.fetchEditData(this.selectedEvent.id).then(() => {
-        this.scenario = 'edit',
-        this.selectedOpen = false,
-        this.dialog = true
-      })
-    }
+        (this.scenario = "edit"),
+          (this.selectedOpen = false),
+          (this.dialog = true);
+      });
+    },
   },
 };
 </script>

@@ -151,6 +151,7 @@ const actions = {
   setContactAddress({ commit }, value) {
     commit('setContactAddress', value)
   }, */
+  
   removeEgreso({ commit }, value) {
     commit('removeEgreso', value)
   },

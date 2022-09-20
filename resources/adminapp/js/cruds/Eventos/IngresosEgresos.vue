@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
-    <create-ingreso :scenario="'Multiple'" />
-    <create-egreso :scenario="'Multiple'"/>
+    <create-ingreso :scenario="scenario" />
+    <create-egreso :scenario="scenario"/>
   </v-row>
 </template>
 
@@ -9,6 +9,13 @@
 import CreateIngreso from "@cruds/Ingresos/Create";
 import CreateEgreso from "@cruds/Egresos/Create";
 export default {
+  props: {
+    scenario: {
+      type: String,
+      required: true,
+      default: 'single'
+    }
+  },
   components: {
     CreateIngreso,
     CreateEgreso

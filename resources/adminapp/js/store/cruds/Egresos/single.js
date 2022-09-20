@@ -7,7 +7,7 @@ function initialState() {
             monto: "",
             fecha: "",
             egreso_categoria_id: null,
-            evento_id: 1,
+            evento_id: null,
             // ATRIBUTOS
             created_at: "",
             updated_at: "",
@@ -94,6 +94,9 @@ const actions = {
     },
 
     // ATRIBUTOS
+    setEventId({ commit }, value) {
+        commit("setEventId", value);
+    },
     setCategoria({ commit }, value) {
         commit("setCategoria", value);
     },
@@ -145,6 +148,9 @@ const mutations = {
     // ATRIBUTOS
     setCategoria(state, value) {
         state.entry.egreso_categoria_id = value;
+    },
+    setEventId(state, value) {
+        state.entry.evento_id = value;
     },
     setDescripcion(state, value) {
         state.entry.descripcion = value;

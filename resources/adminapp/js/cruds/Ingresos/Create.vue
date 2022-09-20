@@ -140,7 +140,6 @@ export default {
     submitForm() {
       this.storeData()
         .then(() => {
-          this.$router.push({ name: "ingresos.index" });
           this.$eventHub.$emit("create-success");
         })
         .catch((error) => {

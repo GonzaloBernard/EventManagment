@@ -178,7 +178,7 @@
           </v-row>
         </v-stepper-content>
         <v-stepper-content step="3">
-          <IngresosEgresos class="my-4" />
+          <IngresosEgresos class="my-4" :scenario="'multiple'" />
           <v-row justify="center">
             <v-card
               v-for="(ingreso, indexIngreso) in entry.ingresos"
