@@ -82,10 +82,31 @@
                             </template>
                             <span>Borrar Evento</span>
                           </v-tooltip>
+                          <v-tooltip top color="success">
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                @click="agregarIngresoEgreso(item.id)"
+                                class="mx-1"
+                                fab
+                                dark
+                                x-small
+                                v-bind="attrs"
+                                v-on="on"
+                                color="green darken-3"
+                                ><v-icon dark>mdi-plus</v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Agregar Ingreso/Egreso</span>
+                          </v-tooltip>
                         </div>
                       </template>
                     </v-data-table>
                   </v-card>
+                  <v-dialog v-model="modalIngresoEgreso" max-width="900">
+                    <v-card class="pa-8">
+                      <ingresos-egresos :scenario="'single'" />
+                    </v-card>
+                  </v-dialog>
                 </template>
               </div>
             </div>
@@ -98,13 +119,16 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import CreateEditModal from "./CreateEditModal.vue";
+import IngresosEgresos from "@/cruds/Eventos/IngresosEgresos"
 export default {
   components: {
     CreateEditModal,
+    IngresosEgresos
   },
   data() {
     return {
       search: "",
+      modalIngresoEgreso: false,
       headers: [
         { text: "#", value: "id" },
         { text: "Nombre", value: "nombre" },
@@ -114,7 +138,7 @@ export default {
         { text: "Precio $", value: "precio" },
         { text: "Fecha y hora", value: "fecha" },
         { text: "Duración", value: "duracion" },
-        { text: "Acciones", value: "acciones" , align: "center"},
+        { text: "Acciones", value: "acciones", align: "center" },
       ],
       dialog: false,
       scenario: "",
@@ -137,7 +161,18 @@ export default {
       "resetState",
       "destroyData",
     ]),
-    ...mapActions("EventoSingle", ["fetchEditData", "fetchCreateData", "resetState"]),
+    agregarIngresoEgreso(id) {
+      this.$store.dispatch("IngresoSingle/fetchCreateData");
+      this.$store.dispatch("EgresoSingle/fetchCreateData");
+      this.$store.dispatch("IngresoSingle/setEventId", id);
+      this.$store.dispatch("EgresoSingle/setEventId", id);
+      this.modalIngresoEgreso = true;
+    },
+    ...mapActions("EventoSingle", [
+      "fetchEditData",
+      "fetchCreateData",
+      "resetState",
+    ]),
     destroyDataAction(id) {
       this.$swal({
         title: "Are you sure?",
@@ -155,11 +190,11 @@ export default {
       });
     },
     createEvent() {
-      this.resetState()
-      this.fetchCreateData().then(()=>{
-        this.scenario = 'create'
-        this.dialog = true
-      })
+      this.resetState();
+      this.fetchCreateData().then(() => {
+        this.scenario = "create";
+        this.dialog = true;
+      });
     },
     editEvent(id) {
       this.fetchEditData(id).then(() => {
