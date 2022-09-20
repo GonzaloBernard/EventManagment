@@ -37,6 +37,42 @@
                                 <template v-slot:[`item.fecha`]="{ item }">
                                     {{item.fecha.substring(0,10)}}
                                 </template>
+                                <template v-slot:[`item.acciones`]="{ item }">
+                                    <div class="d-flex justify-content-center">
+                                    <v-tooltip bottom color="primary">
+                                        <template v-slot:activator="{ on, attrs }">
+                                        <v-btn
+                                            @click="editItem(item.id)"
+                                            class="mx-1"
+                                            fab
+                                            dark
+                                            x-small
+                                            v-bind="attrs"
+                                            v-on="on"
+                                            color="primary"
+                                            ><v-icon dark>mdi-pencil</v-icon></v-btn
+                                        >
+                                        </template>
+                                        <span>Editar Ingreso</span>
+                                    </v-tooltip>
+                                    <v-tooltip top color="error">
+                                        <template v-slot:activator="{ on, attrs }">
+                                        <v-btn
+                                            @click="destroyDataAction(item.id)"
+                                            class="mx-1"
+                                            fab
+                                            dark
+                                            x-small
+                                            v-bind="attrs"
+                                            v-on="on"
+                                            color="red darken-3"
+                                            ><v-icon dark>mdi-delete-forever</v-icon>
+                                        </v-btn>
+                                        </template>
+                                        <span>Borrar Ingreso</span>
+                                    </v-tooltip>
+                                    </div>
+                                </template>
                                 </v-data-table>
                             </div>
                         </div>
@@ -76,7 +112,13 @@ export default {
     ...mapGetters('IngresoIndex', ['data', 'total', 'loading'])
   },
   methods: {
-    ...mapActions('IngresoIndex', ['fetchIndexData', 'resetState'])
+    ...mapActions('IngresoIndex', ['fetchIndexData', 'resetState']),
+    editItem(){
+        alert("EN desarrollo")
+    },
+    destroyDataAction(){
+        alert("EN desarrollo")
+    },
   }
 }
 </script>
