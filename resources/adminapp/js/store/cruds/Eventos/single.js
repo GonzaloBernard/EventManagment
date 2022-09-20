@@ -36,8 +36,6 @@ const getters = {
 const actions = {
   storeData({ commit, state, dispatch }) {
     commit('setLoading', true)
-
-
     return new Promise((resolve, reject) => {
         let parametros = {
             id: state.entry.id,
@@ -82,6 +80,36 @@ const actions = {
         })
     })
   },
+  updateEgresosIngresos({ commit, state }, id) {
+    commit('setLoading', true)
+    return new Promise((resolve, reject) => {
+        let parametros = {
+            ingresos: state.entry.ingresos,
+            egresos: state.entry.egresos
+        }
+        console.log(parametros)
+      let params = objectToFormData(parametros, {
+        indices: true,
+        booleansAsIntegers: true
+      })
+      params.set('_method', 'PUT')
+      axios
+        .post(`eventoIngresoEgreso/${id}`, params)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          let message = error.response.data.message || error.message
+          let errors = error.response.data.errors
+          console.log(message)
+          console.log(errors)
+          reject(error)
+        })
+        .finally(() => {
+          commit('setLoading', false)
+        })
+    })
+  },
   updateData({ commit, state, dispatch }) {
     commit('setLoading', true)
 
@@ -97,6 +125,8 @@ const actions = {
             duracion: state.entry.duracion,
             precio: state.entry.precio,
             agasajado: state.entry.agasajado,
+            ingresos: state.ingresos,
+            egresos:state.egresos
         }
         console.log(parametros)
       let params = objectToFormData(parametros, {

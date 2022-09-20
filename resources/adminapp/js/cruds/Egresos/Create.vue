@@ -119,7 +119,7 @@ export default {
       this.setFecha(dateFormat);
     },
     handleSubmit() {
-      if (this.scenario === "Multiple") {
+      if (this.scenario === "multiple") {
         if (
           this.entry.fecha &&
           this.entry.egreso_categoria_id &&

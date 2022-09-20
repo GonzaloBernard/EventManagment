@@ -125,6 +125,18 @@
         <v-dialog v-model="modalIngresoEgreso" max-width="900">
           <v-card class="pa-8">
             <ingresos-egresos :scenario="'multiple'" />
+            <v-row justify="center">
+              <v-btn
+                @click.prevent="updateEgresosIngresos(selectedEvent.id)"
+                color="green accent-4"
+                dark
+                class="mr-4 my-4"
+                large
+              >
+                <v-icon dark left>mdi-save</v-icon>
+                Guardar Cambios</v-btn
+              >
+            </v-row>
           </v-card>
         </v-dialog>
       </v-sheet>
@@ -183,6 +195,7 @@ export default {
   methods: {
     ...mapActions("EventosIndex", ["fetchIndexData", "destroyData"]),
     ...mapActions("EventoSingle", [
+      "updateEgresosIngresos",
       "fetchShowData",
       "fetchEditData",
       "resetState",
@@ -195,7 +208,9 @@ export default {
       this.$store.dispatch("EgresoSingle/fetchCreateData");
       this.$store.dispatch("IngresoSingle/setEventId", id);
       this.$store.dispatch("EgresoSingle/setEventId", id);
-      this.modalIngresoEgreso = true;
+      this.fetchShowData(id).then(() => {
+        this.modalIngresoEgreso = true;
+      })
     },
     destroyDataAction(id) {
       this.$swal({

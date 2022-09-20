@@ -12,7 +12,7 @@
         dark
         outlined
         shaped
-        :key="indexIngreso + 5"
+        :key="indexIngreso + 200"
         width="200"
       >
         <v-card-title class="mb-2">
@@ -35,9 +35,7 @@
           <p>
             Medio de pago:
             {{
-              listsIngresos.medio_de_pagos.find(
-                (medio) => medio.id === ingreso.medio_de_pago_id
-              ).descripcion
+              ingreso.medio_de_pago !== null ? ingreso.medio_de_pago.descripcion : 'No registrado'
             }}
           </p>
         </v-card-text>
@@ -74,9 +72,7 @@
           <p>
             Categoria:
             {{
-              listsEgresos.egreso_categoria.find(
-                (categoria) => categoria.id === egreso.egreso_categoria_id
-              ).descripcion
+              egreso.egreso_categoria !== null ? egreso.egreso_categoria.descripcion : 'No registrado'
             }}
           </p>
         </v-card-text>

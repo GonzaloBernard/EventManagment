@@ -19,7 +19,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Eventos
     Route::resource('eventos', 'EventoApiController');
-    Route::post('eventoIngresoEgreso/{evento}', 'EventoApiController@postEventoIngresoEgreso');
+    Route::put('eventoIngresoEgreso/{evento}', 'EventoApiController@postEventoIngresoEgreso');
 
     // Ingreso
     Route::resource('ingresos', 'IngresoApiController');
