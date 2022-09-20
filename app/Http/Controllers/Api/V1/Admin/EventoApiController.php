@@ -18,6 +18,33 @@ use Carbon\Carbon;
 
 class EventoApiController extends Controller
 {
+    public function ingresoEgreso(Request $request, Evento $evento)
+    {
+        if($request->ingresos){
+            foreach ($request->ingresos as $ingreso) {
+
+                Ingreso::create([
+                    'evento_id' => $evento->id,
+                    'monto' => $ingreso['monto'],
+                    'fecha' => $ingreso['fecha'],
+                    'medio_de_pago_id' => $ingreso['medio_de_pago_id'],
+                ]);
+            }}
+
+            if($request->egresos){
+            foreach ($request->egresos as $egreso) {
+                Egreso::create([
+                    'evento_id' => $evento['id'],
+                    'monto' => $egreso['monto'],
+                    'fecha' => $egreso['fecha'],
+                    'egreso_categoria_id' => $egreso['egreso_categoria_id'],
+                ]);
+            }}
+        return (new EventoResource($evento))
+            ->response()
+            ->setStatusCode(Response::HTTP_ACCEPTED);
+    }
+
     public function index()
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -81,7 +108,7 @@ class EventoApiController extends Controller
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EventoResource($evento->load(['lugar']));
+        return new EventoResource($evento->load(['lugar', 'ingresos','egresos']));
     }
 
     public function update(UpdateEventoRequest $request, Evento $evento)
