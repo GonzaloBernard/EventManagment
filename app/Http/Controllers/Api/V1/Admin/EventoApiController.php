@@ -108,7 +108,7 @@ class EventoApiController extends Controller
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EventoResource($evento->load(['lugar', 'ingresos','egresos']));
+        return new EventoResource($evento->load(['lugar', 'ingresos', 'ingresos.medioDePago','egresos', 'egresos.egreso_categoria']));
     }
 
     public function update(UpdateEventoRequest $request, Evento $evento)
