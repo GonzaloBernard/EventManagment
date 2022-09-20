@@ -18,7 +18,7 @@ use Carbon\Carbon;
 
 class EventoApiController extends Controller
 {
-    public function ingresoEgreso(Request $request, Evento $evento)
+    public function postEventoIngresoEgreso(Request $request, Evento $evento)
     {
         if($request->ingresos){
             foreach ($request->ingresos as $ingreso) {
@@ -34,7 +34,7 @@ class EventoApiController extends Controller
             if($request->egresos){
             foreach ($request->egresos as $egreso) {
                 Egreso::create([
-                    'evento_id' => $evento['id'],
+                    'evento_id' => $evento->id,
                     'monto' => $egreso['monto'],
                     'fecha' => $egreso['fecha'],
                     'egreso_categoria_id' => $egreso['egreso_categoria_id'],
@@ -81,7 +81,7 @@ class EventoApiController extends Controller
         if($request->egresos){
         foreach ($request->egresos as $egreso) {
             Egreso::create([
-                'evento_id' => $evento['id'],
+                'evento_id' => $evento->id,
                 'monto' => $egreso['monto'],
                 'fecha' => $egreso['fecha'],
                 'egreso_categoria_id' => $egreso['egreso_categoria_id'],
