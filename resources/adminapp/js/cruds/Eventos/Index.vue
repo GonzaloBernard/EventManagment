@@ -50,6 +50,22 @@
                     >
                       <template v-slot:[`item.acciones`]="{ item }">
                         <div class="d-flex justify-content-center">
+                          <v-tooltip top color="success">
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                @click="agregarIngresoEgreso(item.id)"
+                                class="mx-1"
+                                fab
+                                dark
+                                x-small
+                                v-bind="attrs"
+                                v-on="on"
+                                color="green darken-3"
+                                ><v-icon dark>mdi-plus</v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Agregar Ingreso/Egreso</span>
+                          </v-tooltip>
                           <v-tooltip bottom color="primary">
                             <template v-slot:activator="{ on, attrs }">
                               <v-btn
@@ -81,22 +97,6 @@
                               </v-btn>
                             </template>
                             <span>Borrar Evento</span>
-                          </v-tooltip>
-                          <v-tooltip top color="success">
-                            <template v-slot:activator="{ on, attrs }">
-                              <v-btn
-                                @click="agregarIngresoEgreso(item.id)"
-                                class="mx-1"
-                                fab
-                                dark
-                                x-small
-                                v-bind="attrs"
-                                v-on="on"
-                                color="green darken-3"
-                                ><v-icon dark>mdi-plus</v-icon>
-                              </v-btn>
-                            </template>
-                            <span>Agregar Ingreso/Egreso</span>
                           </v-tooltip>
                         </div>
                       </template>
