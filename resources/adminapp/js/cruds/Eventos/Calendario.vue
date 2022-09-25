@@ -110,7 +110,7 @@
               <h4>Precio $ {{ selectedEvent.precio }}</h4>
             </v-card-text>
             <v-card-actions>
-              <v-btn @click="saldoFinal(selectedEvent.id)">
+              <v-btn @click="saldoFinal(selectedEvent)">
                 <v-icon dark>mdi-check-decagram</v-icon> Caja
               </v-btn>
               <v-btn @click="agregarIngresoEgreso(selectedEvent.id)">
@@ -222,13 +222,13 @@ export default {
       this.$store.dispatch("EgresoSingle/resetState");
       this.$store.dispatch("IngresoSingle/resetState");
     },
-    saldoFinal(id) {
-      this.selectedEvent = id;
+    saldoFinal(event) {
+      this.selectedEvent = event;
       this.$store.dispatch("IngresoSingle/fetchCreateData");
       this.$store.dispatch("EgresoSingle/fetchCreateData");
-      this.$store.dispatch("IngresoSingle/setEventId", id);
-      this.$store.dispatch("EgresoSingle/setEventId", id);
-      this.fetchShowData(id).then(() => {
+      this.$store.dispatch("IngresoSingle/setEventId", event.id);
+      this.$store.dispatch("EgresoSingle/setEventId", event.id);
+      this.fetchShowData(event.id).then(() => {
         // SE PONE DELETED AT PARA QUE EL EVENTO SE MARQUE COMO FINALIZADO
         this.setFechaLiquidacion(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
         this.modalIngresoEgreso = true;
