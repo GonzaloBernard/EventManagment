@@ -7,23 +7,21 @@
                         <div class="card-icon"><i class="material-icons">assignment</i>
                         </div>
                         <h4 class="card-title">
-                            {{ $t('global.table') }}
-                            <strong>Ingreso</strong>
+                            <strong>Ingresos</strong>
                         </h4>
                     </div>
 
-                    <div class="card-body">
+                    <!-- <div class="card-body">
                         <router-link class="btn btn-primary" :to="{ name: 'ingresos.create' }">
                             <i class="material-icons">
                                 add
                             </i>
                             {{ $t('global.add') }}
                         </router-link>
-                    </div>
+                    </div> -->
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h1>Tabla de Ingresos</h1>
                                 <v-data-table
                                     :headers="headers"
                                     :items="data"

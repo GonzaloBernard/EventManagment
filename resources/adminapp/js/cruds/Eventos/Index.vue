@@ -50,6 +50,22 @@
                     >
                       <template v-slot:[`item.acciones`]="{ item }">
                         <div class="d-flex justify-content-center">
+                          <v-tooltip top color="primary">
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                @click="saldoFinal(item.id)"
+                                class="mx-1"
+                                fab
+                                dark
+                                x-small
+                                v-bind="attrs"
+                                v-on="on"
+                                color="primary darken-3"
+                                ><v-icon dark>mdi-check-decagram</v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Caja</span>
+                          </v-tooltip>
                           <v-tooltip top color="success">
                             <template v-slot:activator="{ on, attrs }">
                               <v-btn
@@ -179,6 +195,19 @@ export default {
       console.log("sadas")
       this.$store.dispatch("EventoSingle/resetState");
     },
+    saldoFinal(id) {
+      this.selectedEvent = id;
+      this.$store.dispatch("IngresoSingle/fetchCreateData");
+      this.$store.dispatch("EgresoSingle/fetchCreateData");
+      this.$store.dispatch("IngresoSingle/setEventId", id);
+      this.$store.dispatch("EgresoSingle/setEventId", id);
+      this.fetchShowData(id).then(() => {
+        console.log(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
+        // SE PONE DELETED AT PARA QUE EL EVENTO SE MARQUE COMO FINALIZADO
+        this.setDeletedAt(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
+        this.modalIngresoEgreso = true;
+      })
+    },
     agregarIngresoEgreso(id) {
       this.selectedEvent = id;
       this.$store.dispatch("IngresoSingle/fetchCreateData");
@@ -195,6 +224,7 @@ export default {
       "fetchCreateData",
       "resetState",
       "updateEgresosIngresos",
+      "setDeletedAt",
     ]),
     destroyDataAction(id) {
       this.$swal({

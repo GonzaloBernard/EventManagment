@@ -95,7 +95,8 @@ const actions = {
     return new Promise((resolve, reject) => {
         let parametros = {
             ingresos: state.entry.ingresos.filter((item) => !item.created_at ),
-            egresos: state.entry.egresos.filter((item) => !item.created_at )
+            egresos: state.entry.egresos.filter((item) => !item.created_at ),
+            deleted_at: state.entry.deleted_at,
         }
         console.log(parametros)
       let params = objectToFormData(parametros, {
@@ -257,8 +258,11 @@ const actions = {
     })
   },
   fetchShowData({ commit, dispatch }, id) {
-    axios.get(`${route}/${id}`).then(response => {
-      commit('setEntry', response.data.data)
+    return new Promise((resolve, reject) => {
+      axios.get(`${route}/${id}`).then(response => {
+        commit('setEntry', response.data.data)
+        resolve();
+      })
     })
   },
   resetState({ commit }) {
