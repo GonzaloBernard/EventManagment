@@ -136,7 +136,7 @@
                 Guardar Cambios</v-btn
                 >
               <v-btn
-                @click="modalIngresoEgreso = false"
+                @click="modalIngresoEgreso = false, resetStateEventoSingle()"
                 class="mr-4 my-4"
                 large
                 >
@@ -210,6 +210,11 @@ export default {
     ]),
     ...mapActions("IngresoSingle", ["fetchCreateData", "setEventId"]),
     ...mapActions("EgresoSingle", ["fetchCreateData", "setEventId"]),
+    
+    resetStateEventoSingle(){
+      console.log("sadas")
+      this.$store.dispatch("EventoSingle/resetState");
+    },
     agregarIngresoEgreso(id) {
       this.$store.dispatch("IngresoSingle/fetchCreateData");
       this.$store.dispatch("EgresoSingle/fetchCreateData");

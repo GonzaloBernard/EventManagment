@@ -114,6 +114,9 @@ export default {
     CreateIngreso,
     CreateEgreso,
   },
+  beforeDestroy() {
+    this.$store.dispatch("EventoSingle/resetState");
+  },
 };
 </script>
 

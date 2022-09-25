@@ -114,7 +114,7 @@
                           large><v-icon dark left>mdi-save</v-icon>Guardar Cambios
                         </v-btn>
                         <v-btn
-                          @click="modalIngresoEgreso = false"
+                          @click="modalIngresoEgreso = false, resetStateEventoSingle()"
                           class="mr-4 my-4"
                           large>Cerrar
                         </v-btn>
@@ -175,6 +175,10 @@ export default {
       "resetState",
       "destroyData",
     ]),
+    resetStateEventoSingle(){
+      console.log("sadas")
+      this.$store.dispatch("EventoSingle/resetState");
+    },
     agregarIngresoEgreso(id) {
       this.selectedEvent = id;
       this.$store.dispatch("IngresoSingle/fetchCreateData");
