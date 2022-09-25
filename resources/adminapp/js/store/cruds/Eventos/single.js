@@ -11,7 +11,8 @@ function initialState() {
       agasajado: '',
       nombre: null,
       color: null,
-      lugar_id: 1,
+      lugar_id: null,
+      lugar:null,
       created_at: '',
       updated_at: '',
       deleted_at: '',
@@ -134,8 +135,8 @@ const actions = {
             duracion: state.entry.duracion,
             precio: state.entry.precio,
             agasajado: state.entry.agasajado,
-            ingresos: state.ingresos,
-            egresos:state.egresos
+            ingresos: state.entry.ingresos.filter((item) => !item.created_at ),
+            egresos: state.entry.egresos.filter((item) => !item.created_at )
         }
         console.log(parametros)
       let params = objectToFormData(parametros, {
@@ -334,7 +335,8 @@ const mutations = {
     state.entry.fecha = value
   },
   setLugar(state, value) {
-    state.entry.lugar_id = value
+    state.entry.lugar_id = value.id
+    state.entry.lugar = value
   },
   setCreatedAt(state, value) {
     state.entry.created_at = value

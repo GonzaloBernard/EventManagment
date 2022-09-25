@@ -82,6 +82,7 @@
                 <v-icon>mdi-pencil</v-icon>
               </v-btn> -->
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+              <v-chip class="mx-4" color="primary"> Saldo Pendiente {{`$ ${getSaldoPendiente}`}} </v-chip>
               <v-spacer></v-spacer>
 <!--               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
@@ -124,15 +125,14 @@
         <v-dialog v-model="modalIngresoEgreso" max-width="900">
           <v-card class="pa-8">
             <ingresos-egresos :scenario="'multiple'" />
-            <v-row justify="center">
+            <v-row justify="end">
               <v-btn
-                @click.prevent="updateEgresosIngresos(selectedEvent.id).then(() => {modalIngresoEgreso = false})"
-                color="green accent-4"
+                @click.prevent="updateEgresosIngresos(selectedEvent.id).then(() => {modalIngresoEgreso = false, resetStateEventoSingle()})"
+                color="primary"
                 dark
                 class="mr-4 my-4"
                 large
-                >
-                <v-icon dark left>mdi-save</v-icon>
+                > 
                 Guardar Cambios</v-btn
                 >
               <v-btn
@@ -184,6 +184,7 @@ export default {
   },
   computed: {
     ...mapGetters("EventosIndex", ["data", "loading"]),
+    ...mapGetters("EventoSingle", ["getSaldoPendiente"]),
 
     eventos() {
       return this.data.map((evento) => {
@@ -214,6 +215,8 @@ export default {
     resetStateEventoSingle(){
       console.log("sadas")
       this.$store.dispatch("EventoSingle/resetState");
+      this.$store.dispatch("EgresoSingle/resetState");
+      this.$store.dispatch("IngresoSingle/resetState");
     },
     agregarIngresoEgreso(id) {
       this.$store.dispatch("IngresoSingle/fetchCreateData");
@@ -278,7 +281,7 @@ export default {
     },
     createEvent() {
       this.resetState();
-      this.fetchCreateData().then(() => {
+      this.$store.dispatch("EventoSingle/fetchCreateData").then(() => {
         this.scenario = "create";
         this.dialog = true;
       });

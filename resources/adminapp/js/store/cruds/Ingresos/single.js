@@ -5,7 +5,7 @@ function initialState() {
             ///////////
             //descripcion: '',
             monto: "",
-            fecha: "",
+            fecha: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
             medio_de_pago: null,
             medio_de_pago_id: null,
             evento_id: null,

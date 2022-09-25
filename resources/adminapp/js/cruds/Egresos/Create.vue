@@ -76,9 +76,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
+      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
       menu: false,
       status: "",
       activeField: "",

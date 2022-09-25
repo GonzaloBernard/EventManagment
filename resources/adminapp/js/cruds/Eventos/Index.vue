@@ -105,13 +105,13 @@
                   <v-dialog v-model="modalIngresoEgreso" max-width="900">
                     <v-card class="pa-8">
                       <ingresos-egresos :scenario="'multiple'" />
-                      <v-row justify="center">
+                      <v-row justify="end">
                         <v-btn
-                          @click.prevent="updateEgresosIngresos(selectedEvent).then(() => {modalIngresoEgreso = false})"
-                          color="green accent-4"
+                          @click.prevent="updateEgresosIngresos(selectedEvent).then(() => {modalIngresoEgreso = false, resetStateEventoSingle()})"
+                          color="primary"
                           dark
                           class="mr-4 my-4"
-                          large><v-icon dark left>mdi-save</v-icon>Guardar Cambios
+                          large>Guardar Cambios
                         </v-btn>
                         <v-btn
                           @click="modalIngresoEgreso = false, resetStateEventoSingle()"

@@ -5,7 +5,7 @@ function initialState() {
             // ATRIBUTOS
             descripcion: "",
             monto: "",
-            fecha: "",
+            fecha: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
             egreso_categoria_id: null,
             evento_id: null,
             // ATRIBUTOS

@@ -51,18 +51,16 @@
                     </v-row>
                   </v-col>
                 </v-row>
-                <v-row justify="center" class="mt-8">
-                  <v-btn
-                    color="red darken-3"
-                    class="mr-4"
-                    dark
-                    @click.prevent="$emit('dialogClose')"
-                    >Cerrar</v-btn
-                  >
+                <v-row justify="end" class="mt-8">
                   <v-btn color="primary" @click="paso = 2" class="mx-2">
                     Continuar
                     <v-icon dark right>mdi-arrow-right-box</v-icon>
                   </v-btn>
+                  <v-btn
+                    class="mr-4"
+                    @click.prevent="$emit('dialogClose')"
+                    >Cerrar</v-btn
+                  >
                 </v-row>
               </v-form>
             </v-container>
@@ -99,10 +97,9 @@
                 label="descripcion"
                 placeholder="Seleccione Lugar"
                 :key="'id'"
-                :value="entry.lugar_id"
+                :value="entry.lugar"
                 :options="lists.lugar"
                 :closeOnSelect="true"
-                :reduce="(lugar) => lugar.id"
                 @input="updateAtributo($event, 'Lugar')"
                 @[`search.focus`]="focusField('lugar')"
               />
@@ -163,39 +160,35 @@
               </v-row>
             </v-col>
           </v-row>
-          <v-row justify="center" class="mb-4">
-            <v-btn
-              color="red darken-3"
-              class="mr-4"
-              dark
-              @click.prevent="$emit('dialogClose')"
-              >Cerrar</v-btn
-            >
+          <v-row justify="end" class="mb-4">
             <v-btn color="primary" @click="paso = 3" class="mx-2">
               Continuar
               <v-icon dark right>mdi-arrow-right-box</v-icon>
             </v-btn>
+            <v-btn
+              class="mr-4"
+              @click.prevent="$emit('dialogClose')"
+              >Cerrar</v-btn
+            >
           </v-row>
         </v-stepper-content>
         <v-stepper-content step="3">
           <IngresosEgresos class="my-4" :scenario="'multiple'" />
           
           <v-row justify="center">
-            <v-row justify="center" class="mb-4">
-            <v-btn
-              color="red darken-3"
-              class="mr-4"
-              dark
-              @click.prevent="$emit('dialogClose')"
-              >Cerrar</v-btn
-            >
-            <v-btn
+            <v-row justify="end" class="mb-4">
+              <v-btn
               @click.prevent="buttonHandler"
-              color="green accent-4" dark class="mx-2">
+              color="primary accent-4" dark class="mx-2">
               <v-icon dark left>mdi-calendar-plus</v-icon>
               {{
                 scenario === "create" ? "Crear Evento" : "Actualizar Evento"
               }}</v-btn
+            >
+            <v-btn
+              class="mr-8"
+              @click.prevent="$emit('dialogClose')"
+              >Cerrar</v-btn
             >
           </v-row>
             

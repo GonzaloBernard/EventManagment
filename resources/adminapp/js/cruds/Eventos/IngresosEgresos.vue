@@ -1,11 +1,11 @@
 <template>
   <v-row justify="center">
-    <template >
-      <span class="m-1">Saldo Pendiente </span> 
-      
-      <v-chip color="green darken-3" dark>
-          {{`$ ${getSaldoPendiente}`}}
-      </v-chip>
+    <template>
+      <v-chip outlined large color="primary darken-3" dark>Saldo Pendiente   
+        <span class="m-2" >
+            {{`$ ${getSaldoPendiente}`}}
+        </span>
+      </v-chip> 
     </template>
     <create-ingreso scenario="multiple" />
     <create-egreso scenario="multiple" />
@@ -24,7 +24,8 @@
       >
         <v-card-title class="mb-2">
           <v-row justify="space-around">
-            <span class="ml-1">Ingreso</span>
+            <span>$ {{ parseFloat(ingreso.monto).toFixed(2) }}
+            </span>
             <!-- El v-if="!ingreso.created_at" deja eliminar solo los que no esten en base de datos -->
             <!-- Todos los ingresos / egresos con created_at NO SE MANDAN en la request -->
             <v-btn
@@ -38,17 +39,13 @@
               <v-icon dark color="white"> mdi-delete-forever </v-icon>
             </v-btn>
           </v-row>
+          <v-row justify="start">
+            <v-chip outlined>{{ ingreso.fecha.substring(0, 10) }}</v-chip>
+            <v-chip outlined color="smokewhite darken-3" dark>
+              {{ingreso.medio_de_pago !== null ? ingreso.medio_de_pago.descripcion : 'No registrado'}}
+            </v-chip>
+          </v-row>
         </v-card-title>
-        <v-card-text>
-          <p>Fecha: {{ ingreso.fecha }}</p>
-          <p>Monto: {{ ingreso.monto }}</p>
-          <p>
-            Medio de pago:
-            {{
-              ingreso.medio_de_pago !== null ? ingreso.medio_de_pago.descripcion : 'No registrado'
-            }}
-          </p>
-        </v-card-text>
       </v-card>
       <v-card
         v-for="(egreso, index) in entry.egresos"
@@ -63,7 +60,7 @@
       >
         <v-card-title class="mb-2">
           <v-row justify="space-around">
-            <span class="ml-1">Egreso</span>
+            <span>$ {{ parseFloat(egreso.monto).toFixed(2) }} </span>
             <!-- El v-if="!egreso.created_at" deja eliminar solo los que no esten en base de datos -->
             <!-- Todos los egresos / egresos con created_at NO SE MANDAN en la request -->
             <v-btn
@@ -77,18 +74,13 @@
               <v-icon dark color="white"> mdi-delete-forever </v-icon>
             </v-btn>
           </v-row>
+          <v-row justify="start">
+          <v-chip outlined>{{ egreso.fecha.substring(0, 10) }}</v-chip>
+          <v-chip outlined color="smokewhite darken-3" dark>
+              {{egreso.egreso_categoria !== null ? egreso.egreso_categoria.descripcion : 'No registrado'}}
+          </v-chip>
+          </v-row>
         </v-card-title>
-
-        <v-card-text>
-          <p>Fecha: {{ egreso.fecha.substring(0, 10) }}</p>
-          <p>Monto: {{ egreso.monto }}</p>
-          <p>
-            Categoria:
-            {{
-              egreso.egreso_categoria !== null ? egreso.egreso_categoria.descripcion : 'No registrado'
-            }}
-          </p>
-        </v-card-text>
       </v-card>
     </v-row>
   </v-row>

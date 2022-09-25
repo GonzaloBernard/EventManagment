@@ -31,15 +31,15 @@ class EventoApiController extends Controller
                 ]);
             }}
 
-            if($request->egresos){
-            foreach ($request->egresos as $egreso) {
-                Egreso::create([
-                    'evento_id' => $evento->id,
-                    'monto' => $egreso['monto'],
-                    'fecha' => $egreso['fecha'],
-                    'egreso_categoria_id' => $egreso['egreso_categoria_id'],
-                ]);
-            }}
+        if($request->egresos){
+        foreach ($request->egresos as $egreso) {
+            Egreso::create([
+                'evento_id' => $evento->id,
+                'monto' => $egreso['monto'],
+                'fecha' => $egreso['fecha'],
+                'egreso_categoria_id' => $egreso['egreso_categoria_id'],
+            ]);
+        }}
         return (new EventoResource($evento))
             ->response()
             ->setStatusCode(Response::HTTP_ACCEPTED);
@@ -114,6 +114,26 @@ class EventoApiController extends Controller
     public function update(UpdateEventoRequest $request, Evento $evento)
     {
         $evento->update($request->validated());
+        if($request->ingresos){
+            foreach ($request->ingresos as $ingreso) {
+
+                Ingreso::create([
+                    'evento_id' => $evento->id,
+                    'monto' => $ingreso['monto'],
+                    'fecha' => $ingreso['fecha'],
+                    'medio_de_pago_id' => $ingreso['medio_de_pago_id'],
+                ]);
+            }}
+
+        if($request->egresos){
+        foreach ($request->egresos as $egreso) {
+            Egreso::create([
+                'evento_id' => $evento->id,
+                'monto' => $egreso['monto'],
+                'fecha' => $egreso['fecha'],
+                'egreso_categoria_id' => $egreso['egreso_categoria_id'],
+            ]);
+        }}
 
         //EDITAR EL EVENTO EN GOOGLE CALENDAR
         $event = Event::find($evento->google_calendar_id);
@@ -132,7 +152,7 @@ class EventoApiController extends Controller
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return response([
-            'data' => new EventoResource($evento->load(['lugar'])),
+            'data' => new EventoResource($evento->load(['lugar', 'ingresos', 'ingresos.medioDePago','egresos', 'egresos.egreso_categoria'])),
             'meta' => [
                 'lugar' => Lugar::get(['id', 'descripcion']),
             ],
