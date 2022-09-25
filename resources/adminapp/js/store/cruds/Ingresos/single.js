@@ -6,6 +6,7 @@ function initialState() {
             //descripcion: '',
             monto: "",
             fecha: "",
+            medio_de_pago: null,
             medio_de_pago_id: null,
             evento_id: null,
             ///////////
@@ -141,7 +142,8 @@ const mutations = {
         state.entry.evento_id = value;
     },
     setMedioDePago(state, value) {
-        state.entry.medio_de_pago_id = value;
+        state.entry.medio_de_pago = value;
+        state.entry.medio_de_pago_id = value.id;
     },
     setDescripcion(state, value) {
         state.entry.descripcion = value;

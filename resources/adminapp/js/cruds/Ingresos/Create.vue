@@ -52,8 +52,7 @@
       <v-col cols="3" align-self="center" class="mb-8">
         <v-select
           @input="setMedioDePago($event)"
-          :value="entry.medio_de_pago_id"
-          :reduce="(medio_de_pago) => medio_de_pago.id"
+          :value="entry.medio_de_pago"
           label="descripcion"
           placeholder="Medio de pago"
           :options="lists.medio_de_pagos"
@@ -65,7 +64,7 @@
           color="green lighten-3"
           class="ma-2 white--text"
         >
-          Guardar Ingreso
+        <v-icon dark>mdi-plus</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -123,7 +122,8 @@ export default {
         ) {
           this.setIngreso({
             fecha: this.entry.fecha,
-            medio_de_pago_id: this.entry.medio_de_pago_id,
+            medio_de_pago: this.entry.medio_de_pago,
+            medio_de_pago_id: this.entry.medio_de_pago.id,
             monto: this.entry.monto,
           });
           this.setMonto(0);

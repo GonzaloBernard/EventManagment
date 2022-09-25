@@ -1,7 +1,14 @@
 <template>
   <v-row justify="center">
-    <create-ingreso :scenario="scenario" />
-    <create-egreso :scenario="scenario" />
+    <template >
+      <span class="m-1">Saldo Pendiente </span> 
+      
+      <v-chip color="green darken-3" dark>
+          {{`$ ${getSaldoPendiente}`}}
+      </v-chip>
+    </template>
+    <create-ingreso scenario="multiple" />
+    <create-egreso scenario="multiple" />
 
     <v-row justify="center">
       <v-card
@@ -18,7 +25,10 @@
         <v-card-title class="mb-2">
           <v-row justify="space-around">
             <span class="ml-1">Ingreso</span>
+            <!-- El v-if="!ingreso.created_at" deja eliminar solo los que no esten en base de datos -->
+            <!-- Todos los ingresos / egresos con created_at NO SE MANDAN en la request -->
             <v-btn
+              v-if="!ingreso.created_at"
               fab
               dark
               x-small
@@ -54,7 +64,10 @@
         <v-card-title class="mb-2">
           <v-row justify="space-around">
             <span class="ml-1">Egreso</span>
+            <!-- El v-if="!egreso.created_at" deja eliminar solo los que no esten en base de datos -->
+            <!-- Todos los egresos / egresos con created_at NO SE MANDAN en la request -->
             <v-btn
+            v-if="!egreso.created_at"
               fab
               dark
               x-small
@@ -87,7 +100,7 @@ import CreateEgreso from "@cruds/Egresos/Create";
 import { mapActions, mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters("EventoSingle", ["entry"]),
+    ...mapGetters("EventoSingle", ["entry","getSaldoPendiente"]),
     ...mapGetters("IngresoSingle", ["listsIngresos"]),
     ...mapGetters("EgresoSingle", ["listsEgresos"]),
   },
@@ -95,13 +108,6 @@ export default {
     ...mapActions("EventoSingle", ["removeEgreso", "removeIngreso"]),
     removeEgresoIngreso(tipo, index) {
       this[`remove${tipo}`](index);
-    },
-  },
-  props: {
-    scenario: {
-      type: String,
-      required: true,
-      default: "single",
     },
   },
   components: {

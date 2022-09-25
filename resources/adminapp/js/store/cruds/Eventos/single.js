@@ -30,7 +30,16 @@ const route = 'eventos'
 const getters = {
   entry: state => state.entry,
   lists: state => state.lists,
-  loading: state => state.loading
+  loading: state => state.loading,
+  getSaldoPendiente: state => {
+    const ingresos = state.entry.ingresos?.map((value) => value.monto);
+    const egresos = state.entry.egresos?.map((value) => value.monto);
+    const initialValue = 0;
+    const ingresoTotal = ingresos.reduce( (previousValue, currentValue) => parseFloat(previousValue) + parseFloat(currentValue),initialValue );
+    const egresoTotal = egresos.reduce( (previousValue, currentValue) => parseFloat(previousValue) + parseFloat(currentValue),initialValue );
+    const sum = parseFloat(state.entry.precio !== null ? state.entry.precio: 0 ) + egresoTotal - ingresoTotal;
+    return sum?sum.toFixed(2):0;
+  }
 }
 
 const actions = {
@@ -84,8 +93,8 @@ const actions = {
     commit('setLoading', true)
     return new Promise((resolve, reject) => {
         let parametros = {
-            ingresos: state.entry.ingresos,
-            egresos: state.entry.egresos
+            ingresos: state.entry.ingresos.filter((item) => !item.created_at ),
+            egresos: state.entry.egresos.filter((item) => !item.created_at )
         }
         console.log(parametros)
       let params = objectToFormData(parametros, {

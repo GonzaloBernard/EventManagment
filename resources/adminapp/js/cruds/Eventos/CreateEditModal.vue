@@ -179,20 +179,26 @@
         </v-stepper-content>
         <v-stepper-content step="3">
           <IngresosEgresos class="my-4" :scenario="'multiple'" />
-          <v-divider></v-divider>
+          
           <v-row justify="center">
+            <v-row justify="center" class="mb-4">
+            <v-btn
+              color="red darken-3"
+              class="mr-4"
+              dark
+              @click.prevent="$emit('dialogClose')"
+              >Cerrar</v-btn
+            >
             <v-btn
               @click.prevent="buttonHandler"
-              color="green accent-4"
-              dark
-              class="mr-4 my-4"
-              large
-            >
+              color="green accent-4" dark class="mx-2">
               <v-icon dark left>mdi-calendar-plus</v-icon>
               {{
                 scenario === "create" ? "Crear Evento" : "Actualizar Evento"
               }}</v-btn
             >
+          </v-row>
+            
           </v-row>
         </v-stepper-content>
       </v-stepper-items>

@@ -147,7 +147,8 @@ const mutations = {
 
     // ATRIBUTOS
     setCategoria(state, value) {
-        state.entry.egreso_categoria_id = value;
+        state.entry.egreso_categoria_id = value.id;
+        state.entry.egreso_categoria = value;
     },
     setEventId(state, value) {
         state.entry.evento_id = value;

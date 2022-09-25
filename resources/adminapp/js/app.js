@@ -52,7 +52,8 @@ const app = new Vue({
   store,
   i18n,
   vuetify: new Vuetify({
-    theme: { dark: localStorage.getItem("darkMode") }
+    // Si se va a usar el boton dark mode tiene que almacenarse en un modulo de vuex sin resetState
+    theme: { dark: false/* localStorage.getItem("darkMode") */ }
   }),
   created() {
     this.fetchLanguages()

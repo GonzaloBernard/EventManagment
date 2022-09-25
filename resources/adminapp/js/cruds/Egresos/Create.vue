@@ -52,8 +52,7 @@
       <v-col cols="3" align-self="center" class="mb-8">
         <v-select
           @input="setCategoria($event)"
-          :value="entry.egreso_categoria_id"
-          :reduce="(egreso_categoria) => egreso_categoria.id"
+          :value="entry.egreso_categoria"
           label="descripcion"
           placeholder="Categoría"
           :options="lists.egreso_categoria"
@@ -65,7 +64,7 @@
           color="red lighten-3"
           class="ma-2 white--text"
         >
-          Guardar Egreso
+        <v-icon dark>mdi-plus</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -127,6 +126,7 @@ export default {
         ) {
           this.setEgreso({
             fecha: this.entry.fecha,
+            egreso_categoria: this.entry.egreso_categoria,
             egreso_categoria_id: this.entry.egreso_categoria_id,
             monto: this.entry.monto,
           });

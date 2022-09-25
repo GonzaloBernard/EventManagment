@@ -47,7 +47,8 @@ export default {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
     setDarkMode (e) {
-      localStorage.setItem("darkMode", e)
+      // Usar un modulo vuex con la variable darkMode y no hacer nunca resetState a ese modulo
+      /* localStorage.setItem("darkMode", false) */
     }
   },
 };

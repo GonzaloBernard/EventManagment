@@ -109,9 +109,6 @@
               <h4>Precio $ {{ selectedEvent.precio }}</h4>
             </v-card-text>
             <v-card-actions>
-              <v-btn @click="saldoFinal(selectedEvent.id)">
-                <v-icon dark>mdi-plus</v-icon> Saldo Final
-              </v-btn>
               <v-btn @click="agregarIngresoEgreso(selectedEvent.id)">
                 <v-icon dark>mdi-plus</v-icon> Registrar Ingreso / Egreso
               </v-btn>
@@ -129,14 +126,21 @@
             <ingresos-egresos :scenario="'multiple'" />
             <v-row justify="center">
               <v-btn
-                @click.prevent="updateEgresosIngresos(selectedEvent.id)"
+                @click.prevent="updateEgresosIngresos(selectedEvent.id).then(() => {modalIngresoEgreso = false})"
                 color="green accent-4"
                 dark
                 class="mr-4 my-4"
                 large
-              >
+                >
                 <v-icon dark left>mdi-save</v-icon>
                 Guardar Cambios</v-btn
+                >
+              <v-btn
+                @click="modalIngresoEgreso = false"
+                class="mr-4 my-4"
+                large
+                >
+                Cerrar</v-btn
               >
             </v-row>
           </v-card>
@@ -147,8 +151,9 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import CreateEditModal from "./CreateEditModal.vue";
-import IngresosEgresos from "./IngresosEgresos.vue";
+import CreateEditModal from "@/cruds/Eventos/CreateEditModal.vue";
+import IngresosEgresos from "@/cruds/Eventos/IngresosEgresos.vue";
+
 export default {
   components: {
     CreateEditModal,
@@ -205,16 +210,6 @@ export default {
     ]),
     ...mapActions("IngresoSingle", ["fetchCreateData", "setEventId"]),
     ...mapActions("EgresoSingle", ["fetchCreateData", "setEventId"]),
-    saldoFinal(id) {
-      alert("En Desarrollo")
-      this.$store.dispatch("IngresoSingle/fetchCreateData");
-      this.$store.dispatch("EgresoSingle/fetchCreateData");
-      this.$store.dispatch("IngresoSingle/setEventId", id);
-      this.$store.dispatch("EgresoSingle/setEventId", id);
-      this.fetchShowData(id).then(() => {
-        this.modalIngresoEgreso = true;
-      })
-    },
     agregarIngresoEgreso(id) {
       this.$store.dispatch("IngresoSingle/fetchCreateData");
       this.$store.dispatch("EgresoSingle/fetchCreateData");

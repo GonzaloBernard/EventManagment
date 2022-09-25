@@ -53,22 +53,6 @@
                           <v-tooltip top color="success">
                             <template v-slot:activator="{ on, attrs }">
                               <v-btn
-                                @click="saldoFinal(item.id)"
-                                class="mx-1"
-                                fab
-                                dark
-                                x-small
-                                v-bind="attrs"
-                                v-on="on"
-                                color="green darken-3"
-                                ><v-icon dark>mdi-plus</v-icon>
-                              </v-btn>
-                            </template>
-                            <span>Saldo Final</span>
-                          </v-tooltip>
-                          <v-tooltip top color="success">
-                            <template v-slot:activator="{ on, attrs }">
-                              <v-btn
                                 @click="agregarIngresoEgreso(item.id)"
                                 class="mx-1"
                                 fab
@@ -121,6 +105,20 @@
                   <v-dialog v-model="modalIngresoEgreso" max-width="900">
                     <v-card class="pa-8">
                       <ingresos-egresos :scenario="'multiple'" />
+                      <v-row justify="center">
+                        <v-btn
+                          @click.prevent="updateEgresosIngresos(selectedEvent).then(() => {modalIngresoEgreso = false})"
+                          color="green accent-4"
+                          dark
+                          class="mr-4 my-4"
+                          large><v-icon dark left>mdi-save</v-icon>Guardar Cambios
+                        </v-btn>
+                        <v-btn
+                          @click="modalIngresoEgreso = false"
+                          class="mr-4 my-4"
+                          large>Cerrar
+                        </v-btn>
+                      </v-row>
                     </v-card>
                   </v-dialog>
                 </template>
@@ -134,7 +132,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import CreateEditModal from "./CreateEditModal.vue";
+import CreateEditModal from "@/cruds/Eventos/CreateEditModal.vue";
 import IngresosEgresos from "@/cruds/Eventos/IngresosEgresos"
 export default {
   components: {
@@ -177,8 +175,8 @@ export default {
       "resetState",
       "destroyData",
     ]),
-    saldoFinal(id) {
-      alert("En Desarrollo")
+    agregarIngresoEgreso(id) {
+      this.selectedEvent = id;
       this.$store.dispatch("IngresoSingle/fetchCreateData");
       this.$store.dispatch("EgresoSingle/fetchCreateData");
       this.$store.dispatch("IngresoSingle/setEventId", id);
@@ -187,18 +185,12 @@ export default {
         this.modalIngresoEgreso = true;
       })
     },
-    agregarIngresoEgreso(id) {
-      this.$store.dispatch("IngresoSingle/fetchCreateData");
-      this.$store.dispatch("EgresoSingle/fetchCreateData");
-      this.$store.dispatch("IngresoSingle/setEventId", id);
-      this.$store.dispatch("EgresoSingle/setEventId", id);
-      this.modalIngresoEgreso = true;
-    },
     ...mapActions("EventoSingle", [
       "fetchShowData",
       "fetchEditData",
       "fetchCreateData",
       "resetState",
+      "updateEgresosIngresos",
     ]),
     destroyDataAction(id) {
       this.$swal({
