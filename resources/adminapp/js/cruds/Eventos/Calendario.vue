@@ -130,7 +130,7 @@
             <ingresos-egresos :scenario="'multiple'" />
             <v-row justify="end">
               <v-btn
-                @click.prevent="updateEgresosIngresos(selectedEvent.id).then(() => {modalIngresoEgreso = false, resetStateEventoSingle()})"
+                @click.prevent="updateEgresosIngresos(selectedEvent.id).then(() => {modalIngresoEgreso = false, resetStateEventoSingle(),fetchIndexData()})"
                 color="primary"
                 dark
                 class="mr-4 my-4"
@@ -211,7 +211,7 @@ export default {
       "fetchEditData",
       "resetState",
       "fetchCreateData",
-      "setDeletedAt",
+      "setFechaLiquidacion",
     ]),
     ...mapActions("IngresoSingle", ["fetchCreateData", "setEventId"]),
     ...mapActions("EgresoSingle", ["fetchCreateData", "setEventId"]),
@@ -230,7 +230,7 @@ export default {
       this.$store.dispatch("EgresoSingle/setEventId", id);
       this.fetchShowData(id).then(() => {
         // SE PONE DELETED AT PARA QUE EL EVENTO SE MARQUE COMO FINALIZADO
-        this.setDeletedAt(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
+        this.setFechaLiquidacion(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
         this.modalIngresoEgreso = true;
       })
     },

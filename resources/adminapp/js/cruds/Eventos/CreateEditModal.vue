@@ -58,7 +58,7 @@
                   </v-btn>
                   <v-btn
                     class="mr-4"
-                    @click.prevent="$emit('dialogClose')"
+                    @click.prevent="$emit('dialogClose'), paso = 1"
                     >Cerrar</v-btn
                   >
                 </v-row>
@@ -167,7 +167,7 @@
             </v-btn>
             <v-btn
               class="mr-4"
-              @click.prevent="$emit('dialogClose')"
+              @click.prevent="$emit('dialogClose'), paso = 1"
               >Cerrar</v-btn
             >
           </v-row>
@@ -187,7 +187,7 @@
             >
             <v-btn
               class="mr-8"
-              @click.prevent="$emit('dialogClose')"
+              @click.prevent="$emit('dialogClose'), paso = 1"
               >Cerrar</v-btn
             >
           </v-row>
@@ -286,7 +286,7 @@ export default {
     },
     addEvent() {
       if (this.validator()) {
-        this.storeData();
+        this.storeData().then(()=>{this.$emit('dialogClose');this.paso=1 });
 
         // TESTING
         /* this.$emit("eventAdded");
@@ -297,9 +297,7 @@ export default {
     },
     updateEvent() {
       if (this.validator()) {
-        this.updateData();
-        this.$emit("eventAdded");
-        this.$emit("dialogClose");
+        this.updateData().then(()=>{this.$emit("eventAdded");this.$emit("dialogClose");this.paso=1 ;});
       } else {
         this.$swal("error", "Faltan datos");
       }

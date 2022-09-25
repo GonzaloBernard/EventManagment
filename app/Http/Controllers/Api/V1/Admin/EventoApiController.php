@@ -40,6 +40,10 @@ class EventoApiController extends Controller
                 'egreso_categoria_id' => $egreso['egreso_categoria_id'],
             ]);
         }}
+        // Si es un cierre de caja borrar el evento
+        $evento->fecha_liquidacion = $request->fecha_liquidacion;
+        $evento->usuario_gestor = auth()->user()->name;
+        $evento->update();
         return (new EventoResource($evento))
             ->response()
             ->setStatusCode(Response::HTTP_ACCEPTED);
@@ -49,7 +53,7 @@ class EventoApiController extends Controller
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EventoResource(Evento::with(['lugar', 'ingresos', 'ingresos.medioDePago','egresos', 'egresos.egreso_categoria'])->get());
+        return new EventoResource(Evento::/* where('fecha_liquidacion', null)-> */with(['lugar', 'ingresos', 'ingresos.medioDePago','egresos', 'egresos.egreso_categoria'])->get());
     }
 
     public function store(StoreEventoRequest $request)

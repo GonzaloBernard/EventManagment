@@ -16,6 +16,7 @@ function initialState() {
       created_at: '',
       updated_at: '',
       deleted_at: '',
+      fecha_liquidacion: '',
       ingresos: [],
       egresos: []
     },
@@ -70,6 +71,8 @@ const actions = {
       axios
         .post(route, params)
         .then(response => {
+          dispatch('EventosIndex/fetchIndexData',null,{ root: true })
+          dispatch('resetState')
           resolve(response)
         })
         .catch(error => {
@@ -96,7 +99,7 @@ const actions = {
         let parametros = {
             ingresos: state.entry.ingresos.filter((item) => !item.created_at ),
             egresos: state.entry.egresos.filter((item) => !item.created_at ),
-            deleted_at: state.entry.deleted_at,
+            fecha_liquidacion: state.entry.fecha_liquidacion,
         }
         console.log(parametros)
       let params = objectToFormData(parametros, {
@@ -148,6 +151,8 @@ const actions = {
       axios
         .post(`${route}/${state.entry.id}`, params)
         .then(response => {
+          dispatch('EventosIndex/fetchIndexData',null,{ root: true })
+          dispatch('resetState')
           resolve(response)
         })
         .catch(error => {
@@ -234,6 +239,9 @@ const actions = {
   },
   setHora({ commit }, value) {
     commit('setHora', value)
+  },
+  setFechaLiquidacion({ commit }, value) {
+    commit('setFechaLiquidacion', value)
   },
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
@@ -341,6 +349,9 @@ const mutations = {
   setLugar(state, value) {
     state.entry.lugar_id = value.id
     state.entry.lugar = value
+  },
+  setFechaLiquidacion(state, value) {
+    state.entry.fecha_liquidacion = value
   },
   setCreatedAt(state, value) {
     state.entry.created_at = value

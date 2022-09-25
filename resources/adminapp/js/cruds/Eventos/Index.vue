@@ -48,6 +48,28 @@
                       :items="data"
                       :search="search"
                     >
+                    <template v-slot:[`item.fecha_liquidacion`]="{ item }">
+                      <v-chip class="my-1" v-if="item.fecha_liquidacion">
+                        {{item.usuario_gestor?item.usuario_gestor : 'Sin cajero'}} 
+                      </v-chip>
+                      <v-chip class="my-1" outlined v-if="item.fecha_liquidacion">
+                        {{item.fecha_liquidacion.substr(0,10)}}
+                      </v-chip>
+                    </template>
+
+                    <template v-slot:[`item.fecha`]="{ item }">
+                      <v-chip class="my-1">
+                        {{item.fecha.substr(0,10)}} 
+                      </v-chip>
+                      <v-chip class="my-1" outlined>
+                        {{item.fecha.substr(10)}}
+                      </v-chip>
+                      <v-chip class="my-1" outlined>
+                        {{item.duracion}} min
+                      </v-chip>
+                    </template>
+
+
                       <template v-slot:[`item.acciones`]="{ item }">
                         <div class="d-flex justify-content-center">
                           <v-tooltip top color="primary">
@@ -123,7 +145,7 @@
                       <ingresos-egresos :scenario="'multiple'" />
                       <v-row justify="end">
                         <v-btn
-                          @click.prevent="updateEgresosIngresos(selectedEvent).then(() => {modalIngresoEgreso = false, resetStateEventoSingle()})"
+                          @click.prevent="updateEgresosIngresos(selectedEvent).then(() => {modalIngresoEgreso = false, resetStateEventoSingle(),fetchIndexData()})"
                           color="primary"
                           dark
                           class="mr-4 my-4"
@@ -166,8 +188,8 @@ export default {
         { text: "Mamá / Papá", value: "cliente" },
         { text: "Cumple de", value: "agasajado" },
         { text: "Precio $", value: "precio" },
-        { text: "Fecha y hora", value: "fecha" },
-        { text: "Duración", value: "duracion" },
+        { text: "Fecha, hora y duración", value: "fecha" },
+        { text: "Liquidado", value: "fecha_liquidacion" },
         { text: "Acciones", value: "acciones", align: "center" },
       ],
       dialog: false,
@@ -204,7 +226,7 @@ export default {
       this.fetchShowData(id).then(() => {
         console.log(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
         // SE PONE DELETED AT PARA QUE EL EVENTO SE MARQUE COMO FINALIZADO
-        this.setDeletedAt(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
+        this.setFechaLiquidacion(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
         this.modalIngresoEgreso = true;
       })
     },
@@ -224,7 +246,7 @@ export default {
       "fetchCreateData",
       "resetState",
       "updateEgresosIngresos",
-      "setDeletedAt",
+      "setFechaLiquidacion",
     ]),
     destroyDataAction(id) {
       this.$swal({

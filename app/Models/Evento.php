@@ -32,6 +32,8 @@ class Evento extends Model
         'lugar_id',
         'google_calendar_id',
         'color',
+        'usuario_gestor',
+        'fecha_liquidacion',
         'created_at',
         'updated_at',
         'deleted_at',
