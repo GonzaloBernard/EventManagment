@@ -217,7 +217,6 @@ export default {
     ...mapActions("EgresoSingle", ["fetchCreateData", "setEventId"]),
     
     resetStateEventoSingle(){
-      console.log("sadas")
       this.$store.dispatch("EventoSingle/resetState");
       this.$store.dispatch("EgresoSingle/resetState");
       this.$store.dispatch("IngresoSingle/resetState");
