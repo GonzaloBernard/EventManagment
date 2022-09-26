@@ -130,7 +130,7 @@
             <ingresos-egresos :scenario="'multiple'" />
             <v-row justify="end">
               <v-btn
-                @click.prevent="updateEgresosIngresos(selectedEvent.id).then(() => {modalIngresoEgreso = false, resetStateEventoSingle(),fetchIndexData()})"
+                @click.prevent="updateEgresosIngresos(selectedEvent.id).then(() => {modalIngresoEgreso = false,/*  resetStateEventoSingle(), */fetchIndexData()})"
                 color="primary"
                 dark
                 class="mr-4 my-4"
@@ -139,7 +139,7 @@
                 Guardar Cambios</v-btn
                 >
               <v-btn
-                @click="modalIngresoEgreso = false, resetStateEventoSingle()"
+                @click="modalIngresoEgreso = false/* , resetStateEventoSingle() */"
                 class="mr-4 my-4"
                 large
                 >
