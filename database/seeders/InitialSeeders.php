@@ -29,6 +29,10 @@ class InitialSeeders extends Seeder
             [
                 'id'    => 1,
                 'descripcion' => 'Efectivo',
+            ],
+            [
+                'id'    => 2,
+                'descripcion' => 'Tarjeta',
             ]
         ];
 

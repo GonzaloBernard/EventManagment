@@ -108,6 +108,9 @@
               <h4>Mamá / Papá: {{ selectedEvent.cliente }}</h4>
               <h4>Cumple de: {{ selectedEvent.agasajado }}</h4>
               <h4>Precio $ {{ selectedEvent.precio }}</h4>
+              <h4 v-if="selectedEvent.fecha_liquidacion && selectedEvent.usuario_gestor">
+                Cajero: {{ selectedEvent.usuario_gestor }} <v-chip class="p-1" color="primary" small outlined> {{ selectedEvent.fecha_liquidacion.substring(0,10) }} </v-chip>
+              </h4>
             </v-card-text>
             <v-card-actions>
               <v-btn @click="saldoFinal(selectedEvent)">
