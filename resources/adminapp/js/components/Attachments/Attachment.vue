@@ -305,7 +305,7 @@ export default {
       })
     },
     handleTmpFileRemoved(file) {
-      console.log(file)
+      //console.log(file)
       if (_.includes(['canceled', 'error'], file.o.status)) {
         this.removeTmpFile(file)
         return

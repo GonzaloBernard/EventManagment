@@ -214,7 +214,7 @@ export default {
       "destroyData",
     ]),
     resetStateEventoSingle(){
-      console.log("sadas")
+      //console.log("sadas")
       this.$store.dispatch("EventoSingle/resetState");
     },
     saldoFinal(id) {
@@ -224,7 +224,7 @@ export default {
       this.$store.dispatch("IngresoSingle/setEventId", id);
       this.$store.dispatch("EgresoSingle/setEventId", id);
       this.fetchShowData(id).then(() => {
-        console.log(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
+        //console.log(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
         // SE PONE DELETED AT PARA QUE EL EVENTO SE MARQUE COMO FINALIZADO
         this.setFechaLiquidacion(new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10));
         this.modalIngresoEgreso = true;

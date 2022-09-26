@@ -62,7 +62,7 @@ const actions = {
             ingresos: state.entry.ingresos,
             egresos: state.entry.egresos
         }
-    console.log(parametros)
+    //console.log(parametros)
       let params = objectToFormData(parametros, {
         indices: true,
         booleansAsIntegers: true
@@ -101,7 +101,7 @@ const actions = {
             egresos: state.entry.egresos.filter((item) => !item.created_at ),
             fecha_liquidacion: state.entry.fecha_liquidacion,
         }
-        console.log(parametros)
+        //console.log(parametros)
       let params = objectToFormData(parametros, {
         indices: true,
         booleansAsIntegers: true
@@ -142,7 +142,7 @@ const actions = {
             ingresos: state.entry.ingresos.filter((item) => !item.created_at ),
             egresos: state.entry.egresos.filter((item) => !item.created_at )
         }
-        console.log(parametros)
+        //console.log(parametros)
       let params = objectToFormData(parametros, {
         indices: true,
         booleansAsIntegers: true

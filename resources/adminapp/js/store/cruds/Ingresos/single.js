@@ -112,7 +112,7 @@ const actions = {
     },
     fetchCreateData({ commit }) {
         axios.get(`${route}/create`).then((response) => {
-            console.log(response.data.meta);
+            //console.log(response.data.meta);
             commit("setLists", response.data.meta);
         });
     },
