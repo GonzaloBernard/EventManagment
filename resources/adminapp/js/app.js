@@ -32,6 +32,10 @@ import '@mdi/font/css/materialdesignicons.css'
 import Vue from 'vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 
+import JsonExcel from "vue-json-excel";
+ 
+Vue.component("downloadExcel", JsonExcel);
+
 Vue.use(VueSweetalert2);
 Vue.use(Vuetify)
 
