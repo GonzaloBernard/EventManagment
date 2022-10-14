@@ -64,9 +64,9 @@ export default {
           gate: "user_management_access",
         },
         {
-          title: "Reportes",
+          title: "Balances",
           icon: "insert_chart",
-          path: { name: "reportes" },
+          path: { name: "balances" },
           gate: "user_management_access",
         },
       ],

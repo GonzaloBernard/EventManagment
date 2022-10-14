@@ -7,11 +7,6 @@
 <script>
 import Bar from "../components/Bar.vue";
 export default {
-  data() {
-    return {
-      loaded: false,
-    };
-  },
   created() {
     this.$store.dispatch("EgresoIndex/fetchIndexData");
     this.$store.dispatch("IngresoIndex/fetchIndexData");
@@ -26,7 +21,6 @@ export default {
         ingresosArray[parseInt(ingreso.fecha.split("-")[1]) - 1] +=
           ingreso.monto;
       });
-      this.loaded = true;
       return ingresosArray;
     },
     egresos() {
@@ -36,6 +30,9 @@ export default {
       });
       return egresosArray;
     },
+    loaded() {
+      return this.ingresos.some(ingreso => ingreso > 0) && this.egresos.some(egreso => egreso > 0)
+    }
   },
 };
 </script>

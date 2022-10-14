@@ -14,11 +14,23 @@
             </h4>
           </div>
           <div class="card-body">
-            <filter-by-date-category
-              :opcionesSelect="lists.medio_de_pago"
-              @filter="filters[$event.tipo].valor = $event.valor"
-            />
-
+          <v-row justify="center">
+              <v-col cols="8">
+              <filter-by-date-category
+                :opcionesSelect="lists.lugar"
+                @filter="filters[$event.tipo].valor = $event.valor"
+              />
+              </v-col>
+              <v-col cols="4" align-self="center">
+              <v-select
+                @input="filters['select'].valor = $event"
+                v-model="opcionSeleccionada"
+                label="descripcion"
+                placeholder="Medio de pago"
+                :options="lists.medio_de_pagos"
+              />
+              </v-col>
+            </v-row>
             <download-excel
               class="btn btn-outline-success btn-sm"
               :data="ingresosFiltrados"
@@ -96,6 +108,7 @@ export default {
   data() {
     return {
       search: "",
+      opcionSeleccionada:null,
       filters: {
         desde: {
           valor: null,
@@ -111,7 +124,7 @@ export default {
         { text: "Fecha", value: "fecha" },
         { text: "Monto", value: "monto" },
         { text: "Medio de Pago", value: "medio_de_pago.descripcion" },
-        { text: "Evento", value: "evento.cliente" },
+        { text: "Cliente", value: "evento.cliente" },
         { text: "Acciones", value: "acciones", align: "center" },
       ],
     };
@@ -124,8 +137,7 @@ export default {
     this.fetchIndexData();
   },
   computed: {
-    ...mapGetters("IngresoIndex", ["data", "total", "loading"]),
-    ...mapGetters("IngresoSingle", ["lists"]),
+    ...mapGetters("IngresoIndex", ["data", "total", "loading", "lists"]),
 
     ingresosFiltrados() {
       let ingresosFiltered = this.data;

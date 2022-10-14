@@ -7,7 +7,9 @@
             <div class="card-icon">
               <i class="material-icons">assignment</i>
             </div>
-            <h4 class="card-title">
+            <h4
+              :class="[$vuetify.theme.dark ? 'text-light' : '', 'card-title']"
+            >
               <strong>Egresos</strong>
             </h4>
           </div>
@@ -21,10 +23,23 @@
                         </router-link>
                     </div> -->
           <div class="card-body">
-            <filter-by-date-category
-              :opcionesSelect="lists.lugar"
-              @filter="filters[$event.tipo].valor = $event.valor"
-            />
+            <v-row justify="center">
+              <v-col cols="8">
+              <filter-by-date-category
+                :opcionesSelect="lists.lugar"
+                @filter="filters[$event.tipo].valor = $event.valor"
+              />
+              </v-col>
+              <v-col cols="4" align-self="center">
+              <v-select
+                @input="filters['select'].valor = $event"
+                v-model="opcionSeleccionada"
+                label="descripcion"
+                placeholder="Categoría"
+                :options="lists.egreso_categoria"
+              />
+              </v-col>
+            </v-row>
             <div class="row">
               <div class="col-md-12">
                 <v-data-table
@@ -93,6 +108,7 @@ export default {
   components: { FilterByDateCategory },
   data() {
     return {
+      opcionSeleccionada: null,
       filters: {
         desde: {
           valor: null,
@@ -123,8 +139,7 @@ export default {
     this.fetchIndexData();
   },
   computed: {
-    ...mapGetters("EgresoIndex", ["data", "total", "loading"]),
-    ...mapGetters("EgresoSingle", ["lists"]),
+    ...mapGetters("EgresoIndex", ["data", "total", "loading", "lists"]),
 
     egresosFiltrados() {
       let egresosFiltered = this.data;

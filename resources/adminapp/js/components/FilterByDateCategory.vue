@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="space-between">
+  <v-row>
     <v-col cols="3">
       <v-menu
         v-model="menu1"
@@ -57,15 +57,6 @@
           "
         ></v-date-picker>
       </v-menu>
-    </v-col>
-    <v-col cols="4" align-self="center">
-      <v-select
-        @input="$emit('filter', { tipo: 'select', valor: $event })"
-        v-model="opcionSeleccionada"
-        label="descripcion"
-        placeholder="Categoría"
-        :options="[{ id: 1, descripcion: 'Efectivo' }, { id: 2, descripcion: 'Tarjeta' }]"
-      />
     </v-col>
   </v-row>
 </template>
