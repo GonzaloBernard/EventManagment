@@ -71,14 +71,7 @@ export default {
       menu2: false,
       opcionSeleccionada: null,
     };
-  },
-  props: {
-    opcionesSelect: {
-      type: Array,
-      required: true,
-      default: () => [],
-    },
-  },
+  }
 };
 </script>
 

@@ -17,7 +17,6 @@
           <v-row justify="center">
               <v-col cols="8">
               <filter-by-date-category
-                :opcionesSelect="lists.lugar"
                 @filter="filters[$event.tipo].valor = $event.valor"
               />
               </v-col>
@@ -101,7 +100,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import FilterByDateCategory from "../../components/FilterByDateCategory.vue";
+import FilterByDateCategory from "@/components/FilterByDateCategory.vue";
 
 export default {
   components: { FilterByDateCategory },

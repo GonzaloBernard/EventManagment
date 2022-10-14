@@ -8,8 +8,8 @@ function initialState() {
     total: 0,
     loading: false,
     lists: {
-            egreso_categoria: [],
-        },
+      egreso_categoria: [],
+    },
   }
 }
 
