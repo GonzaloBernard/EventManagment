@@ -1,11 +1,8 @@
 <template>
   <div class="container-fluid">
-    <v-row>
-      <v-col>
+    
       <FilterByDateCategory @filter="filters[$event.tipo].valor = $event.valor"/>
-    </v-col>
-    <v-col><v-btn @click="filtrar">Filtrar</v-btn></v-col>
-    </v-row>  
+      
     <v-row>
       <v-col>
         <v-data-table
