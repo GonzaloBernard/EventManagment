@@ -21,9 +21,11 @@
             {{ item.fecha.substring(0,10) }}
           </template>
           <template v-slot:[`item.monto`]="{ item }">
+            $ {{ item.monto.toFixed(2) }}
+          </template>
+          <template v-slot:[`item.movimiento`]="{ item }">
             <!--# Si es un egreso el id tiene prefijo e --  item.id[0] === e egreso -->
-            <v-chip outlined :color=" item.id[0] === 'e' ? 'red' : 'green' ">${{ item.monto }}</v-chip>
-            <v-chip outlined :color=" item.id[0] === 'e' ? 'red' : 'green' ">{{ item.medio_de_pago?.descripcion?? item.egreso_categoria.descripcion}}</v-chip>
+            <v-chip outlined :color=" item.id[0] === 'e' ? 'red' : 'green' "> {{ item.medio_de_pago?.descripcion?? item.egreso_categoria.descripcion}}</v-chip>
           </template>
         </v-data-table>
       </v-col>
@@ -43,8 +45,9 @@ export default {
       search: "",
       headers: [
         { text: "Fecha", value: "fecha" },
-        { text: "Monto", value: "monto" },
         { text: "Evento", value: "evento.cliente" },
+        { text: "Monto", value: "monto", align: "end" },
+        { text: "Movimiento", value: "movimiento" },
       ],
       filters: {
         desde: {

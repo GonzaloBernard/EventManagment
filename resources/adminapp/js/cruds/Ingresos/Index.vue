@@ -47,7 +47,7 @@
                 >
                   <template v-slot:[`item.monto`]="{ item }">
                     <v-chip color="green darken-3" dark>
-                      {{ `$ ${item.monto}` }}
+                      {{ `$ ${item.monto.toFixed(2)}` }}
                     </v-chip>
                   </template>
                   <template v-slot:[`item.fecha`]="{ item }">
@@ -121,9 +121,9 @@ export default {
       },
       headers: [
         { text: "Fecha", value: "fecha" },
-        { text: "Monto", value: "monto" },
-        { text: "Medio de Pago", value: "medio_de_pago.descripcion" },
         { text: "Cliente", value: "evento.cliente" },
+        { text: "Monto", value: "monto", align: "end" },
+        { text: "Medio de Pago", value: "medio_de_pago.descripcion" },
         { text: "Acciones", value: "acciones", align: "center" },
       ],
     };
