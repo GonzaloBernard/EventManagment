@@ -1,8 +1,10 @@
 <template>
   <div class="container-fluid">
     <v-row>
+      <v-col>
       <FilterByDateCategory @filter="filters[$event.tipo].valor = $event.valor"/>
-      <v-btn @click="filtrar">Filtrar</v-btn>
+    </v-col>
+    <v-col><v-btn @click="filtrar">Filtrar</v-btn></v-col>
     </v-row>  
     <v-row>
       <v-col>
@@ -12,14 +14,15 @@
           :sort-desc="[true]"
           :headers="headers"
           :items="[
-            ...$store.getters['EgresoIndex/data'].map((egreso) => {
-              return { ...egreso, id: 'e' + egreso.id };
-            }),
-            ...$store.getters['IngresoIndex/data'],
+            ...ingresosFiltrados,
+            ...egresosFiltrados,
           ]"
           :search="search"
           item-key="id"
           >
+          <template v-slot:[`item.fecha`]="{ item }">
+            {{ item.fecha.substring(0,10) }}
+          </template>
           <template v-slot:[`item.monto`]="{ item }">
             <!--# Si es un egreso el id tiene prefijo e --  item.id[0] === e egreso -->
             <v-chip outlined :color=" item.id[0] === 'e' ? 'red' : 'green' ">${{ item.monto }}</v-chip>
@@ -46,6 +49,17 @@ export default {
         { text: "Monto", value: "monto" },
         { text: "Evento", value: "evento.cliente" },
       ],
+      filters: {
+        desde: {
+          valor: null,
+        },
+        hasta: {
+          valor: null,
+        },
+        select: {
+          valor: null,
+        },
+      },
     };
   },
   created() {
@@ -62,6 +76,38 @@ export default {
     }
   },
   computed: {
+    ingresosFiltrados() {
+      let ingresosFiltered = this.$store.getters["IngresoIndex/data"].map((ingreso) => { return { ...ingreso, id: 'i' + ingreso.id };});
+
+      if (this.filters["desde"].valor) {
+        ingresosFiltered = ingresosFiltered.filter((ingreso) =>
+          moment(ingreso.fecha).isSameOrAfter(moment(this.filters["desde"].valor))
+        );
+      }
+
+      if (this.filters["hasta"].valor) {
+        ingresosFiltered = ingresosFiltered.filter((ingreso) =>
+          moment(ingreso.fecha).isSameOrBefore(moment(this.filters["hasta"].valor))
+        );
+      }
+      return ingresosFiltered;
+    },
+    egresosFiltrados() {
+      let egresosFiltered = this.$store.getters["EgresoIndex/data"].map((egreso) => { return { ...egreso, id: 'e' + egreso.id };});
+
+      if (this.filters["desde"].valor) {
+        egresosFiltered = egresosFiltered.filter((ingreso) =>
+          moment(ingreso.fecha).isSameOrAfter(moment(this.filters["desde"].valor))
+        );
+      }
+
+      if (this.filters["hasta"].valor) {
+        egresosFiltered = egresosFiltered.filter((ingreso) =>
+          moment(ingreso.fecha).isBefore(moment(this.filters["hasta"].valor))
+        );
+      }
+      return egresosFiltered;
+    },
     ingresos() {
       let ingresosArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       this.$store.getters["IngresoIndex/data"].forEach((ingreso) => {
