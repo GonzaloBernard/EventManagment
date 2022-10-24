@@ -18,7 +18,12 @@ class EgresoApiController extends Controller
     {
         abort_if(Gate::denies('user_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EgresoResource(Egreso::with(['evento', 'egreso_categoria'])->get());
+        return response([
+            'data' => new EgresoResource(Egreso::with(['evento', 'egreso_categoria'])->get()),
+            'meta' => [
+                'egreso_categoria' => EgresoCategoria::get(['id', 'descripcion']),
+            ],
+        ]);
     }
 
     public function store(StoreEgresoRequest $request)

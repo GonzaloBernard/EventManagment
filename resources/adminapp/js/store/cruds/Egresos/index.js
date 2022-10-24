@@ -6,7 +6,10 @@ function initialState() {
   return {
     data: [],
     total: 0,
-    loading: false
+    loading: false,
+    lists: {
+      egreso_categoria: [],
+    },
   }
 }
 
@@ -15,7 +18,8 @@ const route = 'egresos'
 const getters = {
   data: state => state.data,
   total: state => state.total,
-  loading: state => state.loading
+  loading: state => state.loading,
+  lists: (state) => state.lists,
 }
 
 const actions = {
@@ -26,6 +30,7 @@ const actions = {
       .get(route/* , { params: state.query } */)
       .then(response => {
         commit('setData', response.data.data)
+        commit("setLists", response.data.meta);
         //commit('setTotal', response.data.total)
       })
       .catch(error => {
@@ -57,6 +62,9 @@ const actions = {
 
 const mutations = {
   setData: set('data'),
+  setLists(state, lists) {
+    state.lists = lists;
+  },
   setTotal: set('total'),
   setLoading: set('loading'),
   resetState(state) {

@@ -18,6 +18,12 @@ const routes = [
         meta: { title: 'global.dashboard' }
       },
       {
+        path: 'balances',
+        name: 'balances',
+        component: () => import('@pages/Balances.vue'),
+        meta: { title: 'Balances' }
+      },
+      {
         path: 'eventos_calendario',
         name: 'eventos.calendario',
         component: () => import('@cruds/Eventos/Calendario.vue'),

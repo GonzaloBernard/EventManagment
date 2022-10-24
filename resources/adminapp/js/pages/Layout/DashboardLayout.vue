@@ -15,56 +15,62 @@
 </template>
 
 <script>
-import DashboardContent from './Content.vue'
-import TopNavbar from './TopNavbar.vue'
-import MobileMenu from './MobileMenu.vue'
+import DashboardContent from "./Content.vue";
+import TopNavbar from "./TopNavbar.vue";
+import MobileMenu from "./MobileMenu.vue";
 
 export default {
   components: {
     DashboardContent,
     TopNavbar,
-    MobileMenu
+    MobileMenu,
   },
   data() {
     return {
       sidebarLinks: [
         {
-          title: 'Inicio',
-          icon: 'dashboard',
-          path: { name: 'dashboard' }
+          title: "Inicio",
+          icon: "dashboard",
+          path: { name: "dashboard" },
         },
         {
-          title: 'Usuarios',
-          icon: 'person',
-          path: { name: 'users.index' },
-          gate: 'user_management_access',
+          title: "Usuarios",
+          icon: "person",
+          path: { name: "users.index" },
+          gate: "user_management_access",
         },
         {
-          title: 'Calendario de Eventos',
-          icon: 'perm_contact_calendar',
-          path: { name: 'eventos.calendario' },
-          gate: 'user_management_access',
+          title: "Calendario de Eventos",
+          icon: "perm_contact_calendar",
+          path: { name: "eventos.calendario" },
+          gate: "user_management_access",
         },
         {
-          title: 'Tabla de Evento',
-          icon: 'table_view',
-          path: { name: 'eventos.index' },
-          gate: 'user_management_access',
+          title: "Tabla de Evento",
+          icon: "table_view",
+          path: { name: "eventos.index" },
+          gate: "user_management_access",
         },
         {
-          title: 'Tabla de Ingresos',
-          icon: 'attach_money',
-          path: { name: 'ingresos.index' },
-          gate: 'user_management_access',
+          title: "Tabla de Ingresos",
+          icon: "attach_money",
+          path: { name: "ingresos.index" },
+          gate: "user_management_access",
         },
         {
-          title: 'Tabla de Egresos',
-          icon: 'money_off',
-          path: { name: 'egresos.index' },
-          gate: 'user_management_access',
+          title: "Tabla de Egresos",
+          icon: "money_off",
+          path: { name: "egresos.index" },
+          gate: "user_management_access",
         },
-      ]
-    }
-  }
-}
+        {
+          title: "Balances",
+          icon: "insert_chart",
+          path: { name: "balances" },
+          gate: "user_management_access",
+        },
+      ],
+    };
+  },
+};
 </script>
