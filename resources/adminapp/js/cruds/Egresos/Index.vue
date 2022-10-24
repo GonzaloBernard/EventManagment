@@ -63,7 +63,7 @@
                 >
                   <template v-slot:[`item.monto`]="{ item }">
                     <v-chip color="red darken-3" dark>
-                      {{ `$ ${item.monto.toFixed(2)}` }}
+                      {{ `$ ${item.monto?.toFixed(2)}` }}
                     </v-chip>
                   </template>
                   <template v-slot:[`item.fecha`]="{ item }">
