@@ -10,6 +10,9 @@
     "watch": "npm run development -- --watch",
     "watch-poll": "npm run watch -- --watch-poll"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@mdi/font": "^7.0.96",
     "chart.js": "^3.9.1",
