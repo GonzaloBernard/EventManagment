@@ -13,7 +13,7 @@
       </download-excel>
     </v-row>
     <v-row>
-      <v-col>
+      <v-col cols="6">
         <v-data-table
           must-sort
           :sort-by="['fecha']"
@@ -40,7 +40,8 @@
           </template>
         </v-data-table>
       </v-col>
-      <v-col md="4">
+      <v-divider inset vertical></v-divider>
+      <v-col cols="6">
         <Bar
           :height="600"
           :ingresos="ingresos"
@@ -60,10 +61,10 @@ export default {
     return {
       search: "",
       headers: [
-        { text: "Fecha", value: "fecha" },
-        { text: "Evento", value: "evento.cliente" },
-        { text: "Monto", value: "monto", align: "end" },
-        { text: "Movimiento", value: "movimiento" },
+        { text: "Fecha", value: "fecha", align: "center" },
+        { text: "Evento", align: "center", value: "evento.cliente" },
+        { text: "Monto", value: "monto", align: "center" },
+        { text: "Movimiento", align: "center", value: "movimiento" },
       ],
       filters: {
         desde: {
