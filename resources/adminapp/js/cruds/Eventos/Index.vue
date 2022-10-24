@@ -50,7 +50,7 @@
                     >
                     <template v-slot:[`item.fecha_liquidacion`]="{ item }">
                       <v-chip class="my-1" v-if="item.fecha_liquidacion">
-                        {{item.usuario_gestor?item.usuario_gestor : 'Sin cajero'}} 
+                        {{item.usuario_gestor?item.usuario_gestor : 'Sin cajero'}}
                       </v-chip>
                       <v-chip class="my-1" outlined v-if="item.fecha_liquidacion">
                         {{item.fecha_liquidacion.substr(0,10)}}
@@ -59,7 +59,7 @@
 
                     <template v-slot:[`item.fecha`]="{ item }">
                       <v-chip class="my-1">
-                        {{item.fecha.substr(0,10)}} 
+                        {{item.fecha.substr(0,10)}}
                       </v-chip>
                       <v-chip class="my-1" outlined>
                         {{item.fecha.substr(10)}}
@@ -75,6 +75,7 @@
                           <v-tooltip top color="primary">
                             <template v-slot:activator="{ on, attrs }">
                               <v-btn
+                                :disabled="item.fecha_liquidacion !== null"
                                 @click="saldoFinal(item.id)"
                                 class="mx-1"
                                 fab
@@ -104,7 +105,7 @@
                             </template>
                             <span>Agregar Ingreso/Egreso</span>
                           </v-tooltip>
-                          <v-tooltip bottom color="primary">
+                          <v-tooltip top color="primary">
                             <template v-slot:activator="{ on, attrs }">
                               <v-btn
                                 @click="editEvent(item.id)"

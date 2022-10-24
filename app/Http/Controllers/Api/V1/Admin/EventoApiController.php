@@ -42,7 +42,10 @@ class EventoApiController extends Controller
         }}
         // Si es un cierre de caja borrar el evento
         $evento->fecha_liquidacion = $request->fecha_liquidacion;
-        $evento->usuario_gestor = auth()->user()->name;
+        // Guardar cajero
+        if($evento->fecha_liquidacion !== null ){
+            $evento->usuario_gestor = auth()->user()->name;
+        }
         $evento->update();
         return (new EventoResource($evento))
             ->response()
