@@ -24,21 +24,35 @@
                     </div> -->
           <div class="card-body">
             <v-row justify="center">
+              <h4>Filtros</h4>
+            </v-row>
+            <v-row justify="center" class="filtros">
               <v-col cols="8">
-              <filter-by-date-category
-                @filter="filters[$event.tipo].valor = $event.valor"
-              />
+                <filter-by-date-category
+                  @filter="filters[$event.tipo].valor = $event.valor"
+                />
               </v-col>
               <v-col cols="4" align-self="center">
-              <v-select
-                @input="filters['select'].valor = $event"
-                v-model="opcionSeleccionada"
-                label="descripcion"
-                placeholder="Categoría"
-                :options="lists.egreso_categoria"
-              />
+                <v-select
+                  @input="filters['select'].valor = $event"
+                  v-model="opcionSeleccionada"
+                  label="descripcion"
+                  placeholder="Categoría"
+                  :options="lists.egreso_categoria"
+                />
               </v-col>
             </v-row>
+            <download-excel
+              class="btn btn-outline-success btn-sm"
+              :data="egresosFiltrados"
+              worksheet="Ingresos"
+              name="ingresos.xls"
+            >
+              <v-icon color="green darken-3" class="mr-2"
+                >mdi-download-circle</v-icon
+              >
+              Descargar Excel
+            </download-excel>
             <div class="row">
               <div class="col-md-12">
                 <v-data-table
@@ -176,3 +190,11 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+.filtros
+  background-color: rgba(0,0,0,0.03)
+  margin-bottom: .75rem
+  margin-top: .5rem
+  border-style: groove
+</style>
