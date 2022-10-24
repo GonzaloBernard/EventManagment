@@ -1,8 +1,17 @@
 <template>
   <div class="container-fluid">
-    
-      <FilterByDateCategory @filter="filters[$event.tipo].valor = $event.valor"/>
-      
+    <FilterByDateCategory @filter="filters[$event.tipo].valor = $event.valor" />
+    <v-row justify="space-between">
+      <download-excel
+        class="btn btn-outline-success btn-sm ml-4"
+        :data="[...ingresosFiltrados, ...egresosFiltrados]"
+        worksheet="Balances"
+        name="balance.xls"
+      >
+        <v-icon color="green darken-3" class="mr-2">mdi-download-circle</v-icon>
+        Descargar Excel
+      </download-excel>
+    </v-row>
     <v-row>
       <v-col>
         <v-data-table
@@ -10,30 +19,37 @@
           :sort-by="['fecha']"
           :sort-desc="[true]"
           :headers="headers"
-          :items="[
-            ...ingresosFiltrados,
-            ...egresosFiltrados,
-          ]"
+          :items="[...ingresosFiltrados, ...egresosFiltrados]"
           :search="search"
           item-key="id"
-          >
+        >
           <template v-slot:[`item.fecha`]="{ item }">
-            {{ item.fecha.substring(0,10) }}
+            {{ item.fecha.substring(0, 10) }}
           </template>
           <template v-slot:[`item.monto`]="{ item }">
             $ {{ item.monto.toFixed(2) }}
           </template>
           <template v-slot:[`item.movimiento`]="{ item }">
             <!--# Si es un egreso el id tiene prefijo e --  item.id[0] === e egreso -->
-            <v-chip outlined :color=" item.id[0] === 'e' ? 'red' : 'green' "> {{ item.medio_de_pago?.descripcion?? item.egreso_categoria.descripcion}}</v-chip>
+            <v-chip outlined :color="item.id[0] === 'e' ? 'red' : 'green'">
+              {{
+                item.medio_de_pago?.descripcion ??
+                item.egreso_categoria.descripcion
+              }}</v-chip
+            >
           </template>
         </v-data-table>
       </v-col>
       <v-col md="4">
-        <Bar :height="600" :ingresos="ingresos" :egresos="egresos" v-if="loaded" />
+        <Bar
+          :height="600"
+          :ingresos="ingresos"
+          :egresos="egresos"
+          v-if="loaded"
+        />
       </v-col>
-    </v-row>  
-  </div> 
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -68,36 +84,50 @@ export default {
   },
   components: {
     Bar,
-    FilterByDateCategory
+    FilterByDateCategory,
   },
   methods: {
-    filtrar () {
-      alert('en desarrollo')
-    }
+    filtrar() {
+      alert("en desarrollo");
+    },
   },
   computed: {
     ingresosFiltrados() {
-      let ingresosFiltered = this.$store.getters["IngresoIndex/data"].map((ingreso) => { return { ...ingreso, id: 'i' + ingreso.id };});
+      let ingresosFiltered = this.$store.getters["IngresoIndex/data"].map(
+        (ingreso) => {
+          return { ...ingreso, id: "i" + ingreso.id };
+        }
+      );
 
       if (this.filters["desde"].valor) {
         ingresosFiltered = ingresosFiltered.filter((ingreso) =>
-          moment(ingreso.fecha).isSameOrAfter(moment(this.filters["desde"].valor))
+          moment(ingreso.fecha).isSameOrAfter(
+            moment(this.filters["desde"].valor)
+          )
         );
       }
 
       if (this.filters["hasta"].valor) {
         ingresosFiltered = ingresosFiltered.filter((ingreso) =>
-          moment(ingreso.fecha).isSameOrBefore(moment(this.filters["hasta"].valor))
+          moment(ingreso.fecha).isSameOrBefore(
+            moment(this.filters["hasta"].valor)
+          )
         );
       }
       return ingresosFiltered;
     },
     egresosFiltrados() {
-      let egresosFiltered = this.$store.getters["EgresoIndex/data"].map((egreso) => { return { ...egreso, id: 'e' + egreso.id };});
+      let egresosFiltered = this.$store.getters["EgresoIndex/data"].map(
+        (egreso) => {
+          return { ...egreso, id: "e" + egreso.id };
+        }
+      );
 
       if (this.filters["desde"].valor) {
         egresosFiltered = egresosFiltered.filter((ingreso) =>
-          moment(ingreso.fecha).isSameOrAfter(moment(this.filters["desde"].valor))
+          moment(ingreso.fecha).isSameOrAfter(
+            moment(this.filters["desde"].valor)
+          )
         );
       }
 
