@@ -45,8 +45,9 @@
             <download-excel
               class="btn btn-outline-success btn-sm"
               :data="egresosFiltrados"
-              worksheet="Ingresos"
-              name="ingresos.xls"
+              :fields="excel_headers"
+              worksheet="Egresos"
+              name="Egresos.xls"
             >
               <v-icon color="green darken-3" class="mr-2"
                 >mdi-download-circle</v-icon
@@ -70,7 +71,7 @@
                   </template>
                   <template v-slot:[`item.acciones`]="{ item }">
                     <div class="d-flex justify-content-center">
-                      <v-tooltip bottom color="primary">
+                     <!--#  <v-tooltip bottom color="primary">
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
                             @click="editItem(item.id)"
@@ -85,7 +86,7 @@
                           >
                         </template>
                         <span>Editar Egreso</span>
-                      </v-tooltip>
+                      </v-tooltip> -->
                       <v-tooltip top color="error">
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
@@ -133,11 +134,18 @@ export default {
           valor: null,
         },
       },
-
+      excel_headers: {
+        id: "id",
+        fecha: "fecha",
+        evento: "evento.cliente",
+        monto: "monto",
+        categoria: "egreso_categoria.descripcion",
+      },
       search: "",
       headers: [
         { text: "Fecha", value: "fecha" },
-        { text: "Evento", value: "evento.cliente" },
+        { text: "Evento #", value: "evento.id" },
+        { text: "Cliente", value: "evento.cliente" },
         { text: "Monto", value: "monto", align: "end" },
         { text: "Categoria", value: "egreso_categoria.descripcion" },
         { text: "Acciones", value: "acciones", align: "center" },
@@ -180,12 +188,25 @@ export default {
     },
   },
   methods: {
-    ...mapActions("EgresoIndex", ["fetchIndexData", "resetState"]),
+    ...mapActions("EgresoIndex", ["fetchIndexData", "resetState", "destroyData"]),
     editItem() {
       alert("EN desarrollo");
     },
-    destroyDataAction() {
-      alert("EN desarrollo");
+    destroyDataAction(id) {
+      this.$swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        confirmButtonColor: "#dd4b39",
+        focusCancel: true,
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.value) {
+          this.destroyData(id);
+        }
+      });
     },
   },
 };
