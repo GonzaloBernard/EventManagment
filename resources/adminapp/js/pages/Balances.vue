@@ -5,6 +5,7 @@
       <download-excel
         class="btn btn-outline-success btn-sm ml-4"
         :data="[...ingresosFiltrados, ...egresosFiltrados]"
+        :fields="excel_headers"
         worksheet="Balances"
         name="balance.xls"
       >
@@ -60,6 +61,30 @@ export default {
   data() {
     return {
       search: "",
+      excel_headers: {
+        id: {
+          callback: (value) => {
+            return `${value.id.substring(1)}`;
+          },
+        },
+        fecha: "fecha",
+        evento: "evento.cliente",
+        
+        ingreso: {
+            callback: (value) => {
+              console.log(value)
+              let ingreso = value.id.substring(0,1) === 'i' ? value.monto: ''
+                return ` ${ingreso}`;
+            },},
+        egreso: {
+        callback: (value) => {
+          console.log(value)
+          let egreso = value.id.substring(0,1) === 'e' ? value.monto: ''
+            return ` ${egreso}`;
+        },},
+        "medio de pago": "medio_de_pago.descripcion",
+        "Egreso Categoría": "egreso_categoria.descripcion",
+      },
       headers: [
         { text: "Fecha", value: "fecha", align: "center" },
         { text: "Evento", align: "center", value: "evento.cliente" },

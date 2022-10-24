@@ -36,8 +36,9 @@
             <download-excel
               class="btn btn-outline-success btn-sm"
               :data="ingresosFiltrados"
+              :fields="excel_headers"
               worksheet="Ingresos"
-              name="ingresos.xls"
+              name="Ingresos.xls"
             >
               <v-icon color="green darken-3" class="mr-2"
                 >mdi-download-circle</v-icon
@@ -61,7 +62,7 @@
                   </template>
                   <template v-slot:[`item.acciones`]="{ item }">
                     <div class="d-flex justify-content-center">
-                      <v-tooltip bottom color="primary">
+                      <!--# <v-tooltip bottom color="primary">
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
                             @click="editItem(item.id)"
@@ -76,7 +77,7 @@
                           >
                         </template>
                         <span>Editar Ingreso</span>
-                      </v-tooltip>
+                      </v-tooltip> -->
                       <v-tooltip top color="error">
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
@@ -125,8 +126,16 @@ export default {
           valor: null,
         },
       },
+      excel_headers: {
+        id: "id",
+        fecha: "fecha",
+        evento: "evento.cliente",
+        monto: "monto",
+        "medio de pago": "medio_de_pago.descripcion",
+      },
       headers: [
         { text: "Fecha", value: "fecha" },
+        { text: "Evento #", value: "evento.id" },
         { text: "Cliente", value: "evento.cliente" },
         { text: "Monto", value: "monto", align: "end" },
         { text: "Medio de Pago", value: "medio_de_pago.descripcion" },
@@ -170,12 +179,25 @@ export default {
     },
   },
   methods: {
-    ...mapActions("IngresoIndex", ["fetchIndexData", "resetState"]),
+    ...mapActions("IngresoIndex", ["fetchIndexData", "resetState", "destroyData"]),
     editItem() {
       alert("EN desarrollo");
     },
-    destroyDataAction() {
-      alert("EN desarrollo");
+    destroyDataAction(id) {
+      this.$swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        confirmButtonColor: "#dd4b39",
+        focusCancel: true,
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.value) {
+          this.destroyData(id);
+        }
+      });
     },
   },
 };
