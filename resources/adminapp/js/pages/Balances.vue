@@ -28,7 +28,7 @@
             {{ item.fecha.substring(0, 10) }}
           </template>
           <template v-slot:[`item.monto`]="{ item }">
-            $ {{ item.monto.toFixed(2) }}
+            $ {{ item.monto }}
           </template>
           <template v-slot:[`item.movimiento`]="{ item }">
             <!--# Si es un egreso el id tiene prefijo e --  item.id[0] === e egreso -->
@@ -68,7 +68,7 @@ export default {
         },
         fecha: "fecha",
         evento: "evento.cliente",
-        
+
         ingreso: {
             callback: (value) => {
               console.log(value)
