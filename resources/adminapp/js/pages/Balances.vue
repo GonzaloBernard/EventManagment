@@ -168,14 +168,14 @@ export default {
       let ingresosArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       this.$store.getters["IngresoIndex/data"].forEach((ingreso) => {
         ingresosArray[parseInt(ingreso.fecha.split("-")[1]) - 1] +=
-          ingreso.monto;
+          parseFloat(ingreso.monto);
       });
       return ingresosArray;
     },
     egresos() {
       let egresosArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       this.$store.getters["EgresoIndex/data"].forEach((egreso) => {
-        egresosArray[parseInt(egreso.fecha.split("-")[1]) - 1] += egreso.monto;
+        egresosArray[parseInt(egreso.fecha.split("-")[1]) - 1] += parseFloat(egreso.monto);
       });
       return egresosArray;
     },
