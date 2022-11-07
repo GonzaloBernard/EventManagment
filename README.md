@@ -6,7 +6,7 @@
 - VUE 2
 - HEROKU
 
-### SETUP
+# SETUP
 ```
 cp .env.example .env
 ```
