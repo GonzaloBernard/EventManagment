@@ -4,7 +4,7 @@
 
 - LARAVEL 7
 - VUE 2
-- HEROKU PaaS
+- HEROKU
 
 ### SETUP
 ```
@@ -18,9 +18,3 @@ php artisan key:generate
 npm install
 npm run watch
 ```
-
-### Heroku
-### Google calendar
-
-
-
