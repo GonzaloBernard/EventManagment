@@ -5,6 +5,7 @@
 - LARAVEL 7
 - VUE 2
 - HEROKU
+- GOOGLE CALENDAR
 
 # SETUP
 ```
