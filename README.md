@@ -1,25 +1,26 @@
-# TEMPLATE LARAVEL VUE
+# GESTION DE EVENTOS
 
-**Deploy**
+### Tecnologías
 
-- cp .env.example .env
+LARAVEL 7
+VUE 2
+HEROKU PaaS
 
-Then edit your .env file with DB credentials and other settings.
+### SETUP
+```
+cp .env.example .env
+```
+##### Editar variables de entorno en .env
+```
+composer install
+php artisan migrate --seed
+php artisan key:generate
+npm install
+npm run watch
+```
 
-- composer install
-
-- php artisan migrate --seed
-
-- php artisan key:generate
-
-- npm install
-
-- npm run watch
-
-# http://eventos-produccion.herokuapp.com/login
-
-# Heroku
-# Google calendar
+### Heroku
+### Google calendar
 
 
 
