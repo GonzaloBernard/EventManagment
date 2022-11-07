@@ -21,6 +21,10 @@ class InitialSeeders extends Seeder
                 'id'    => 2,
                 'descripcion' => 'Comida',
             ],
+            [
+                'id'    => 3,
+                'descripcion' => 'Otro',
+            ],
         ];
 
         EgresoCategoria::insert($egreso_categoria);
@@ -32,7 +36,19 @@ class InitialSeeders extends Seeder
             ],
             [
                 'id'    => 2,
+                'descripcion' => 'Transferencia',
+            ],
+            [
+                'id'    => 3,
                 'descripcion' => 'Tarjeta',
+            ],
+            [
+                'id'    => 4,
+                'descripcion' => 'BilleteraSF',
+            ],
+            [
+                'id'    => 5,
+                'descripcion' => 'Otro',
             ]
         ];
 
@@ -43,75 +59,13 @@ class InitialSeeders extends Seeder
                 'id'    => 1,
                 'descripcion' => 'Pelotero',
             ],
+            [
+                'id'    => 2,
+                'descripcion' => 'Otro',
+            ],
         ];
 
         Lugar::insert($lugar);
 
-
-        $eventos = [
-            [
-                'id'    => 1,
-                'nombre' => 'Cumpleaños',
-                'descripcion' => 'Esto es una descripcion 1',
-                'cliente' => 'Gonzalo',
-                'fecha' => '2022-05-20',
-                'duracion' => 60,
-                'lugar_id' => 1,
-                'color' => '#33B8FF'
-            ],
-            [
-                'id'    => 2,
-                'nombre' => 'Cumpleaños',
-                'descripcion' => 'Esto es una descripcion 2',
-                'cliente' => 'Gonzalo',
-                'fecha' => '2022-07-20',
-                'duracion' => 90,
-                'lugar_id' => 1,
-                'color' => '#33B8FF'
-            ],
-            [
-                'id'    => 3,
-                'nombre' => 'Cumpleaños',
-                'descripcion' => 'Esto es una descripcion 3',
-                'cliente' => 'Gonzalo',
-                'fecha' => '2022-07-25',
-                'duracion' => 120,
-                'lugar_id' => 1,
-                'color' => '#33B8FF'
-            ],
-            [
-                'id'    => 4,
-                'nombre' => 'Cumpleaños',
-                'descripcion' => 'Esto es una descripcion 4',
-                'cliente' => 'Gonzalo',
-                'fecha' => '2022-07-18',
-                'duracion' => 120,
-                'lugar_id' => 1,
-                'color' => '#33B8FF'
-            ],
-            [
-                'id'    => 5,
-                'nombre' => 'Cumpleaños',
-                'descripcion' => 'Esto es una descripcion 5',
-                'cliente' => 'Gonzalo',
-                'fecha' => '2022-07-15',
-                'duracion' => 120,
-                'lugar_id' => 1,
-                'color' => '#33B8FF'
-            ],
-            [
-                'id'    => 6,
-                'nombre' => 'Cumpleaños',
-                'descripcion' => 'Esto es una descripcion 6',
-                'cliente' => 'Gonzalo',
-                'fecha' => '2022-07-26',
-                'duracion' => 90,
-                'lugar_id' => 1,
-                'color' => '#33B8FF'
-            ],
-
-        ];
-
-        Evento::insert($eventos);
-}
+    }
 }
