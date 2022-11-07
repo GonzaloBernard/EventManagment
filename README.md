@@ -13,6 +13,7 @@ cp .env.example .env
 cp google-credentials.json.example google-credentials.json
 ```
 > Editar variables de entorno en .env
+
 > Editar configuracion de google calendar en google-credentials.json
 ```
 composer install
