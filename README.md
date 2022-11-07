@@ -2,9 +2,9 @@
 
 ### Tecnologías
 
-LARAVEL 7
-VUE 2
-HEROKU PaaS
+- LARAVEL 7
+- VUE 2
+- HEROKU PaaS
 
 ### SETUP
 ```
